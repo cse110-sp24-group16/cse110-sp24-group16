@@ -11,5 +11,7 @@ One person will be for every meeting, each time the note taker will be different
  - **Mascot:** Quasar the Cat
  - **Font:** Futura Bk BT for body text and Orbitron for headings
   
-### Team photo:
-- [x] taken
+### Tasks:
+- [x] Create team branding
+- [x] Take group photo
+- [ ] Create team introduction video
