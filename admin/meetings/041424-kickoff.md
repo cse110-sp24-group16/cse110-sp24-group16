@@ -10,3 +10,6 @@ One person will be for every meeting, each time the note taker will be different
  - **Logo:** A stylized Q with a leaping silhouette
  - **Mascot:** Quasar the Cat
  - **Font:** Futura Bk BT for body text and Orbitron for headings
+  
+### Team photo:
+- [x] taken
