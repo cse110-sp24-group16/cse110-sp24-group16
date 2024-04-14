@@ -1,5 +1,7 @@
 # Team Quantum Leap
 
+![Image](./quantleap-logo.webp)
+
 ## Our Brand
 
 **Colors:** Quantum Purple and Photon Silver
@@ -13,16 +15,16 @@ We prioritize innovation, collaboration, and transparency. We strive to push the
 
 ## Roster
 
-- **Alice Johnson** - Team Lead, specializes in project management. [GitHub](https://github.com/alicejohnson)
-- **Bob Smith** - Software Architect, expert in system integration. [GitHub](https://github.com/bobsmith)
-- **Charlie Davis** - UX Designer, focuses on accessibility and user engagement. [GitHub](https://github.com/charliedavis)
-- **Dana Lee** - DevOps Engineer, ensures our deployments are smooth and scalable. [GitHub](https://github.com/danalee)
+![Image](./photo_2024-04-14_15-24-04.jpg)
 
-## Our Culture
-
-We believe in working hard and playing hard. Weekly game nights and team lunches help us stay connected and decompress.
-
-## Branding Usage
-
-- **Presentations:** Use the provided PowerPoint template for all official presentations to maintain a cohesive look.
-- **Communication:** Always include the team logo in communications where possible. Use the custom font settings for all outward-facing documents.
+- **Daniil Katulevskiy** - Team lead
+- **Matthew Fang** - Team lead
+- **Wilson Sugiarto** - Designer
+- **Neelkanth Shitolay** - Developer
+- **Hisham Baobaid** - Developer
+- **Jason Yang** - Developer
+- **Michelle Huang** - Developer
+- **Sam Lau** - Developer
+- **Jordan Huynh** - Developer
+- **Andrew Tran** - Developer
+- **Jungwoo Im** - Developer
