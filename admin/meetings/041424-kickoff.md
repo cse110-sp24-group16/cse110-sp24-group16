@@ -13,5 +13,7 @@ One person will be for every meeting, each time the note taker will be different
   
 ### Tasks:
 - [x] Create team branding
+- [x] Update team.md
 - [x] Take group photo
-- [ ] Create team introduction video
+- [x] Create team introduction video
+- [x] Create team contract
