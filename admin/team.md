@@ -1,12 +1,15 @@
 # Team Quantum Leap
 
-![Image](./quantleap-logo.webp)
+![Image](./branding/quantleap-logo.webp)
 
 ## Our Brand
 
 **Colors:** Quantum Purple and Photon Silver
+
 **Logo:** A stylized Q with a leaping silhouette
+
 **Mascot:** Quasar the Cat
+
 **Font:** Futura Bk BT for body text and Orbitron for headings
 
 ## Team Values
