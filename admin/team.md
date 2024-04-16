@@ -1,4 +1,4 @@
-# Team Quantum Leap
+# Team Quantuum Leap
 
 ![Image](./branding/quantleap-logo.webp)
 
