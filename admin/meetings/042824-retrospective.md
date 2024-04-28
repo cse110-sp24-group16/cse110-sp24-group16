@@ -6,6 +6,7 @@ Note Taker: Wilson Sugiarto
 ## Jam Board ScreenShots
 ![jamboard1](jb1.png)
 ![jamboard2](jb2.png)
+- Video: https://www.youtube.com/watch?v=J2NpjMepksg
 -	First part of the meeting was completing the jam board of glad, sad and mad (https://jamboard.google.com/d/1ogp0lCJMZgUCSHzWZg-mq2ykjIgGMoGgtZwXHHlJrPU/viewer?f=0) 
 -	Verbally went through the sticky notes on jam board. 
 -	We should split groups into smaller groups for closer with one another work 
