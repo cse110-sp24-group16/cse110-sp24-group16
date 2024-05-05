@@ -12,4 +12,5 @@ Note Taker: Wilson Sugiarto
 -	Jordan believes that design being completed quickly allowed other teams to be able to plan out their work much earlier. 
 -	Andrew believes that there was some struggle reading JSON documentation, but eventually was worked out by the deadlines. 
 -	Michelle speaks about the success of creating the general framework, calendar features, and headers.
+-	Neelkanth believes that the design team worked well together to work on each others improvements. However, he thinks that there could have been better communication (through zoom or slack meetings) to understand what each person was thinking throughout the week.
 -	Overall: Distribution of work was performed efficiently
