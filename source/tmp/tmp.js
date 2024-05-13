@@ -25,7 +25,7 @@ export function isDate(date) {
   return dateRegex.test(date);
 }
 
-// Matches valid 3 or 6 character hex codes used for HTML or CSS .
+// Matches valid 3 or 6 character hex codes used for HTML or CSS.
 export function isHexColor(color) {
   const colorRegex = /^#?[A-Fa-f0-9]{3}([A-Fa-f0-9]{3})?$/;
   return colorRegex.test(color);
