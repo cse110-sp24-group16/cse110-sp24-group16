@@ -14,6 +14,8 @@ jobs:
         run: cd source/ && npm install
       - name: Run tests and collect coverage
         run: cd source/ && npm run test
+      - name: Run Linter
+        run: cd source/ && eslint
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         env:
