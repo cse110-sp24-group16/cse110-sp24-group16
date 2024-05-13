@@ -18,7 +18,7 @@ We prioritize innovation, collaboration, and transparency. We strive to push the
 
 ## Roster
 
-![Image](./photo_2024-04-14_15-24-04.jpg)
+![Image](./branding/photo_2024-04-14_15-24-04.jpg)
 
 - **Daniil Katulevskiy** - Team lead
 - **Matthew Fang** - Team lead
