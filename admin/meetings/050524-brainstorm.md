@@ -1,32 +1,79 @@
 Note Taker: Neelkanth Shitolay
 # Attendance:
 -	Jordan, Neelkanth, Daniil, Michelle, Wilson, Andrew, Sam, Jason, Mathew, Hisham
--	Absence: Jungwoo
+-	Absence: None
 # Tasks :
-- Discussed what tasks need to be completed by Sunday night: _Brainstorming Activity, Starting Pitch_
+- Create an Overall Plan for what will happen in the coming week
 - Focused on what will be done on the upcoming week and general due dates for the near future 
 
-## Brainstorming Activity:
-- Created a Miro board with user stories and possible features
-- https://miro.com/app/board/uXjVKRuSIyU=/
-- This miro board contains
-- 1. User Stories  
-  2. Possible Features  
-  3. Research
-<img width="895" alt="Screenshot 2024-05-05 at 11 28 38 PM" src="https://github.com/cse110-sp24-group16/cse110-sp24-group16/assets/109946481/d88a8ac1-3a81-4ad8-b15c-fd00f2b76b94">
+## Overall Plan:
+# EL PLAN
 
-- Discussed good programming practices and which features to develop first based on necessity and how essential they would be to the user
+## Future
 
+### Weekly View
+- **Start on Sunday**
+- **Task List (Sidebar)**
+  - Located on the left
+  - Prioritize late tasks
 
-## Starting Pitch:
-- Chose to use a Google slide deck for the starting pitch
-- Laid out the structure for the slides and organized by necessary topics to cover in the pitch including background, risks, rabbit holes, and wireframes
-- Examples of Slide Deck:
-<img width="723" alt="Screenshot 2024-05-05 at 11 30 14 PM" src="https://github.com/cse110-sp24-group16/cse110-sp24-group16/assets/109946481/4d23e411-cf1a-4db5-8d22-d1f27842efd1">
+### Task Interaction
+- **Click a Task**
+  - Opens the task overlay menu with various functions
 
+### Adding Tasks
+- **Two Methods**
+  - Using the `+` sign on the task list (priority)
+  - Dragging on the calendar
 
-- Divided work equally and worked on the slides to serve as an effective pitch
-- Discussed briefly about using a website or app to develop or journal and the pros and cons of each of them
+### Deleting Tasks
+- Must be a two-step process
+
+### Navigation
+- Switch weeks using arrows located at the top near the date
+
+## Backlog
+
+### Monthly View
+- **Sidebar**
+  - Displays top impact tasks on the left
+
+### Heatmap
+- **Color Scheme**
+  - Should probably be one color, preferably blue
+
+### Journal Entries
+- Clicking a day opens the journal entry for that day
+- Viewing a journal entry should function the same as editing a task in the calendar
+
+### Sidebar Consistency
+- The sidebar should be the same for both the task list and backlog, but pool different information
+
+### Task Descriptions
+- Should support Markdown
+- Task descriptions and journal entries are essentially the same
+
+## Extra Features
+- **Animations**
+- **fzf (fuzzyfind) for Task Search**
+- **Tags**
+  - Add tags
+  - Search by tag
+
+### Accessibility
+- Implement at least some accessibility features (e.g., colors or descriptions)
+
+### Miscellaneous
+- GitHub integration
+- Keybinds
+- Noscript troll: `sudo rm -rf /`
+- Monthly widget to choose the week for task list view
+
+## Continuous Integration (CI)
+- **Testing and Review**
+  - Different levels of testing and review for different branches
+  - Add End-to-End (E2E) testing with Puppeteer
+
 
 ## Additional Points of Discussion 
 - Feedback Collection: Consider implementing mechanisms to gather feedback from potential users or stakeholders regarding the proposed features and design concepts. This feedback can help refine the project's direction and prioritize development efforts effectively.  
