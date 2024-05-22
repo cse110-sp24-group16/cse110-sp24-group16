@@ -13,7 +13,7 @@
   },
   "scripts": {
     "test": "node ./source/__tests__/tmp2.js",
-    "lint": "node --experimental-vm-modules node_modules/eslint/bin/eslint.js",
+    "lint": "node ./source/__tests__/tmp3.js",
     "jsdoc": "node --experimental-vm-modules node_modules/jsdoc/jsdoc.js -r ./source/",
     "start": "electron --trace-warnings ."
   },
