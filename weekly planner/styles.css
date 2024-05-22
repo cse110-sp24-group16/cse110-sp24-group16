@@ -8,7 +8,7 @@
     --day-background-color: #fff;
     --day-border-color: #ccc;
     --day-padding: 10px;
-    --day-box-shadow: 2px 2px 5px rgba(0, 0, 0, 10%);
+    --day-box-shadow: 2px 2px 5px #0000001a;
     --header-font-weight: bold;
     --header-border-bottom: 1px solid #ccc;
     --header-margin-bottom: 10px;
