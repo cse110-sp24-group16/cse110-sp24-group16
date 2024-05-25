@@ -5,260 +5,276 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weekly View Calendar</title>
     <link rel="stylesheet" href="./styles/planner-styles.css" />
-
   </head>
   <body>
-    <div class="header-container">
-      <div class="header">May 2024</div>
-      <button class="nav-button">←</button>
-      <button class="nav-button">→</button>
-    </div>
-    <div class="calendar">
-      <div class="day">
-        <header>Monday</header>
-
-
-        <script>
-          //javascript for deleting an element with a confirmation screen
-          document.addEventListener("DOMContentLoaded", () => {
-          const deleteButtons = document.querySelectorAll('.delete-button');
-          const popup = document.getElementById('popup-delete');
-          const overlay = document.getElementById('overlay-delete');
-          let currentTask;
-          deleteButtons.forEach(button => {
-              button.addEventListener('click', (event) => {
-                currentTask = event.target.closest('.event-item');
-                showPopupForDelete();
-            });
-
-            document.getElementById('confirm-delete').addEventListener('click', () => {
-                currentTask.remove();
-                hidePopupForDelete();
-            });
-
-            document.getElementById('cancel-delete').addEventListener('click', hidePopupForDelete);
-
-            overlay.addEventListener('click', hidePopupForDelete);
-
-            function showPopupForDelete() {
-                popup.style.display = 'block';
-                overlay.style.display = 'block';
-            }
-
-            function hidePopupForDelete() {
-                popup.style.display = 'none';
-                overlay.style.display = 'none';
-                currentItem = null;
-            }
-        });
-      });
-
-        </script>
-
-        <div class="overlay" id="overlay-delete"></div>
-        <div class="popup" id="popup-delete">
-            <div class="popup-message">Are you sure you want to delete this task?</div>
-            <div class="popup-buttons">
-                <button class="popup-button-confirm" id="confirm-delete">Yes</button>
-                <button class="popup-button-cancel" id="cancel-delete">No</button>
-            </div>
+    <div class="main-content">
+      <div class="task-list">
+        <header>Task List</header>
+        <ul>
+          <li class="task-item">
+            <div class="task-title">Task 1</div>
+            <div class="task-description">Description of Task 1</div>
+          </li>
+          <li class="task-item">
+            <div class="task-title">Task 2</div>
+            <div class="task-description">Description of Task 2</div>
+          </li>
+          <li class="task-item">
+            <div class="task-title">Task 3</div>
+            <div class="task-description">Description of Task 3</div>
+          </li>
+        </ul>
+      </div>
+      <div class="content-container">
+        <div class="header-container">
+          <div class="header">May 2024</div>
+          <button class="nav-button">←</button>
+          <button class="nav-button">→</button>
         </div>
-
-        <ul>
-          <li class = "event-item">
-            <div class="event-title">9:00 AM - Meeting</div>
-            <div class="event-description">
-              Discuss project requirements and next steps.
-            </div>
-            <div class="button-container">
-              <button class="edit-button">Edit</button>
-              <button class="delete-button">Delete</button>
-            </div>
-          </li>
-          <li class = "event-item">
-            <div class="event-title">11:00 AM - Code Review</div>
-            <div class="event-description">
-              Review the latest code submissions.
-            </div>
-            <div class="button-container">
-              <button class="edit-button">Edit</button>
-              <button class="delete-button">Delete</button>
-            </div>
-          </li>
-          <li class = "event-item">
-            <div class="event-title">2:00 PM - Project Update</div>
-            <div class="event-description">
-              Update on the current project status.
-            </div>
-            <div class="button-container">
-              <button class="edit-button">Edit</button>
-              <button class="delete-button">Delete</button>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="day">
-        <header>Tuesday</header>
-        <ul>
-          <li class = "event-item">
-            <div class="event-title">10:00 AM - Design Workshop</div>
-            <div class="event-description">
-              Participate in the design workshop.
-            </div>
-            <div class="button-container">
-              <button class="edit-button">Edit</button>
-              <button class="delete-button">Delete</button>
-            </div>
-          </li>
-          <li class = "event-item">
-            <div class="event-title">1:00 PM - Team Lunch</div>
-            <div class="event-description">
-              Lunch with the team at the local restaurant.
-            </div>
-            <div class="button-container">
-              <button class="edit-button">Edit</button>
-              <button class="delete-button">Delete</button>
-            </div>
-          </li>
-          <li class = "event-item">
-            <div class="event-title">3:00 PM - Client Call</div>
-            <div class="event-description">
-              Call with the client to discuss feedback.
-            </div>
-            <div class="button-container">
-              <button class="edit-button">Edit</button>
-              <button class="delete-button">Delete</button>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="day">
-        <header>Wednesday</header>
-        <ul>
-          <li class = "event-item">
-            <div class="event-title">9:00 AM - Standup Meeting</div>
-            <div class="event-description">
-              Daily standup meeting with the team.
-            </div>
-            <div class="button-container">
-              <button class="edit-button">Edit</button>
-              <button class="delete-button">Delete</button>
-            </div>
-          </li>
-          <li class = "event-item">
-            <div class="event-title">12:00 PM - Lunch Break</div>
-            <div class="event-description">Lunch break.</div>
-            <div class="button-container">
-              <button class="edit-button">Edit</button>
-              <button class="delete-button">Delete</button>
-            </div>
-          </li>
-          <li class = "event-item">
-            <div class="event-title">4:00 PM - Team Meeting</div>
-            <div class="event-description">
-              Weekly team meeting to discuss progress.
-            </div>
-            <div class="button-container">
-              <button class="edit-button">Edit</button>
-              <button class="delete-button">Delete</button>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="day">
-        <header>Thursday</header>
-        <ul>
-          <li class = "event-item">
-            <div class="event-title">9:00 AM - Project Planning</div>
-            <div class="event-description">
-              Plan the next phases of the project.
-            </div>
-            <div class="button-container">
-              <button class="edit-button">Edit</button>
-              <button class="delete-button">Delete</button>
-            </div>
-          </li>
-          <li class = "event-item">
-            <div class="event-title">11:00 AM - Development</div>
-            <div class="event-description">Focus on development tasks.</div>
-            <div class="button-container">
-              <button class="edit-button">Edit</button>
-              <button class="delete-button">Delete</button>
-            </div>
-          </li>
-          <li class = "event-item">
-            <div class="event-title">3:00 PM - Sprint Review</div>
-            <div class="event-description">
-              Review the sprint progress and achievements.
-            </div>
-            <div class="button-container">
-              <button class="edit-button">Edit</button>
-              <button class="delete-button">Delete</button>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="day">
-        <header>Friday</header>
-        <ul>
-          <li class = "event-item">
-            <div class="event-title">10:00 AM - Code Review</div>
-            <div class="event-description">
-              Review the latest code submissions.
-            </div>
-            <div class="button-container">
-              <button class="edit-button">Edit</button>
-              <button class="delete-button">Delete</button>
-            </div>
-          </li>
-          <li class = "event-item">
-            <div class="event-title">1:00 PM - One-on-One</div>
-            <div class="event-description">
-              One-on-one meeting with the manager.
-            </div>
-            <div class="button-container">
-              <button class="edit-button">Edit</button>
-              <button class="delete-button">Delete</button>
-            </div>
-          </li>
-          <li class = "event-item">
-            <div class="event-title">4:00 PM - Happy Hour</div>
-            <div class="event-description">
-              Relax and unwind with colleagues.
-            </div>
-            <div class="button-container">
-              <button class="edit-button">Edit</button>
-              <button class="delete-button">Delete</button>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="day">
-        <header>Saturday</header>
-        <ul>
-          <li class = "event-item">
-            <div class="event-title">Free Time</div>
-            <div class="event-description">Enjoy your day off!</div>
-            <div class="button-container">
-              <button class="edit-button">Edit</button>
-              <button class="delete-button">Delete</button>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="day">
-        <header>Sunday</header>
-        <ul>
-          <li class = "event-item">
-            <div class="event-title">Family Day</div>
-            <div class="event-description">Spend quality time with family.</div>
-            <div class="button-container">
-              <button class="edit-button">Edit</button>
-              <button class="delete-button">Delete</button>
-            </div>
-          </li>
-        </ul>
+        <div class="calendar">
+          <div class="day">
+            <header>Monday</header>
+            <ul>
+              <li class="event-item">
+                <div class="event-title">9:00 AM - Meeting</div>
+                <div class="event-description">
+                  Discuss project requirements and next steps.
+                </div>
+                <div class="button-container">
+                  <button class="edit-button">Edit</button>
+                  <button class="delete-button">Delete</button>
+                </div>
+              </li>
+              <li class="event-item">
+                <div class="event-title">11:00 AM - Code Review</div>
+                <div class="event-description">
+                  Review the latest code submissions.
+                </div>
+                <div class="button-container">
+                  <button class="edit-button">Edit</button>
+                  <button class="delete-button">Delete</button>
+                </div>
+              </li>
+              <li class="event-item">
+                <div class="event-title">2:00 PM - Project Update</div>
+                <div class="event-description">
+                  Update on the current project status.
+                </div>
+                <div class="button-container">
+                  <button class="edit-button">Edit</button>
+                  <button class="delete-button">Delete</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="day">
+            <header>Tuesday</header>
+            <ul>
+              <li class="event-item">
+                <div class="event-title">10:00 AM - Design Workshop</div>
+                <div class="event-description">
+                  Participate in the design workshop.
+                </div>
+                <div class="button-container">
+                  <button class="edit-button">Edit</button>
+                  <button class="delete-button">Delete</button>
+                </div>
+              </li>
+              <li class="event-item">
+                <div class="event-title">1:00 PM - Team Lunch</div>
+                <div class="event-description">
+                  Lunch with the team at the local restaurant.
+                </div>
+                <div class="button-container">
+                  <button class="edit-button">Edit</button>
+                  <button class="delete-button">Delete</button>
+                </div>
+              </li>
+              <li class="event-item">
+                <div class="event-title">3:00 PM - Client Call</div>
+                <div class="event-description">
+                  Call with the client to discuss feedback.
+                </div>
+                <div class="button-container">
+                  <button class="edit-button">Edit</button>
+                  <button class="delete-button">Delete</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="day">
+            <header>Wednesday</header>
+            <ul>
+              <li class="event-item">
+                <div class="event-title">9:00 AM - Standup Meeting</div>
+                <div class="event-description">
+                  Daily standup meeting with the team.
+                </div>
+                <div class="button-container">
+                  <button class="edit-button">Edit</button>
+                  <button class="delete-button">Delete</button>
+                </div>
+              </li>
+              <li class="event-item">
+                <div class="event-title">12:00 PM - Lunch Break</div>
+                <div class="event-description">Lunch break.</div>
+                <div class="button-container">
+                  <button class="edit-button">Edit</button>
+                  <button class="delete-button">Delete</button>
+                </div>
+              </li>
+              <li class="event-item">
+                <div class="event-title">4:00 PM - Team Meeting</div>
+                <div class="event-description">
+                  Weekly team meeting to discuss progress.
+                </div>
+                <div class="button-container">
+                  <button class="edit-button">Edit</button>
+                  <button class="delete-button">Delete</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="day">
+            <header>Thursday</header>
+            <ul>
+              <li class="event-item">
+                <div class="event-title">9:00 AM - Project Planning</div>
+                <div class="event-description">
+                  Plan the next phases of the project.
+                </div>
+                <div class="button-container">
+                  <button class="edit-button">Edit</button>
+                  <button class="delete-button">Delete</button>
+                </div>
+              </li>
+              <li class="event-item">
+                <div class="event-title">11:00 AM - Development</div>
+                <div class="event-description">Focus on development tasks.</div>
+                <div class="button-container">
+                  <button class="edit-button">Edit</button>
+                  <button class="delete-button">Delete</button>
+                </div>
+              </li>
+              <li class="event-item">
+                <div class="event-title">3:00 PM - Sprint Review</div>
+                <div class="event-description">
+                  Review the sprint progress and achievements.
+                </div>
+                <div class="button-container">
+                  <button class="edit-button">Edit</button>
+                  <button class="delete-button">Delete</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="day">
+            <header>Friday</header>
+            <ul>
+              <li class="event-item">
+                <div class="event-title">10:00 AM - Code Review</div>
+                <div class="event-description">
+                  Review the latest code submissions.
+                </div>
+                <div class="button-container">
+                  <button class="edit-button">Edit</button>
+                  <button class="delete-button">Delete</button>
+                </div>
+              </li>
+              <li class="event-item">
+                <div class="event-title">1:00 PM - One-on-One</div>
+                <div class="event-description">
+                  One-on-one meeting with the manager.
+                </div>
+                <div class="button-container">
+                  <button class="edit-button">Edit</button>
+                  <button class="delete-button">Delete</button>
+                </div>
+              </li>
+              <li class="event-item">
+                <div class="event-title">4:00 PM - Happy Hour</div>
+                <div class="event-description">
+                  Relax and unwind with colleagues.
+                </div>
+                <div class="button-container">
+                  <button class="edit-button">Edit</button>
+                  <button class="delete-button">Delete</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="day">
+            <header>Saturday</header>
+            <ul>
+              <li class="event-item">
+                <div class="event-title">Free Time</div>
+                <div class="event-description">Enjoy your day off!</div>
+                <div class="button-container">
+                  <button class="edit-button">Edit</button>
+                  <button class="delete-button">Delete</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="day">
+            <header>Sunday</header>
+            <ul>
+              <li class="event-item">
+                <div class="event-title">Family Day</div>
+                <div class="event-description">Spend quality time with family.</div>
+                <div class="button-container">
+                  <button class="edit-button">Edit</button>
+                  <button class="delete-button">Delete</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
+
+    <div class="overlay" id="overlay-delete"></div>
+    <div class="popup" id="popup-delete">
+        <div class="popup-message">Are you sure you want to delete this task?</div>
+        <div class="popup-buttons">
+            <button class="popup-button-confirm" id="confirm-delete">Yes</button>
+            <button class="popup-button-cancel" id="cancel-delete">No</button>
+        </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const deleteButtons = document.querySelectorAll('.delete-button');
+        const popup = document.getElementById('popup-delete');
+        const overlay = document.getElementById('overlay-delete');
+        let currentTask;
+        deleteButtons.forEach(button => {
+          button.addEventListener('click', (event) => {
+            currentTask = event.target.closest('.event-item');
+            showPopupForDelete();
+          });
+        });
+
+        document.getElementById('confirm-delete').addEventListener('click', () => {
+          currentTask.remove();
+          hidePopupForDelete();
+        });
+
+        document.getElementById('cancel-delete').addEventListener('click', hidePopupForDelete);
+        overlay.addEventListener('click', hidePopupForDelete);
+
+        function showPopupForDelete() {
+          popup.style.display = 'block';
+          overlay.style.display = 'block';
+        }
+
+        function hidePopupForDelete() {
+          popup.style.display = 'none';
+          overlay.style.display = 'none';
+          currentTask = null;
+        }
+      });
+    </script>
+
   </body>
 </html>
