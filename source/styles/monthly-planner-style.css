@@ -1,0 +1,132 @@
+:root {
+    --background-color: #f4f4f4;
+    --header-background-color: #f4f4f4;
+    --header-font-size: 1em;
+    --header-margin: 10px 0;
+    --calendar-padding: 10px 20px 20px 20px;
+    --calendar-gap: 10px;
+    --day-background-color: #fff;
+    --day-border-color: #ccc;
+    --day-padding: 10px;
+    --day-box-shadow: 5px 5px 15px #0000001a;
+    --header-font-weight: bold;
+    --header-border-bottom: 1px solid #ccc;
+    --header-margin-bottom: 10px;
+    --header-padding-bottom: 5px;
+    --event-title-font-weight: bold;
+    --event-description-margin-top: 5px;
+    --list-item-padding: 1px 3px 1px 3px;
+    --list-item-border: 2px solid #ccc;
+    --list-item-border-radius: 5px;
+    --list-item-background-color: #b1dfec;
+    --nav-button-background-color: #007bff;
+    --nav-button-hover-background-color: #0056b3;
+    --nav-button-color: white;
+    --nav-button-padding: 10px;
+    --nav-button-font-size: 1em;
+    --nav-button-margin-left: 5px;
+    --nav-button-border-radius: 5px;
+}
+
+body {
+    background-color: var(--background-color);
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    font-size: 100%;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu;
+}
+
+.taskbar-wrapper {
+    width: 20%;
+    background-color: #d8e5e8;
+}
+
+.calendar-wrapper {
+    width: 80%;
+}
+
+.navigator {
+    display: flex;
+}
+
+.navigator-buttons {
+    margin: 1% 0;
+    display: flex;
+}
+
+.navigator-button {
+    box-shadow: var(--day-box-shadow);
+}
+
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border: 1px solid var(--day-border-color);
+    gap: 1px;
+    background-color: var(--day-border-color);
+    box-shadow: var(--day-box-shadow);
+    margin: 0 1%;
+}
+
+.first-day {
+    grid-column-start: 4;
+}
+
+.day-name {
+    background: #d8e5e8;
+    font-size: larger;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.day {
+    font-size: larger;
+    background-color: white;
+    height: 15vh;
+}
+
+.day-extra {
+    font-size: larger;
+    background-color: var( --background-color);
+    height: 15vh;
+}
+
+
+.day-number {
+    padding: 5px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.today .day-number {
+    border-bottom-left-radius: 50%;
+    color: white;
+    font-weight: bold;
+    background-color: lightcoral;
+}
+
+.task {
+    background-color: var(--list-item-background-color);
+    padding: var(--list-item-padding);
+    font-size: 0.8em;
+}
+
+h1, h2, h3 {
+    margin: 1%;
+}
+
+ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
