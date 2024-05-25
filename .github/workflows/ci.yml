@@ -19,4 +19,4 @@ jobs:
       - name: Generate JSDoc Documentation
         run: npm run jsdoc
       - name: Upload coverage reports to Codacy
-        run: bash <(curl -Ls https://coverage.codacy.com/get.sh)
+        run: export CODACY_PROJECT_TOKEN=59dbc87920684e61aa62e8f3e212b076 && bash <(curl -Ls https://coverage.codacy.com/get.sh)
