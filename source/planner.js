@@ -120,7 +120,7 @@ function init(){
         }
         const [hourMinute, period] = time.split(' ');
         let [hour, minute] = hourMinute.split(':');
-        if(hour == isNaN || minute == isNaN || hour == undefined || minute == undefined){
+        if(isNaN(hour) || isNaN(minute) || hour == undefined || minute == undefined){
             return null;
         }
         hour = parseInt(hour, 10);
@@ -138,7 +138,7 @@ function init(){
             return null;
         }
         let [hour, minute] = time.split(':');
-        if(hour == isNaN || minute == isNaN || hour == undefined || minute == undefined){
+        if(isNaN(hour) || isNaN(minute) || hour == undefined || minute == undefined){
             return null;
         }
         hour = parseInt(hour, 10);
