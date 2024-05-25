@@ -1,0 +1,12 @@
+HTML:
+  - "**/*.html"
+
+JS:
+  - "**/*.js"
+
+CSS:
+  - "**/*.css"
+
+Documentation:
+  - "**/*.md"
+  - "docs/**/*"
