@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weekly View Calendar</title>
     <link rel="stylesheet" href="./styles/planner-styles.css" />
+    <script src="planner.js" type="module"></script>
   </head>
   <body>
     <div class="main-content">
@@ -241,40 +242,5 @@
             <button class="popup-button-cancel" id="cancel-delete">No</button>
         </div>
     </div>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const deleteButtons = document.querySelectorAll('.delete-button');
-        const popup = document.getElementById('popup-delete');
-        const overlay = document.getElementById('overlay-delete');
-        let currentTask;
-        deleteButtons.forEach(button => {
-          button.addEventListener('click', (event) => {
-            currentTask = event.target.closest('.event-item');
-            showPopupForDelete();
-          });
-        });
-
-        document.getElementById('confirm-delete').addEventListener('click', () => {
-          currentTask.remove();
-          hidePopupForDelete();
-        });
-
-        document.getElementById('cancel-delete').addEventListener('click', hidePopupForDelete);
-        overlay.addEventListener('click', hidePopupForDelete);
-
-        function showPopupForDelete() {
-          popup.style.display = 'block';
-          overlay.style.display = 'block';
-        }
-
-        function hidePopupForDelete() {
-          popup.style.display = 'none';
-          overlay.style.display = 'none';
-          currentTask = null;
-        }
-      });
-    </script>
-
   </body>
 </html>
