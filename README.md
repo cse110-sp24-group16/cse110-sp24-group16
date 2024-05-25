@@ -43,6 +43,6 @@ Project status and work:
 - Tags: Automations
   - If interested in only specific updates (e.g., frontend or CSS), use tags in your search. They are both automatically and manually assigned to every Issue and PR.
 
-### Automatic code evaluation scores:
+### Automatic code evaluation scores
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/a35b12c515d74f70811350a600bf47b3)](https://app.codacy.com/gh/cse110-sp24-group16/cse110-sp24-group16/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
