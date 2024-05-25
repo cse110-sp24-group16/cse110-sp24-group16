@@ -120,10 +120,10 @@ function init(){
         }
         const [hourMinute, period] = time.split(' ');
         let [hour, minute] = hourMinute.split(':');
-        if(hour == NaN || minute == NaN || hour == undefined || minute == undefined){
-            return null
+        if(hour == isNaN || minute == isNaN || hour == undefined || minute == undefined){
+            return null;
         }
-        hour = parseInt(hour);
+        hour = parseInt(hour, 10);
         if (period === 'PM' && hour !== 12) {
             hour += 12;
         } else if (period === 'AM' && hour === 12) {
@@ -138,10 +138,10 @@ function init(){
             return null;
         }
         let [hour, minute] = time.split(':');
-        if(hour == NaN || minute == NaN || hour == undefined || minute == undefined){
-            return null
+        if(hour == isNaN || minute == isNaN || hour == undefined || minute == undefined){
+            return null;
         }
-        hour = parseInt(hour);
+        hour = parseInt(hour, 10);
         
         let period = 'AM';
         
