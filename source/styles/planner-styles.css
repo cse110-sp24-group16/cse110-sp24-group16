@@ -26,6 +26,12 @@
     --nav-button-font-size: 1em;
     --nav-button-margin-left: 5px;
     --nav-button-border-radius: 5px;
+    --task-list-background-color: #e0e0e0;
+    --task-list-padding: 10px;
+    --task-item-padding: 10px;
+    --task-item-border: 1px solid #ccc;
+    --task-item-border-radius: 5px;
+    --task-item-background-color: #d1ecf1;
 }
 
 body {
@@ -61,6 +67,44 @@ body {
 
 .nav-button:hover {
     background-color: var(--nav-button-hover-background-color);
+}
+
+.main-content {
+    display: flex;
+    flex: 1;
+    background-color: var(--background-color);
+}
+
+.task-list {
+    background-color: var(--task-list-background-color);
+    padding: var(--task-list-padding);
+    width: 200px;
+}
+
+.task-list header {
+    font-weight: var(--header-font-weight);
+    margin-bottom: var(--header-margin-bottom);
+    border-bottom: var(--header-border-bottom);
+    padding-bottom: var(--header-padding-bottom);
+}
+
+.task-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.task-item {
+    padding: var(--task-item-padding);
+    border: var(--task-item-border);
+    border-radius: var(--task-item-border-radius);
+    background-color: var(--task-item-background-color);
+    margin-bottom: var(--calendar-gap);
+}
+
+.content-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .calendar {
@@ -137,7 +181,7 @@ body {
     background-color: #dfad0b;
 }
 
-.event-item:hover .button-container{
+.event-item:hover .button-container {
     display: block;
 }
 
