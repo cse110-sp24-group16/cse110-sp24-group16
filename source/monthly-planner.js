@@ -57,7 +57,7 @@ function makeCalendar(month, year){
 //helper function to make a li html element.
 //span nested in li element
 function makeBucket(i, month, year){
-    liElt = document.createElement("li");
+    let liElt = document.createElement("li");
     if (i === date.getDate() && month === date.getMonth() && year === date.getFullYear()){
         liElt.id = "today";}
     liElt["tabindex"] = "0";
