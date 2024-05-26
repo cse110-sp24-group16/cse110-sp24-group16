@@ -194,7 +194,7 @@ function init(){
 
     if (switchToWeeklyButton) {
         switchToWeeklyButton.addEventListener('click', () => {
-            window.location.href = 'planner.html';
+            window.location.href = escape('planner.html');
         });
     }
   
