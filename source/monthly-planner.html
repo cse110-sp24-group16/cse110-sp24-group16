@@ -18,7 +18,12 @@
             <h2>Hello, %name%!</h2>
             <h3 id="task-count">You have 0 tasks due for May 2024.</h3>
             <form id="task-form">
-                <input type="text" id="new-task" placeholder="Enter new task" required />
+                <input
+                    type="text"
+                    id="new-task"
+                    placeholder="Enter new task"
+                    required
+                />
                 <button type="submit">Add Task</button>
             </form>
             <ul id="task-list"></ul>
@@ -27,13 +32,13 @@
             <div class="navigator">
                 <h1 class="month-title">May 2024</h1>
                 <div class="navigator-buttons">
-                    <button id="prevButton" class="navigator-button-prev">
+                    <button id="prevButton" class="navigator-button">
                         &#x3008;
                     </button>
-                    <button id="curButton" class="navigator-button-cur">
+                    <button id="curButton" class="navigator-button">
                         Today
                     </button>
-                    <button id="nextButton" class="navigator-button-next">
+                    <button id="nextButton" class="navigator-button">
                         &#x3009;
                     </button>
                 </div>
@@ -153,30 +158,34 @@
                 <li tabindex="0" class="day-extra">
                     <span class="day-number">1</span>
                 </li>
-            -->
-            </ol>
+            --></ol>
         </div>
         <script src="monthly-planner.js"></script>
         <script>
-            document.getElementById('task-form').addEventListener('submit', function(event) {
-                event.preventDefault();
-                const taskInput = document.getElementById('new-task');
-                const taskText = taskInput.value.trim();
-                if (taskText !== '') {
-                    const taskList = document.getElementById('task-list');
-                    const newTask = document.createElement('li');
-                    newTask.textContent = taskText;
-                    taskList.appendChild(newTask);
-                    
-                    taskInput.value = '';
-                    
-                    updateTaskCount();
-                }
-            });
+            document
+                .getElementById("task-form")
+                .addEventListener("submit", function (event) {
+                    event.preventDefault();
+                    const taskInput = document.getElementById("new-task");
+                    const taskText = taskInput.value.trim();
+                    if (taskText !== "") {
+                        const taskList = document.getElementById("task-list");
+                        const newTask = document.createElement("li");
+                        newTask.textContent = taskText;
+                        taskList.appendChild(newTask);
+
+                        taskInput.value = "";
+
+                        updateTaskCount();
+                    }
+                });
 
             function updateTaskCount() {
-                const taskCount = document.getElementById('task-list').children.length;
-                document.getElementById('task-count').textContent = `You have ${taskCount} tasks due for May 2024.`;
+                const taskCount =
+                    document.getElementById("task-list").children.length;
+                document.getElementById(
+                    "task-count"
+                ).textContent = `You have ${taskCount} tasks due for May 2024.`;
             }
 
             updateTaskCount();
