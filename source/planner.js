@@ -45,7 +45,9 @@ function init(){
         const newDate = new Date(document.getElementById('edit-date').value);
         const newTime = convertTo12Hour(document.getElementById('edit-time').value);
         const newCompleted = document.getElementById('edit-completed').checked;
-        const importance = document.getElementById('importance-slider').value
+        const importance = document.getElementById('importance-slider').value;
+        const newColor = document.getElementById('edit-color').value;
+        const newNotes = document.getElementById('edit-notes').value;
 
         if(newTime == null){
             currentTask.querySelector('.event-title').textContent = newTitle;
@@ -57,6 +59,9 @@ function init(){
         currentTask.querySelector('.event-date').textContent = formatDate(newDate);
         currentTask.querySelector('.event-completed input').checked = newCompleted;
         currentTask.querySelector('#slider-value-hidden').textContent = importance;
+        currentTask.querySelector('#event-notes').textContent = newNotes;
+        currentTask.style.backgroundColor = newColor;
+        popupEdit.style.backgroundColor = newColor;
 
         hidePopupForEdit();
     });
@@ -80,7 +85,9 @@ function init(){
         const dateString = item.querySelector('.event-date').textContent;
         const date = parseDate(dateString);
         const sliderValue = item.querySelector('#slider-value-hidden').textContent;
+        const notes = item.querySelector('#event-notes').textContent;
         let [time, eventTitle] = title.split(' - ');
+        popupEdit.style.backgroundColor = currentTask.style.backgroundColor;
 
         //for cases that do not have time specified, the time variable needs to switch with eventTitle
         if(eventTitle === undefined){
@@ -90,6 +97,8 @@ function init(){
 
         popupEdit.style.display = 'block';
         overlay.style.display = 'block';
+
+        let color = window.getComputedStyle(popupEdit).backgroundColor;
 
         slider.addEventListener('change', () => {
             updateSliderValue(slider.value)
@@ -102,6 +111,8 @@ function init(){
         document.getElementById('edit-time').value = convertTimeTo24Hour(time);
         document.getElementById('importance-slider').value = sliderValue;
         document.getElementById('slider-value').textContent = sliderValue;
+        document.getElementById('edit-color').value = rgbToHex(color);
+        document.getElementById('edit-notes').value = notes;
     }
 
     function hidePopupForDelete() {
@@ -185,5 +196,29 @@ function init(){
         switchToWeeklyButton.addEventListener('click', () => {
             window.location.href = 'planner.html';
         });
+    }
+  
+    //turns rgb to hex for the input value of type color
+    function rgbToHex(rgb) {
+        let sep;
+        if (rgb.indexOf(",") > -1) {
+            sep = ",";
+        } else {
+            sep = " ";
+        }
+        const newRGB = rgb.substr(4).split(")")[0].split(sep);
+        let r = (Number(newRGB[0])).toString(16),
+            g = (Number(newRGB[1])).toString(16),
+            b = (Number(newRGB[2])).toString(16);
+        if (r.length === 1){
+            r = "0" + r;
+        }
+        if (g.length === 1){
+            g = "0" + g;
+        }
+        if (b.length === 1){
+            b = "0" + b;
+        }
+        return "#" + r + g + b;
     }
 }
