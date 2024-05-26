@@ -198,7 +198,7 @@ function init(){
         if (r.length === 1){
             r = "0" + r;
         }
-        if (g.length == 1){
+        if (g.length === 1){
             g = "0" + g;
         }
         if (b.length == 1){
