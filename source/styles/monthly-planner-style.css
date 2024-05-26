@@ -69,9 +69,6 @@ body {
     margin: 0 1%;
 }
 
-.first-day {
-    grid-column-start: 4;
-}
 
 .day-name {
     background: #d8e5e8;
@@ -100,7 +97,7 @@ body {
     vertical-align: middle;
 }
 
-.today .day-number {
+#today > .day-number {
     border-bottom-left-radius: 50%;
     color: white;
     font-weight: bold;
