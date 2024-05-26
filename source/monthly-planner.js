@@ -24,7 +24,7 @@ let year = date.getFullYear();
 //given month and year, make the monthly view
 //populate the calendar with buckets (li elements)
 function makeCalendar(month, year){
-    month_header.innerText = `${months[month]} ${year}`;
+    month_header.textContent = `${months[month]} ${year}`;
     //returns the day of the week of the first day
     const start = new Date(year, month, 1).getDay();
     //returns the last day number
@@ -35,48 +35,56 @@ function makeCalendar(month, year){
     const endDatePrev = new Date(year, month, 0).getDate();
     //buckets for extra day at start
     for (let i = start; i > 0; i--){
-        makeBucket(i, month, year);
+        const liElt = document.createElement("li");
+        if (i === date.getDate() && month === date.getMonth() && year === date.getFullYear()){
+        liElt.id = "today";}
+        liElt["tabindex"] = "0";
+        const spanElt = document.createElement("span");
+        spanElt.className = "day-number";
+        liElt.appendChild(spanElt);
+        calendar.appendChild(liElt);
         liElt.className = "day-extra";
-        spanElt.innerText = `${endDatePrev - i + 1}`;
+        spanElt.textContent = `${endDatePrev - i + 1}`;
     }
     //buckets for months days
     for (let i = 1; i < endDate + 1; i++) {
-        makeBucket(i, month, year);
+        const liElt = document.createElement("li");
+        if (i === date.getDate() && month === date.getMonth() && year === date.getFullYear()){
+        liElt.id = "today";}
+        liElt["tabindex"] = "0";
+        const spanElt = document.createElement("span");
+        spanElt.className = "day-number";
+        liElt.appendChild(spanElt);
+        calendar.appendChild(liElt);
         liElt.className = "day";
-        spanElt.innerText = `${i}`;
+        spanElt.textContent = `${i}`;
         if (i === 1){liElt.id = "first-day";}
     }
     //buckets for extra days at end
     for (let i = end; i < 6; i++){
-        makeBucket(i, month, year);
-        spanElt.innerText = `${i - end + 1}`;
+        const liElt = document.createElement("li");
+        if (i === date.getDate() && month === date.getMonth() && year === date.getFullYear()){
+        liElt.id = "today";}
+        liElt["tabindex"] = "0";
+        const spanElt = document.createElement("span");
+        spanElt.className = "day-number";
+        liElt.appendChild(spanElt);
+        calendar.appendChild(liElt);
+        spanElt.textContent = `${i - end + 1}`;
         liElt.className = "day-extra";
     }
 }
 
-//helper function to make a li html element.
-//span nested in li element
-function makeBucket(i, month, year){
-    liElt = document.createElement("li");
-    if (i === date.getDate() && month === date.getMonth() && year === date.getFullYear()){
-        liElt.id = "today";}
-    liElt["tabindex"] = "0";
-    spanElt = document.createElement("span");
-    spanElt.className = "day-number";
-    liElt.appendChild(spanElt);
-    calendar.appendChild(liElt);
-}
-
 //erases the calendar
 function wipeCalendar(){
-    let dayes = document.querySelectorAll(".day-extra");
+    let exdays = document.querySelectorAll(".day-extra");
     let days = document.querySelectorAll(".day");
 
-    for(let i = 0; i < dayes.length; i++){
-        dayes[i].remove();
+    for(const exday of exdays){
+        if (exday instanceof HTMLElement) {exday.parentNode.removeChild(exday)}
     }
-    for(let i = 0; i < days.length; i++){
-        days[i].remove();
+    for(const day of days){
+        if (day instanceof HTMLElement) {day.parentNode.removeChild(day)}
     }
 }
 
