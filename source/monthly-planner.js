@@ -62,7 +62,7 @@ function makeCalendar(month, year){
     }
     //buckets for extra days at end
     for (let i = end; i < 6; i++){
-        const liElt = document.createElement("li");
+        const let liElt = document.createElement("li");
         if (i === date.getDate() && month === date.getMonth() && year === date.getFullYear()){
         liElt.id = "today";}
         liElt["tabindex"] = "0";
