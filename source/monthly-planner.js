@@ -59,7 +59,6 @@ function makeCalendar(month, year){
 function makeBucket(i, month, year){
     liElt = document.createElement("li");
     if (i === date.getDate() && month === date.getMonth() && year === date.getFullYear()){
-        console.log(month);
         liElt.id = "today";}
     liElt["tabindex"] = "0";
     spanElt = document.createElement("span");
@@ -85,7 +84,7 @@ function wipeCalendar(){
 makeCalendar(month, year);
 nextButton.addEventListener("click", () => {
     wipeCalendar();
-    month = month + 1;
+    month += 1;
     if (month > 11){
         month = 0;
         year += 1;
@@ -95,7 +94,7 @@ nextButton.addEventListener("click", () => {
 
 prevButton.addEventListener("click", () => {
     wipeCalendar();
-    month = month - 1;
+    month -= 1;
     if (month < 0){
         month = 11;
         year -= 1;
