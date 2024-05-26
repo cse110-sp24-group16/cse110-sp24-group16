@@ -8,6 +8,9 @@ function init(){
     const popupEdit = document.getElementById('edit-popup');
     const overlay = document.getElementById('overlay');
     const slider = document.getElementById('importance-slider');
+    const switchToMonthlyButton = document.getElementById('switch-to-monthly');
+    const switchToWeeklyButton = document.getElementById('switch-to-weekly');
+
     let currentTask;
     deleteButtons.forEach(button => {
         button.addEventListener('click', (event) => {
@@ -183,6 +186,18 @@ function init(){
         return new Date(`${year}-${month}-${day}`);
     }
 
+    if (switchToMonthlyButton) {
+        switchToMonthlyButton.addEventListener('click', () => {
+            window.location.href = escape('monthly-planner.html');
+        });
+    }
+
+    if (switchToWeeklyButton) {
+        switchToWeeklyButton.addEventListener('click', () => {
+            window.location.href = escape('planner.html');
+        });
+    }
+  
     //turns rgb to hex for the input value of type color
     function rgbToHex(rgb) {
         let sep;
