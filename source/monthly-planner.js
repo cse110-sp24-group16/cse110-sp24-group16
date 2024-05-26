@@ -24,7 +24,7 @@ let year = date.getFullYear();
 //given month and year, make the monthly view
 //populate the calendar with buckets (li elements)
 function makeCalendar(month, year){
-    month_header.textContent = `${months[month]} ${year}`;
+    month_header.textContent = `${months[month | 0]} ${year | 0}`;
     //returns the day of the week of the first day
     const start = new Date(year, month, 1).getDay();
     //returns the last day number
