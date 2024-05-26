@@ -195,7 +195,7 @@ function init(){
         let r = (Number(newRGB[0])).toString(16),
             g = (Number(newRGB[1])).toString(16),
             b = (Number(newRGB[2])).toString(16);
-        if (r.length == 1){
+        if (r.length === 1){
             r = "0" + r;
         }
         if (g.length == 1){
