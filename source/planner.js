@@ -188,7 +188,7 @@ function init(){
 
     if (switchToMonthlyButton) {
         switchToMonthlyButton.addEventListener('click', () => {
-            window.location.href = 'monthly-planner.html';
+            window.location.href = escape('monthly-planner.html');
         });
     }
 
