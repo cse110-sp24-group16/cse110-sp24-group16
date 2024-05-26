@@ -254,8 +254,9 @@ body {
     z-index: 1000;
 }
 
-.edit-popup input, .edit-popup textarea {
+.edit-popup input {
     width: 100%;
+    cursor: pointer;
 }
 
 .edit-popup .popup-buttons {
@@ -264,8 +265,7 @@ body {
 }
 
 #edit-completed {
-    width: 5%
-    
+    width: 5%;
 }
 
 .due-date-container {
@@ -285,12 +285,38 @@ body {
 .edit-popup .popup-button-save {
     background-color: green;
     color: white;
+    cursor: pointer;
 }
 
 .edit-popup .popup-button-cancel {
     background-color: #ccc;
+    cursor: pointer;
 }
 
-.hidden-slider-container {
+.hidden-slider-container, .hidden {
     display: none;
+}
+
+#slider-value {
+    font-weight: bold;
+}
+
+#edit-color, #edit-notes, .slider-container{
+    margin-bottom: 15px;
+}
+
+.edit-completed{
+    display: flex;
+    align-items: center;
+    margin-left: 37.5%;
+    margin-top: auto;
+}
+
+.text-area, #edit-title {
+    width: 100%;
+    cursor: auto;
+}
+
+.text-area {
+    height: 60px;
 }
