@@ -8,6 +8,9 @@ function init(){
     const popupEdit = document.getElementById('edit-popup');
     const overlay = document.getElementById('overlay');
     const slider = document.getElementById('importance-slider');
+    const switchToMonthlyButton = document.getElementById('switch-to-monthly');
+    const switchToWeeklyButton = document.getElementById('switch-to-weekly');
+
     let currentTask;
     deleteButtons.forEach(button => {
         button.addEventListener('click', (event) => {
@@ -170,5 +173,17 @@ function init(){
     function parseDate(dateString) {
         const [month, day, year] = dateString.split('.');
         return new Date(`${year}-${month}-${day}`);
+    }
+
+    if (switchToMonthlyButton) {
+        switchToMonthlyButton.addEventListener('click', () => {
+            window.location.href = 'monthly-planner.html';
+        });
+    }
+
+    if (switchToWeeklyButton) {
+        switchToWeeklyButton.addEventListener('click', () => {
+            window.location.href = 'planner.html';
+        });
     }
 }
