@@ -25,15 +25,15 @@
         </div>
         <div class="calendar-wrapper">
             <div class="navigator">
-                <h1>May 2024</h1>
+                <h1 class="month-title">May 2024</h1>
                 <div class="navigator-buttons">
-                    <button class="navigator-button navigator-button-prev">
+                    <button id="prevButton" class="navigator-button-prev">
                         &#x3008;
                     </button>
-                    <button class="navigator-button navigator-button-cur">
+                    <button id="curButton" class="navigator-button-cur">
                         Today
                     </button>
-                    <button class="navigator-button navigator-button-next">
+                    <button id="nextButton" class="navigator-button-next">
                         &#x3009;
                     </button>
                 </div>
@@ -46,6 +46,7 @@
                 <li class="day-name">Thu</li>
                 <li class="day-name">Fri</li>
                 <li class="day-name">Sat</li>
+                <!-- original template
                 <li tabindex="0" class="day-extra">
                     <span class="day-number">28</span>
                 </li>
@@ -152,8 +153,10 @@
                 <li tabindex="0" class="day-extra">
                     <span class="day-number">1</span>
                 </li>
+            -->
             </ol>
         </div>
+        <script src="monthly-planner.js"></script>
         <script>
             document.getElementById('task-form').addEventListener('submit', function(event) {
                 event.preventDefault();
