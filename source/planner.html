@@ -6,8 +6,23 @@
     <title>Weekly View Calendar</title>
     <link rel="stylesheet" href="./styles/planner-styles.css" />
     <script src="planner.js" type="module"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      .switch-button {
+          position: fixed;
+          top: 10px;
+          right: 10px;
+          color:cyan;
+          font-size:24px;
+      }
+    </style>
   </head>
   <body>
+    <div class="switch">
+      <a href="planner.html">
+        <button class="switch-button">PLANNER <i class="fa fa-eye"></i></button>
+      </a>
+    </div>
     <div class="main-content">
       <div class="task-list">
         <header>Task List</header>
