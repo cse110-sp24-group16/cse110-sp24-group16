@@ -2,10 +2,12 @@ let fs = require('fs');
 window.addEventListener('DOMContentLoaded', init);
 
 function init() {
+    //read json file from task.json
     try {
         const data = JSON.parse(fs.readFileSync('source/task.json', 'utf8'));
         const weekdays = document.querySelectorAll('.day');
 
+        //Tries to match dates to date of task; creates custom element if matches
         for (let i = 0; i < weekdays.length; i++) {
             for (let j = 0; j < data.length; j++) {
                 if (weekdays[i].id == formatDate(data[j].date)) {
@@ -15,8 +17,10 @@ function init() {
                 }
             }
         }
-        
+    
+    //catch block in case task.json doesn't exist
     } catch (err) {
+        //create json array with hard-coded data on browser
         let taskJson = [];
         const weekdays = document.querySelectorAll('.day');
         for (let i = 0; i < weekdays.length; i++) {
@@ -32,6 +36,7 @@ function init() {
             })
         }
 
+        //write taskJson to task.json
         try {
             fs.writeFileSync('source/task.json', JSON.stringify(taskJson));
         } catch (err) {
