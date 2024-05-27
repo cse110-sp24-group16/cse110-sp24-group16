@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Meeting",
+        "description": "Discuss project requirements and next steps.",
+        "date": "2024-05-20",
+        "time": "09:00:00",
+        "completion": false,
+        "importance": 50
+    },
+    {
+        "title": "Code Review",
+        "description": "Review the latest code submissions.",
+        "date": "2024-05-20",
+        "time": "11:00:00",
+        "completion": false,
+        "importance": 50
+    },
+    {
+        "title": "Project Update",
+        "description": "Update on the current project status.",
+        "date": "2024-05-20",
+        "time": "14:00:00",
+        "completion": false,
+        "importance": 50
+    }
+]
