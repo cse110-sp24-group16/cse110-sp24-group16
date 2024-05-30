@@ -43,28 +43,49 @@ function init(){
     getWeek(tday,tmonth,tyear);
 
     //Change the week's dates according to the day, month, year pass to it.
-    //update the month title accordingly
+    //update the month title accordingly, 
+    //if week shows more than one month, display both months,
+    //if more than one year, display both years
+    //return a list of date objects for each day of the week
     function getWeek(day, month, year) {
-        monthTitle.textContent = months[`${month}`] + " " + year;
         const dayInd = new Date(year, month, day).getDay() - 1;
         const monthEnd = new Date(year, month + 1, 0).getDate();
         const lastMonthEnd = new Date(year, month, 0).getDate();
-        console.log(dayInd);
-        console.log(monthEnd);
+        const weekId = [];
+        let monthText = months[`${month}`] + " " + year;;
         for (let i = 0; i < 7; i++){
             let currDate = day - dayInd + i;
-            if (currDate >= 1 && currDate <= monthEnd){
-                week[`${i}`].textContent = weekdays[`${i}`] + " " + currDate;
+            let currMonth = month;
+            let currYear = year;
+            if (currDate > monthEnd){
+                currDate -= monthEnd;
+                if (month == 11){
+                    currMonth = 0;
+                    currYear += 1;
+                    monthText = `${months[`${month}`]} ${year} - ${months[`${0}`]} ${year + 1}`;
+                }
+                else{
+                    currMonth += 1;
+                    monthText = `${months[`${month}`]} - ${months[`${month + 1}`]} ${year}`;
+                }
             }
-            else if (currDate > monthEnd){
-                week[`${i}`].textContent = weekdays[`${i}`] + " " + (currDate - monthEnd);
-                monthTitle.textContent = months[`${month}`] + " - " + months[`${month + 1}`] + " " + year;
+            else if (currDate < 1){
+                currDate += lastMonthEnd;
+                if (month == 0){
+                    currMonth = 11;
+                    currYear -= 1;
+                    monthText = `${months[`${11}`]} ${year - 1} - ${months[`${month}`]} ${year}`;
+                }
+                else{
+                    currMonth -= 1;
+                    monthText = `${months[`${month - 1}`]} - ${months[`${month}`]} ${year}`;
+                }
             }
-            else{
-                week[`${i}`].textContent = weekdays[`${i}`] + " " + (lastMonthEnd + currDate);
-                monthTitle.textContent = months[`${month - 1}`] + " - " + months[`${month}`] + " " + year;
-            }
+            monthTitle.textContent = monthText;
+            week[`${i}`].textContent = weekdays[`${i}`] + " " + currDate;
+            weekId.push(new Date(currYear, currMonth, currDate));
         }
+        return weekId;
     }
 
     //on pressing the next button, will change to the next week
