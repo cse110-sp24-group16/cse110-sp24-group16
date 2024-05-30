@@ -59,7 +59,7 @@ function init(){
             let currYear = year;
             if (currDate > monthEnd){
                 currDate -= monthEnd;
-                if (month == 11){
+                if (month === 11){
                     currMonth = 0;
                     currYear += 1;
                     monthText = `${months[`${month}`]} ${year} - ${months[`${0}`]} ${year + 1}`;
@@ -71,7 +71,7 @@ function init(){
             }
             else if (currDate < 1){
                 currDate += lastMonthEnd;
-                if (month == 0){
+                if (month === 0){
                     currMonth = 11;
                     currYear -= 1;
                     monthText = `${months[`${11}`]} ${year - 1} - ${months[`${month}`]} ${year}`;
