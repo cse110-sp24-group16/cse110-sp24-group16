@@ -39,8 +39,11 @@ function init(){
     let tday = date.getDate();
     let tmonth = date.getMonth();
     let tyear = date.getFullYear();
+
     getWeek(tday,tmonth,tyear);
 
+    //Change the week's dates according to the day, month, year pass to it.
+    //update the month title accordingly
     function getWeek(day, month, year) {
         monthTitle.textContent = months[month] + " " + year;
         const dayInd = new Date(year, month, day).getDay() - 1;
@@ -64,6 +67,7 @@ function init(){
         }
     }
 
+    //on pressing the next button, will change to the next week
     nextButton.addEventListener("click", () => {
         let tmonthEnd = new Date(tyear, tmonth + 1, 0).getDate();
         tday += 7;
@@ -78,6 +82,7 @@ function init(){
         getWeek(tday, tmonth, tyear);
     });
 
+    //on pressing the previous button, will change to the previous week
     prevButton.addEventListener("click", () => {
         let tlastMonthEnd = new Date(tyear, tmonth, 0).getDate();
         tday -= 7;
@@ -92,6 +97,7 @@ function init(){
         getWeek(tday, tmonth, tyear);
     });
 
+    //on pressing the today button, well bring you back to today's week
     curButton.addEventListener("click", () => {
         tday = date.getDate();
         tmonth = date.getMonth();
