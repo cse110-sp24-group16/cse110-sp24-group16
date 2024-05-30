@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', init);
 
 function init(){
-    let monthTitle = document.getElementById("month-title");
+    const monthTitle = document.getElementById("month-title");
     const months = [
         "January",
         "Febuary",
@@ -16,7 +16,7 @@ function init(){
         "November",
         "December",
       ];
-    let week = [document.getElementById("monday"),
+    const week = [document.getElementById("monday"),
         document.getElementById("tuesday"),
         document.getElementById("wednesday"),
         document.getElementById("thursday"),
@@ -45,7 +45,7 @@ function init(){
     //Change the week's dates according to the day, month, year pass to it.
     //update the month title accordingly
     function getWeek(day, month, year) {
-        monthTitle.textContent = months[month].toString() + " " + year.toString();
+        monthTitle.textContent = months[month] + " " + year;
         const dayInd = new Date(year, month, day).getDay() - 1;
         const monthEnd = new Date(year, month + 1, 0).getDate();
         const lastMonthEnd = new Date(year, month, 0).getDate();
@@ -54,15 +54,15 @@ function init(){
         for (let i = 0; i < 7; i++){
             let currDate = day - dayInd + i;
             if (currDate >= 1 && currDate <= monthEnd){
-                week[i].textContent = weekdays[i].toString() + " " + currDate.toString();
+                week[i].textContent = weekdays[i] + " " + currDate;
             }
             else if (currDate > monthEnd){
-                week[i].textContent = weekdays[i].toString() + " " + (currDate - monthEnd).toString();
-                monthTitle.textContent = months[month].toString() + " - " + months[month + 1].toString() + " " + year.toString();
+                week[i].textContent = weekdays[i] + " " + (currDate - monthEnd);
+                monthTitle.textContent = months[month] + " - " + months[month + 1] + " " + year;
             }
             else{
-                week[i].textContent = weekdays[i].toString() + " " + (lastMonthEnd + currDate).toString();
-                monthTitle.textContent = months[month - 1].toString() + " - " + months[month].toString() + " " + year.toString();
+                week[i].textContent = weekdays[i] + " " + (lastMonthEnd + currDate);
+                monthTitle.textContent = months[month - 1] + " - " + months[month] + " " + year;
             }
         }
     }
