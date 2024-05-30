@@ -45,7 +45,7 @@ function init(){
     //Change the week's dates according to the day, month, year pass to it.
     //update the month title accordingly
     function getWeek(day, month, year) {
-        monthTitle.textContent = months[month] + " " + year;
+        monthTitle.textContent = months[month].toString() + " " + year.toString();
         const dayInd = new Date(year, month, day).getDay() - 1;
         const monthEnd = new Date(year, month + 1, 0).getDate();
         const lastMonthEnd = new Date(year, month, 0).getDate();
@@ -54,15 +54,15 @@ function init(){
         for (let i = 0; i < 7; i++){
             let currDate = day - dayInd + i;
             if (currDate >= 1 && currDate <= monthEnd){
-                week[i].textContent = weekdays[i] + " " + currDate;
+                week[i].textContent = weekdays[i].toString() + " " + currDate.toString();
             }
             else if (currDate > monthEnd){
-                week[i].textContent = weekdays[i] + " " + (currDate - monthEnd);
-                monthTitle.textContent = months[month] + " - " + months[month + 1] + " " + year;
+                week[i].textContent = weekdays[i].toString() + " " + (currDate - monthEnd).toString();
+                monthTitle.textContent = months[month].toString() + " - " + months[month + 1].toString() + " " + year.toString();
             }
             else{
-                week[i].textContent = weekdays[i] + " " + (lastMonthEnd + currDate);
-                monthTitle.textContent = months[month - 1] + " - " + months[month] + " " + year;
+                week[i].textContent = weekdays[i].toString() + " " + (lastMonthEnd + currDate).toString();
+                monthTitle.textContent = months[month - 1].toString() + " - " + months[month].toString() + " " + year.toString();
             }
         }
     }
