@@ -56,7 +56,6 @@ function init(){
         const description = document.getElementById('new-task-description').value;
         const date = new Date(document.getElementById('new-task-date').value);
         const time = convertTo12Hour(document.getElementById('new-task-time').value);
-
         if (title && description && date) {
             addNewTask(title, description, date, time);
             addTaskPopup.style.display = 'none';
@@ -91,10 +90,7 @@ function init(){
         taskList.appendChild(taskItem);
     
         calendarDays.forEach(day => {
-            const dayHeader = day.querySelector('header').textContent;
-            const dayDate = new Date(dayHeader.split(' ')[1]);
-    
-            if (dayDate.toDateString() === date.toDateString()) {
+            if (day.id === date.toDateString()) {
                 const eventItem = document.createElement('li');
                 eventItem.className = 'event-item';
     
