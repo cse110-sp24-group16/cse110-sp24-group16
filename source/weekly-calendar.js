@@ -24,6 +24,7 @@ function init(){
         document.getElementById("saturday"),
         document.getElementById("sunday"),
     ];
+    const weekContainers = document.querySelectorAll(".day");
     const prevButton = document.querySelector("#prevButton");
     const curButton = document.querySelector("#curButton");
     const nextButton = document.querySelector("#nextButton");
@@ -83,6 +84,7 @@ function init(){
             }
             monthTitle.textContent = monthText;
             week[`${i}`].textContent = weekdays[`${i}`] + " " + currDate;
+            weekContainers[`${i}`].id = new Date(currYear, currMonth, currDate).toDateString();
             weekId.push(new Date(currYear, currMonth, currDate));
         }
         return weekId;

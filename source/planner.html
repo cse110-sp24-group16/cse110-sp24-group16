@@ -30,6 +30,24 @@
       <div class="task-list">
         <header>Task List</header>
         <button id="switch-to-monthly">Switch to Monthly View</button>
+        
+<!-- adding the pop up for adding tasks -->
+        <button id="add-task-button">+</button>
+
+        <div class="popup" id="add-task-popup">
+          
+          <input type="text" id="new-task-title" placeholder="Task Title">
+          <textarea id="new-task-description" placeholder="Task Description"></textarea>
+          <input type="date" id="new-task-date">
+          <input type="time" id="new-task-time">
+          <div class="popup-buttons">
+            <button class="popup-button-confirm" id="add-task-confirm">Add Task</button>
+            <button class="popup-button-cancel" id="add-task-cancel">Cancel</button>
+          </div>
+        </div>
+
+
+
         <ul>
           <li class="task-item">
             <div class="task-title">Task 1</div>
