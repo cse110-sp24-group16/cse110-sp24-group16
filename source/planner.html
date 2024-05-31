@@ -6,6 +6,7 @@
     <title>Weekly View Calendar</title>
     <link rel="stylesheet" href="./styles/planner-styles.css" />
     <script src="planner.js" type="module"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
       .switch-button {
@@ -15,6 +16,9 @@
           font-size:24px;
       }
     </style>
+
+    <script src="weekly-calendar.js"></script>
+
   </head>
   <body>
     <div class="switch">
@@ -43,13 +47,14 @@
       </div>
       <div class="content-container">
         <div class="header-container">
-          <div class="header">May 2024</div>
-          <button class="nav-button">←</button>
-          <button class="nav-button">→</button>
+          <div id="month-title" class="header">May 2024</div>
+          <button id="prevButton" class="nav-button">←</button>
+          <button id="curButton" class="nav-button">today</button>
+          <button id="nextButton" class="nav-button">→</button>
         </div>
         <div class="calendar">
           <div class="day">
-            <header>Monday</header>
+            <header id="monday">Monday</header>
             <ul>
               <li class="event-item">
                 <div class="event-title">9:00 AM - Meeting</div>
@@ -108,7 +113,7 @@
             </ul>
           </div>
           <div class="day">
-            <header>Tuesday</header>
+            <header id="tuesday">Tuesday</header>
             <ul>
               <li class="event-item">
                 <div class="event-title">10:00 AM - Design Workshop</div>
@@ -167,7 +172,7 @@
             </ul>
           </div>
           <div class="day">
-            <header>Wednesday</header>
+            <header id="wednesday">Wednesday</header>
             <ul>
               <li class="event-item">
                 <div class="event-title">9:00 AM - Standup Meeting</div>
@@ -226,7 +231,7 @@
             </ul>
           </div>
           <div class="day">
-            <header>Thursday</header>
+            <header id="thursday">Thursday</header>
             <ul>
               <li class="event-item">
                 <div class="event-title">9:00 AM - Project Planning</div>
@@ -285,7 +290,7 @@
             </ul>
           </div>
           <div class="day">
-            <header>Friday</header>
+            <header id="friday">Friday</header>
             <ul>
               <li class="event-item">
                 <div class="event-title">10:00 AM - Code Review</div>
@@ -344,7 +349,7 @@
             </ul>
           </div>
           <div class="day">
-            <header>Saturday</header>
+            <header id="saturday">Saturday</header>
             <ul>
               <li class="event-item">
                 <div class="event-title">Free Time</div>
@@ -367,7 +372,7 @@
             </ul>
           </div>
           <div class="day">
-            <header>Sunday</header>
+            <header id="sunday">Sunday</header>
             <ul>
               <li class="event-item">
                 <div class="event-title">Family Day</div>
