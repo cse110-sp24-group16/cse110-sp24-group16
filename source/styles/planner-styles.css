@@ -327,10 +327,10 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #ffffff;
+    background-color: #fff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px #0000001a;
     z-index: 1000;
     width: 500px; /* Adjust width as needed */
     font-family: Arial, sans-serif;

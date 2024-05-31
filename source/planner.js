@@ -74,45 +74,99 @@ function init(){
     function addNewTask(title, description, date, time) {
         const taskList = document.querySelector('.task-list ul');
         const calendarDays = document.querySelectorAll('.day');
-
+    
         const taskItem = document.createElement('li');
         taskItem.className = 'task-item';
-        taskItem.innerHTML = `
-            <div class="task-title">${title}</div>
-            <div class="task-description">${description}</div>
-        `;
+    
+        const taskTitle = document.createElement('div');
+        taskTitle.className = 'task-title';
+        taskTitle.textContent = title;
+    
+        const taskDescription = document.createElement('div');
+        taskDescription.className = 'task-description';
+        taskDescription.textContent = description;
+    
+        taskItem.appendChild(taskTitle);
+        taskItem.appendChild(taskDescription);
         taskList.appendChild(taskItem);
-
+    
         calendarDays.forEach(day => {
             const dayHeader = day.querySelector('header').textContent;
             const dayDate = new Date(dayHeader.split(' ')[1]);
-
+    
             if (dayDate.toDateString() === date.toDateString()) {
                 const eventItem = document.createElement('li');
                 eventItem.className = 'event-item';
-                eventItem.innerHTML = `
-                    <div class="event-title">${time ? `${time} - ` : ''}${title}</div>
-                    <div class="event-description">${description}</div>
-                    <div class="event-date">${formatDate(date)}</div>
-                    <div class="event-completed">
-                        <input type="checkbox"> Completed
-                    </div>
-                    <div class="hidden-slider-container">
-                        <label for="importance-slider-hidden" class="slider-label">Importance (out of 100): </label>
-                        <span id="slider-value-hidden">50</span>
-                        <input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value="50">
-                    </div>
-                    <textarea class="hidden" id="event-notes" placeholder="Add notes"></textarea>
-                    <div class="button-container">
-                        <button class="edit-button">Edit</button>
-                        <button class="delete-button">Delete</button>
-                    </div>
-                `;
+    
+                const eventTitle = document.createElement('div');
+                eventTitle.className = 'event-title';
+                eventTitle.textContent = time ? `${time} - ${title}` : title;
+    
+                const eventDescription = document.createElement('div');
+                eventDescription.className = 'event-description';
+                eventDescription.textContent = description;
+    
+                const eventDate = document.createElement('div');
+                eventDate.className = 'event-date';
+                eventDate.textContent = formatDate(date);
+    
+                const eventCompleted = document.createElement('div');
+                eventCompleted.className = 'event-completed';
+                const completedCheckbox = document.createElement('input');
+                completedCheckbox.type = 'checkbox';
+                eventCompleted.appendChild(completedCheckbox);
+    
+                const hiddenSliderContainer = document.createElement('div');
+                hiddenSliderContainer.className = 'hidden-slider-container';
+                const sliderLabel = document.createElement('label');
+                sliderLabel.setAttribute('for', 'importance-slider-hidden');
+                sliderLabel.className = 'slider-label';
+                sliderLabel.textContent = 'Importance (out of 100): ';
+                const sliderValueHidden = document.createElement('span');
+                sliderValueHidden.id = 'slider-value-hidden';
+                sliderValueHidden.textContent = '50';
+                const importanceSliderHidden = document.createElement('input');
+                importanceSliderHidden.type = 'range';
+                importanceSliderHidden.className = 'slider';
+                importanceSliderHidden.id = 'importance-slider-hidden';
+                importanceSliderHidden.min = '0';
+                importanceSliderHidden.max = '100';
+                importanceSliderHidden.value = '50';
+    
+                hiddenSliderContainer.appendChild(sliderLabel);
+                hiddenSliderContainer.appendChild(sliderValueHidden);
+                hiddenSliderContainer.appendChild(importanceSliderHidden);
+    
+                const eventNotes = document.createElement('textarea');
+                eventNotes.className = 'hidden';
+                eventNotes.id = 'event-notes';
+                eventNotes.placeholder = 'Add notes';
+    
+                const buttonContainer = document.createElement('div');
+                buttonContainer.className = 'button-container';
+                const editButton = document.createElement('button');
+                editButton.className = 'edit-button';
+                editButton.textContent = 'Edit';
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'delete-button';
+                deleteButton.textContent = 'Delete';
+    
+                buttonContainer.appendChild(editButton);
+                buttonContainer.appendChild(deleteButton);
+    
+                eventItem.appendChild(eventTitle);
+                eventItem.appendChild(eventDescription);
+                eventItem.appendChild(eventDate);
+                eventItem.appendChild(eventCompleted);
+                eventItem.appendChild(hiddenSliderContainer);
+                eventItem.appendChild(eventNotes);
+                eventItem.appendChild(buttonContainer);
+    
                 day.querySelector('ul').appendChild(eventItem);
                 addEventListenersToTask(eventItem);
             }
         });
-
+    
         addEventListenersToTask(taskItem);
     }
 
