@@ -11,21 +11,32 @@
     <body>
         <div class="taskbar-wrapper">
             <h1>Backlog</h1>
+            <button id="switch-to-weekly">Switch to Weekly View</button>
             <hr />
             <h2>Hello, %name%!</h2>
-            <h3>You have 0 tasks due for May 2024.</h3>
+            <h3 id="task-count">You have 0 tasks due for May 2024.</h3>
+            <form id="task-form">
+                <input
+                    type="text"
+                    id="new-task"
+                    placeholder="Enter new task"
+                    required
+                />
+                <button type="submit">Add Task</button>
+            </form>
+            <ul id="task-list"></ul>
         </div>
         <div class="calendar-wrapper">
             <div class="navigator">
-                <h1>May 2024</h1>
+                <h1 class="month-title">May 2024</h1>
                 <div class="navigator-buttons">
-                    <button class="navigator-button navigator-button-prev">
+                    <button id="prevButton" class="navigator-button">
                         &#x3008;
                     </button>
-                    <button class="navigator-button navigator-button-cur">
+                    <button id="curButton" class="navigator-button">
                         Today
                     </button>
-                    <button class="navigator-button navigator-button-next">
+                    <button id="nextButton" class="navigator-button">
                         &#x3009;
                     </button>
                 </div>
@@ -38,6 +49,7 @@
                 <li class="day-name">Thu</li>
                 <li class="day-name">Fri</li>
                 <li class="day-name">Sat</li>
+                <!-- original template
                 <li tabindex="0" class="day-extra">
                     <span class="day-number">28</span>
                 </li>
@@ -141,7 +153,37 @@
                 <li tabindex="0" class="day-extra">
                     <span class="day-number">1</span>
                 </li>
-            </ol>
+            --></ol>
         </div>
+        <script src="monthly-planner.js"></script>
+        <script>
+            document
+                .getElementById("task-form")
+                .addEventListener("submit", function (event) {
+                    event.preventDefault();
+                    const taskInput = document.getElementById("new-task");
+                    const taskText = taskInput.value.trim();
+                    if (taskText !== "") {
+                        const taskList = document.getElementById("task-list");
+                        const newTask = document.createElement("li");
+                        newTask.textContent = taskText;
+                        taskList.appendChild(newTask);
+
+                        taskInput.value = "";
+
+                        updateTaskCount();
+                    }
+                });
+
+            function updateTaskCount() {
+                const taskCount =
+                    document.getElementById("task-list").children.length;
+                document.getElementById(
+                    "task-count"
+                ).textContent = `You have ${taskCount} tasks due for May 2024.`;
+            }
+
+            updateTaskCount();
+        </script>
     </body>
 </html>

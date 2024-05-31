@@ -8,11 +8,31 @@
     <link rel="stylesheet" href="./styles/planner-styles.css" />
     <script src="planner.js" type="module"></script>
     <script src="parser.js" type="module"></script>
+    <script src="weekly-calendar.js"></script>
   </head>
   <body>
     <div class="main-content">
       <div class="task-list">
         <header>Task List</header>
+        <button id="switch-to-monthly">Switch to Monthly View</button>
+        
+<!-- adding the pop up for adding tasks -->
+        <button id="add-task-button">+</button>
+
+        <div class="popup" id="add-task-popup">
+          
+          <input type="text" id="new-task-title" placeholder="Task Title">
+          <textarea id="new-task-description" placeholder="Task Description"></textarea>
+          <input type="date" id="new-task-date">
+          <input type="time" id="new-task-time">
+          <div class="popup-buttons">
+            <button class="popup-button-confirm" id="add-task-confirm">Add Task</button>
+            <button class="popup-button-cancel" id="add-task-cancel">Cancel</button>
+          </div>
+        </div>
+
+
+
         <ul>
           <li class="task-item">
             <div class="task-title">Task 1</div>
@@ -30,13 +50,14 @@
       </div>
       <div class="content-container">
         <div class="header-container">
-          <div class="header">May 2024</div>
-          <button class="nav-button">←</button>
-          <button class="nav-button">→</button>
+          <div id="month-title" class="header">May 2024</div>
+          <button id="prevButton" class="nav-button">←</button>
+          <button id="curButton" class="nav-button">today</button>
+          <button id="nextButton" class="nav-button">→</button>
         </div>
         <div class="calendar">
-          <div class="day" id="05-20-2024">
-            <header>Monday</header>
+          <div class="day">
+            <header id="monday">Monday</header>
             <ul>
               <li class="event-item">
                 <div class="event-title">9:00 AM - Meeting</div>
@@ -50,6 +71,7 @@
                   <span id="slider-value-hidden">50</span>
                   <input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value="50">
                 </div>
+                <textarea class="hidden" id="event-notes" placeholder="Add notes"></textarea>
                 <div class="button-container">
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
@@ -67,6 +89,7 @@
                   <span id="slider-value-hidden">50</span>
                   <input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value="50">
                 </div>
+                <textarea class="hidden" id="event-notes" placeholder="Add notes"></textarea>
                 <div class="button-container">
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
@@ -84,6 +107,7 @@
                   <span id="slider-value-hidden">50</span>
                   <input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value="50">
                 </div>
+                <textarea class="hidden" id="event-notes" placeholder="Add notes"></textarea>
                 <div class="button-container">
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
@@ -91,8 +115,8 @@
               </li>
             </ul>
           </div>
-          <div class="day" id="05-21-2024">
-            <header>Tuesday</header>
+          <div class="day">
+            <header id="tuesday">Tuesday</header>
             <ul>
               <li class="event-item">
                 <div class="event-title">10:00 AM - Design Workshop</div>
@@ -106,6 +130,7 @@
                   <span id="slider-value-hidden">50</span>
                   <input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value="50">
                 </div>
+                <textarea class="hidden" id="event-notes" placeholder="Add notes"></textarea>
                 <div class="button-container">
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
@@ -123,6 +148,7 @@
                   <span id="slider-value-hidden">50</span>
                   <input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value="50">
                 </div>
+                <textarea class="hidden" id="event-notes" placeholder="Add notes"></textarea>
                 <div class="button-container">
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
@@ -140,6 +166,7 @@
                   <span id="slider-value-hidden">50</span>
                   <input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value="50">
                 </div>
+                <textarea class="hidden" id="event-notes" placeholder="Add notes"></textarea>
                 <div class="button-container">
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
@@ -147,8 +174,8 @@
               </li>
             </ul>
           </div>
-          <div class="day" id="05-22-2024">
-            <header>Wednesday</header>
+          <div class="day">
+            <header id="wednesday">Wednesday</header>
             <ul>
               <li class="event-item">
                 <div class="event-title">9:00 AM - Standup Meeting</div>
@@ -162,6 +189,7 @@
                   <span id="slider-value-hidden">50</span>
                   <input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value="50">
                 </div>
+                <textarea class="hidden" id="event-notes" placeholder="Add notes"></textarea>
                 <div class="button-container">
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
@@ -179,6 +207,7 @@
                   <span id="slider-value-hidden">50</span>
                   <input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value="50">
                 </div>
+                <textarea class="hidden" id="event-notes" placeholder="Add notes"></textarea>
                 <div class="button-container">
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
@@ -196,6 +225,7 @@
                   <span id="slider-value-hidden">50</span>
                   <input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value="50">
                 </div>
+                <textarea class="hidden" id="event-notes" placeholder="Add notes"></textarea>
                 <div class="button-container">
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
@@ -203,8 +233,8 @@
               </li>
             </ul>
           </div>
-          <div class="day" id="05-23-2024">
-            <header>Thursday</header>
+          <div class="day">
+            <header id="thursday">Thursday</header>
             <ul>
               <li class="event-item">
                 <div class="event-title">9:00 AM - Project Planning</div>
@@ -218,6 +248,7 @@
                   <span id="slider-value-hidden">50</span>
                   <input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value="50">
                 </div>
+                <textarea class="hidden" id="event-notes" placeholder="Add notes"></textarea>
                 <div class="button-container">
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
@@ -235,6 +266,7 @@
                   <span id="slider-value-hidden">50</span>
                   <input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value="50">
                 </div>
+                <textarea class="hidden" id="event-notes" placeholder="Add notes"></textarea>
                 <div class="button-container">
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
@@ -252,6 +284,7 @@
                   <span id="slider-value-hidden">50</span>
                   <input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value="50">
                 </div>
+                <textarea class="hidden" id="event-notes" placeholder="Add notes"></textarea>
                 <div class="button-container">
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
@@ -259,8 +292,8 @@
               </li>
             </ul>
           </div>
-          <div class="day" id="05-24-2024">
-            <header>Friday</header>
+          <div class="day">
+            <header id="friday">Friday</header>
             <ul>
               <li class="event-item">
                 <div class="event-title">10:00 AM - Code Review</div>
@@ -274,6 +307,7 @@
                   <span id="slider-value-hidden">50</span>
                   <input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value="50">
                 </div>
+                <textarea class="hidden" id="event-notes" placeholder="Add notes"></textarea>
                 <div class="button-container">
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
@@ -291,6 +325,7 @@
                   <span id="slider-value-hidden">50</span>
                   <input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value="50">
                 </div>
+                <textarea class="hidden" id="event-notes" placeholder="Add notes"></textarea>
                 <div class="button-container">
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
@@ -308,6 +343,7 @@
                   <span id="slider-value-hidden">50</span>
                   <input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value="50">
                 </div>
+                <textarea class="hidden" id="event-notes" placeholder="Add notes"></textarea>
                 <div class="button-container">
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
@@ -315,8 +351,8 @@
               </li>
             </ul>
           </div>
-          <div class="day" id="05-25-2024">
-            <header>Saturday</header>
+          <div class="day">
+            <header id="saturday">Saturday</header>
             <ul>
               <li class="event-item">
                 <div class="event-title">Free Time</div>
@@ -330,6 +366,7 @@
                   <span id="slider-value-hidden">50</span>
                   <input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value="50">
                 </div>
+                <textarea class="hidden" id="event-notes" placeholder="Add notes"></textarea>
                 <div class="button-container">
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
@@ -337,8 +374,8 @@
               </li>
             </ul>
           </div>
-          <div class="day" id="05-26-2024">
-            <header>Sunday</header>
+          <div class="day">
+            <header id="sunday">Sunday</header>
             <ul>
               <li class="event-item">
                 <div class="event-title">Family Day</div>
@@ -352,6 +389,7 @@
                   <span id="slider-value-hidden">50</span>
                   <input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value="50">
                 </div>
+                <textarea class="hidden" id="event-notes" placeholder="Add notes"></textarea>
                 <div class="button-container">
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
@@ -376,7 +414,7 @@
       <h2>Task's Title:</h2>
       <input type="text" id="edit-title" placeholder="Edit title">
       <h2>Task's Description:</h2>
-      <textarea id="edit-description" placeholder="Edit description"></textarea>
+      <textarea class="text-area" id="edit-description" placeholder="Edit description"></textarea>
       <h2>Task's Due Date:</h2>
       <div class="due-date-container">
         <h4 id="date-label">Date:</h4>
@@ -390,7 +428,11 @@
         <span id="slider-value">50</span>
         <input type="range" class="slider" id="importance-slider" min="0" max="100" value="50">
       </div>
-      <label>
+      <label for="edit-color">Color: </label>
+      <input type="color" id="edit-color"><br>
+      <label>Notes:</label>
+      <textarea class="text-area" id="edit-notes" placeholder="Add notes"></textarea>
+      <label class="edit-completed">
           <input type="checkbox" id="edit-completed"> Completed?
       </label>
       <div class="popup-buttons">

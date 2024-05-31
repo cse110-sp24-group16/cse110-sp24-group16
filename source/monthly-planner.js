@@ -1,63 +1,145 @@
-//fetch and process JSON data
-async function loadTasks() {
-    try {
-        const response = await fetch('task.json'); // Fetching the JSON file from the same directory
-        const tasks = await response.json();
-        displayTasks(tasks);
-    } catch (error) {
-        console.error('Error fetching or parsing tasks:', error);
+const month_header = document.querySelector(".month-title");
+const calendar = document.querySelector("#calendar");
+const prevButton = document.querySelector("#prevButton");
+const curButton = document.querySelector("#curButton");
+const nextButton = document.querySelector("#nextButton");
+const switchToWeeklyButton = document.getElementById("switch-to-weekly");
+const months = [
+  "January",
+  "Febuary",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+let date = new Date();
+let month = date.getMonth();
+let year = date.getFullYear();
+
+//given month and year, make the monthly view
+//populate the calendar with buckets (li elements)
+function makeCalendar(month, year) {
+  month_header.textContent = `${months[month | 0]} ${year | 0}`;
+  //returns the day of the week of the first day
+  const start = new Date(year, month, 1).getDay();
+  //returns the last day number
+  const endDate = new Date(year, month + 1, 0).getDate();
+  //returns the day of the week of the last day
+  const end = new Date(year, month, endDate).getDay();
+  //returns the last months last day
+  const endDatePrev = new Date(year, month, 0).getDate();
+  //buckets for extra day at start
+  for (let i = start; i > 0; i--) {
+    const liElt = document.createElement("li");
+    if (
+      i === date.getDate() &&
+      month === date.getMonth() &&
+      year === date.getFullYear()
+    ) {
+      liElt.id = "today";
     }
+    liElt["tabindex"] = "0";
+    const spanElt = document.createElement("span");
+    spanElt.className = "day-number";
+    liElt.appendChild(spanElt);
+    calendar.appendChild(liElt);
+    liElt.className = "day-extra";
+    spanElt.textContent = `${endDatePrev - i + 1}`;
+  }
+  //buckets for months days
+  for (let i = 1; i < endDate + 1; i++) {
+    const liElt = document.createElement("li");
+    if (
+      i === date.getDate() &&
+      month === date.getMonth() &&
+      year === date.getFullYear()
+    ) {
+      liElt.id = "today";
+    }
+    liElt["tabindex"] = "0";
+    const spanElt = document.createElement("span");
+    spanElt.className = "day-number";
+    liElt.appendChild(spanElt);
+    calendar.appendChild(liElt);
+    liElt.className = "day";
+    spanElt.textContent = `${i}`;
+    if (i === 1) {
+      liElt.id = "first-day";
+    }
+  }
+  //buckets for extra days at end
+  for (let i = end; i < 6; i++) {
+    const liElt = document.createElement("li");
+    if (
+      i === date.getDate() &&
+      month === date.getMonth() &&
+      year === date.getFullYear()
+    ) {
+      liElt.id = "today";
+    }
+    liElt["tabindex"] = "0";
+    const spanElt = document.createElement("span");
+    spanElt.className = "day-number";
+    liElt.appendChild(spanElt);
+    calendar.appendChild(liElt);
+    spanElt.textContent = `${i - end + 1}`;
+    liElt.className = "day-extra";
+  }
 }
 
-//display tasks in the backlog and on the calendar
-function displayTasks(tasks) {
-    const backlog = document.querySelector('.taskbar-wrapper');
-    const calendar = document.querySelector('#calendar');
-    
-    //placeholder to replace with actual user's name
-    const userName = 'User';
-    backlog.querySelector('h2').textContent = `Hello, ${userName}!`;
+//erases the calendar
+function wipeCalendar() {
+  let exdays = document.querySelectorAll(".day-extra");
+  let days = document.querySelectorAll(".day");
 
-    //initialize task count
-    let taskCount = 0;
-
-    tasks.forEach(task => {
-        //create task element for the backlog
-        const taskElement = document.createElement('div');
-        taskElement.classList.add('task');
-        taskElement.innerHTML = `<strong>${task.title}</strong><br>${task.description}`;
-
-        //add task to backlog
-        backlog.appendChild(taskElement);
-
-        //find the respective day element in the calendar
-        const taskDate = new Date(task.date);
-        const dayNumber = taskDate.getDate();
-        const dayElement = Array.from(calendar.children).find(
-            day => day.classList.contains('day') && 
-                   day.querySelector('.day-number').textContent == dayNumber
-        );
-
-        if (dayElement) {
-            //add task to the specific day
-            const taskList = dayElement.querySelector('.task-list') || document.createElement('ul');
-            taskList.classList.add('task-list');
-            const taskItem = document.createElement('li');
-            taskItem.classList.add('task');
-            taskItem.textContent = task.title;
-            taskList.appendChild(taskItem);
-            if (!dayElement.contains(taskList)) {
-                dayElement.appendChild(taskList);
-            }
-        }
-
-        //increment task count
-        taskCount++;
-    });
-
-    //update task count in the backlog header
-    backlog.querySelector('h3').textContent = `You have ${taskCount} tasks due for May 2024.`;
+  for (const exday of exdays) {
+    if (exday instanceof HTMLElement) {
+      exday.parentNode.removeChild(exday);
+    }
+  }
+  for (const day of days) {
+    if (day instanceof HTMLElement) {
+      day.parentNode.removeChild(day);
+    }
+  }
 }
 
-//load tasks when the DOM content is loaded
-document.addEventListener('DOMContentLoaded', loadTasks);
+makeCalendar(month, year);
+nextButton.addEventListener("click", () => {
+  wipeCalendar();
+  month += 1;
+  if (month > 11) {
+    month = 0;
+    year += 1;
+  }
+  makeCalendar(month, year);
+});
+
+prevButton.addEventListener("click", () => {
+  wipeCalendar();
+  month -= 1;
+  if (month < 0) {
+    month = 11;
+    year -= 1;
+  }
+  makeCalendar(month, year);
+});
+
+curButton.addEventListener("click", () => {
+  wipeCalendar();
+  month = date.getMonth();
+  year = date.getFullYear();
+  makeCalendar(month, year);
+});
+
+if (switchToWeeklyButton) {
+  switchToWeeklyButton.addEventListener("click", () => {
+    window.location.href = escape("planner.html");
+  });
+}
