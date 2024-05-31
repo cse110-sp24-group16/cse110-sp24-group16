@@ -320,3 +320,88 @@ body {
 .text-area {
     height: 60px;
 }
+
+#add-task-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 500px; /* Adjust width as needed */
+    font-family: Arial, sans-serif;
+}
+
+#add-task-popup h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+#add-task-popup input[type="text"],
+#add-task-popup textarea,
+#add-task-popup input[type="date"],
+#add-task-popup input[type="time"] {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+#add-task-popup .popup-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+#add-task-popup .popup-button-confirm,
+#add-task-popup .popup-button-cancel {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 45%;
+}
+
+#add-task-popup .popup-button-cancel {
+    background-color: #ccc;
+    color: #333;
+}
+
+#add-task-popup .tags-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-right: 100px;
+}
+
+#add-task-popup .tags-container .tag {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    font-size: 0.9em;
+}
+
+#add-task-popup .tags-container .add-tag-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+

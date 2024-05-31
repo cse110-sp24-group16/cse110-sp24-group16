@@ -10,7 +10,135 @@ function init(){
     const slider = document.getElementById('importance-slider');
     const switchToMonthlyButton = document.getElementById('switch-to-monthly');
     const switchToWeeklyButton = document.getElementById('switch-to-weekly');
+    
+    //Add Task Button//
+    const addTaskButton = document.getElementById('add-task-button');
+    const addTaskPopup = document.getElementById('add-task-popup');
+    const addTaskConfirm = document.getElementById('add-task-confirm');
+    const addTaskCancel = document.getElementById('add-task-cancel');
 
+    // Insert the HTML structure for the add task popup
+    document.body.insertAdjacentHTML('beforeend', `
+    <div class="popup" id="add-task-popup">
+        <h2>Add New Task</h2>
+        <input type="text" id="new-task-title" placeholder="Task Title">
+        <textarea id="new-task-description" placeholder="Task Description"></textarea>
+        <div class="tags-container">
+            <div class="tag">Tags</div>
+            <div class="tag">Tags</div>
+            <div class="tag">Tags</div>
+            <button class="add-tag-button">+</button>
+        </div>
+        <input type="date" id="new-task-date">
+        <input type="time" id="new-task-time">
+        <div class="popup-buttons">
+            <button class="popup-button-confirm" id="add-task-confirm">Add Task</button>
+            <button class="popup-button-cancel" id="add-task-cancel">Cancel</button>
+        </div>
+    </div>
+`   );
+
+    // Event listener for opening the add task popup
+    addTaskButton.addEventListener('click', () => {
+        addTaskPopup.style.display = 'block';
+        overlay.style.display = 'block';
+    });
+
+    // Event listener for closing the add task popup
+    addTaskCancel.addEventListener('click', () => {
+        addTaskPopup.style.display = 'none';
+        overlay.style.display = 'none';
+    });
+
+    // Event listener for adding a new task
+    addTaskConfirm.addEventListener('click', () => {
+        const title = document.getElementById('new-task-title').value;
+        const description = document.getElementById('new-task-description').value;
+        const date = new Date(document.getElementById('new-task-date').value);
+        const time = convertTo12Hour(document.getElementById('new-task-time').value);
+
+        if (title && description && date) {
+            addNewTask(title, description, date, time);
+            addTaskPopup.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+    });
+
+    /**
+     * Adds a new task to the task list and the calendar.
+     * @param {string} title - The title of the task.
+     * @param {string} description - The description of the task.
+     * @param {Date} date - The due date of the task.
+     * @param {string} time - The due time of the task.
+     */
+    function addNewTask(title, description, date, time) {
+        const taskList = document.querySelector('.task-list ul');
+        const calendarDays = document.querySelectorAll('.day');
+
+        const taskItem = document.createElement('li');
+        taskItem.className = 'task-item';
+        taskItem.innerHTML = `
+            <div class="task-title">${title}</div>
+            <div class="task-description">${description}</div>
+        `;
+        taskList.appendChild(taskItem);
+
+        calendarDays.forEach(day => {
+            const dayHeader = day.querySelector('header').textContent;
+            const dayDate = new Date(dayHeader.split(' ')[1]);
+
+            if (dayDate.toDateString() === date.toDateString()) {
+                const eventItem = document.createElement('li');
+                eventItem.className = 'event-item';
+                eventItem.innerHTML = `
+                    <div class="event-title">${time ? `${time} - ` : ''}${title}</div>
+                    <div class="event-description">${description}</div>
+                    <div class="event-date">${formatDate(date)}</div>
+                    <div class="event-completed">
+                        <input type="checkbox"> Completed
+                    </div>
+                    <div class="hidden-slider-container">
+                        <label for="importance-slider-hidden" class="slider-label">Importance (out of 100): </label>
+                        <span id="slider-value-hidden">50</span>
+                        <input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value="50">
+                    </div>
+                    <textarea class="hidden" id="event-notes" placeholder="Add notes"></textarea>
+                    <div class="button-container">
+                        <button class="edit-button">Edit</button>
+                        <button class="delete-button">Delete</button>
+                    </div>
+                `;
+                day.querySelector('ul').appendChild(eventItem);
+                addEventListenersToTask(eventItem);
+            }
+        });
+
+        addEventListenersToTask(taskItem);
+    }
+
+    /**
+     * Adds event listeners to a task item.
+     * @param {HTMLElement} task - The task item element.
+     */
+    function addEventListenersToTask(task) {
+        const deleteButton = task.querySelector('.delete-button');
+        const editButton = task.querySelector('.edit-button');
+
+        if (deleteButton) {
+            deleteButton.addEventListener('click', (event) => {
+                currentTask = event.target.closest('.event-item');
+                showPopupForDelete();
+            });
+        }
+
+        if (editButton) {
+            editButton.addEventListener('click', (event) => {
+                currentTask = event.target.closest('.event-item');
+                showPopupForEdit(currentTask);
+            });
+        }
+    }
+    /************ */
     let currentTask;
     deleteButtons.forEach(button => {
         button.addEventListener('click', (event) => {
