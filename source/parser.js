@@ -5,18 +5,48 @@ function init() {
     //read json file from task.json
     try {
         const data = JSON.parse(fs.readFileSync('source/task.json', 'utf8'));
+        const navButtonArr = document.querySelectorAll('.nav-button');
         const weekdays = document.querySelectorAll('.day');
 
-        //Tries to match dates to date of task; creates custom element if matches
-        for (let i = 0; i < weekdays.length; i++) {
-            for (let j = 0; j < data.length; j++) {
-                if (weekdays[i].id == formatDate(data[j].date)) {
-                    let eventCard = document.createElement('event-card');
-                    eventCard.data = data[j];
-                    weekdays[i].querySelector('ul').appendChild(eventCard);
+            //Tries to match dates to date of task; creates custom element if matches
+            for (let i = 0; i < weekdays.length; i++) {
+                for (let j = 0; j < data.length; j++) {
+                    console.log(weekdays[i].id);
+                    console.log(formatDate(data[j].date));
+                    if (weekdays[i].id == formatDate(data[j].date)) {
+                        console.log('hi');
+                        let eventCard = document.createElement('event-card');
+                        eventCard.data = data[j];
+                        weekdays[i].querySelector('ul').appendChild(eventCard);
+                    }
                 }
             }
-        }
+
+        navButtonArr.forEach((button) => {
+            //Listens for any click on all three of the nav-buttons
+            button.addEventListener('click', () => {
+                const tasks = document.querySelectorAll('event-card');
+                tasks.forEach((task) => {
+                    task.remove();
+                });
+
+                const weekdays = document.querySelectorAll('.day');
+
+                //Tries to match dates to date of task; creates custom element if matches
+                for (let i = 0; i < weekdays.length; i++) {
+                    for (let j = 0; j < data.length; j++) {
+                        console.log(weekdays[i].id);
+                        console.log(formatDate(data[j].date));
+                        if (weekdays[i].id == formatDate(data[j].date)) {
+                            console.log('hi');
+                            let eventCard = document.createElement('event-card');
+                            eventCard.data = data[j];
+                            weekdays[i].querySelector('ul').appendChild(eventCard);
+                        }
+                    }
+                }
+            })
+        })
     
     //catch block in case task.json doesn't exist
     } catch (err) {
@@ -79,7 +109,7 @@ function formatDate(date) {
     const day = (dateObj.getDate() + 1).toString().padStart(2, '0');
     const year = dateObj.getFullYear();
 
-    return `${month}-${day}-${year}`;
+    return `${year}-${month}-${day}`;
 }
 
 //turns the format "mm.dd.yyyy" into an html value that can be used for the "date" input
