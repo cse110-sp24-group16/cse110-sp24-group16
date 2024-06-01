@@ -11,12 +11,10 @@ function init() {
             //Tries to match dates to date of task; creates custom element if matches
             for (let i = 0; i < weekdays.length; i++) {
                 for (let j = 0; j < data.length; j++) {
-                    console.log(weekdays[i].id);
-                    console.log(formatDate(data[j].date));
                     if (weekdays[i].id == formatDate(data[j].date)) {
-                        console.log('hi');
                         let eventCard = document.createElement('event-card');
                         eventCard.data = data[j];
+                        eventCard.id = data[j].id;
                         weekdays[i].querySelector('ul').appendChild(eventCard);
                     }
                 }
@@ -35,12 +33,10 @@ function init() {
                 //Tries to match dates to date of task; creates custom element if matches
                 for (let i = 0; i < weekdays.length; i++) {
                     for (let j = 0; j < data.length; j++) {
-                        console.log(weekdays[i].id);
-                        console.log(formatDate(data[j].date));
                         if (weekdays[i].id == formatDate(data[j].date)) {
-                            console.log('hi');
                             let eventCard = document.createElement('event-card');
                             eventCard.data = data[j];
+                            eventCard.id = data[j].id;
                             weekdays[i].querySelector('ul').appendChild(eventCard);
                         }
                     }
@@ -55,6 +51,7 @@ function init() {
         const weekdays = document.querySelectorAll('.day');
         for (let i = 0; i < weekdays.length; i++) {
             let tasks = weekdays[i].querySelectorAll('.event-item');
+            let id = 0;
             tasks.forEach((task) => {
                 let dailyTasks = {};
                 dailyTasks['title'] = task.querySelector('.event-title').innerHTML;
@@ -62,7 +59,10 @@ function init() {
                 dailyTasks['date'] = parseDate(task.querySelector('.event-date').innerHTML);
                 dailyTasks['completion'] = task.querySelector('.event-completed > input').checked;
                 dailyTasks['importance'] = task.querySelector('.hidden-slider-container > input').value;
+                dailyTasks['id'] = id;
                 taskJson.push(dailyTasks);
+                id++;
+                task.remove();
             })
         }
 
@@ -102,7 +102,7 @@ function convertTo12Hour(time) {
     return `${hour}:${minute} ${period}`;
 }
 
-//turns html value of the date into the format "mm-dd-yyyy" that the user will read
+//turns html value of the date into the format "yyyy-mm-dd" that the user will read
 function formatDate(date) {
     const dateObj = new Date(date);
     const month = (dateObj.getMonth() + 1).toString().padStart(2, '0'); // Add 1 because getMonth() returns zero-based month

@@ -56,9 +56,7 @@ function init(){
         let monthText = months[`${month}`] + " " + year;;
         for (let i = 0; i < 7; i++){
             let currDate = day - dayInd + i;
-            console.log(currDate);
             let currMonth = month + 1;
-            console.log(currMonth);
             let currYear = year;
             if (currDate > monthEnd){
                 currDate -= monthEnd;
@@ -86,7 +84,7 @@ function init(){
             }
             monthTitle.textContent = monthText;
             week[`${i}`].textContent = weekdays[`${i}`] + " " + currDate;
-            weekContainers[`${i}`].id = `${currYear}-${currMonth.toString().padStart(2, '0')}-${currDate}`;
+            weekContainers[`${i}`].id = `${currYear}-${currMonth.toString().padStart(2, '0')}-${currDate.toString().padStart(2, '0')}`;
             weekId.push(new Date(currYear, currMonth, currDate));
         }
         return weekId;
