@@ -35,9 +35,28 @@ function isChecked(status) {
 //turns html value of the date into the format "mm-dd-yyyy" that the user will read
 function formatDate(date) {
     const dateObj = new Date(date);
-    const month = (dateObj.getMonth() + 1).toString().padStart(2, '0'); // Add 1 because getMonth() returns zero-based month
-    const day = (dateObj.getDate() + 1).toString().padStart(2, '0');
+    let month = (dateObj.getMonth() + 1).toString().padStart(2, '0'); // Add 1 because getMonth() returns zero-based month
+    let day = (dateObj.getDate() + 1).toString().padStart(2, '0');
     const year = dateObj.getFullYear();
+
+    // Deals with date overflow, changes the date to the first of next month
+    if (month == '01' || month == '03' || month == '05' || month == '07' || month == '08' || month == '10' || month == '12') {
+        if (day == '32') {
+            month = (dateObj.getMonth() + 2).toString().padStart(2, '0');
+            day = '01'
+        }
+    } else if (month == '04' || month == '06' || month == '09' || month == '11') {
+        if (day == '31') {
+            month = (dateObj.getMonth() + 2).toString().padStart(2, '0');
+            day = '01'
+        }
+    } else if (month == '02') {
+        if (day == '29') {
+            month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+            day = '01'
+            // @todo implement system for leap years
+        }
+    }
 
     return `${month}.${day}.${year}`;
 }

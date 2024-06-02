@@ -3,7 +3,12 @@ let fs = require('fs');
 window.addEventListener('DOMContentLoaded', init);
 
 function init(){
-    const data = JSON.parse(fs.readFileSync('source/task.json', 'utf8'));
+    let data = [];
+    try{
+        data = JSON.parse(fs.readFileSync('source/task.json', 'utf8'));
+    } catch (err) {
+        console.error(err);
+    }
 
     const deleteButtons = document.querySelectorAll('.delete-button');
     const editButtons = document.querySelectorAll('.edit-button');
@@ -103,7 +108,7 @@ function init(){
                 dailyTask['date'] = date;
                 dailyTask['completion'] = false;
                 dailyTask['importance'] = 50;
-                dailyTask['id'] = data.length;
+                dailyTask['id'] = data.length + 1;
                 data.push(dailyTask);
 
                 let eventCard = document.createElement('event-card');

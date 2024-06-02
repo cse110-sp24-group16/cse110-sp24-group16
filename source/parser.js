@@ -4,7 +4,14 @@ window.addEventListener('DOMContentLoaded', init);
 function init() {
     //read json file from task.json
     try {
-        const data = JSON.parse(fs.readFileSync('source/task.json', 'utf8'));
+        let data = JSON.parse(fs.readFileSync('source/task.json', 'utf8'));
+        fs.watch('source/task.json', (eventType, filename) => {
+            console.log(eventType);
+            if (eventType == 'change') {
+                data = JSON.parse(fs.readFileSync('source/task.json', 'utf8'));
+            }
+        })
+        console.log(data);
         const navButtonArr = document.querySelectorAll('.nav-button');
         const weekdays = document.querySelectorAll('.day');
 
@@ -33,6 +40,8 @@ function init() {
                 //Tries to match dates to date of task; creates custom element if matches
                 for (let i = 0; i < weekdays.length; i++) {
                     for (let j = 0; j < data.length; j++) {
+                        console.log(weekdays[i].id);
+                        console.log(formatDate(data[j].date));
                         if (weekdays[i].id == formatDate(data[j].date)) {
                             let eventCard = document.createElement('event-card');
                             eventCard.data = data[j];
@@ -105,9 +114,28 @@ function convertTo12Hour(time) {
 //turns html value of the date into the format "yyyy-mm-dd" that the user will read
 function formatDate(date) {
     const dateObj = new Date(date);
-    const month = (dateObj.getMonth() + 1).toString().padStart(2, '0'); // Add 1 because getMonth() returns zero-based month
-    const day = (dateObj.getDate() + 1).toString().padStart(2, '0');
+    let month = (dateObj.getMonth() + 1).toString().padStart(2, '0'); // Add 1 because getMonth() returns zero-based month
+    let day = (dateObj.getDate() + 1).toString().padStart(2, '0');
     const year = dateObj.getFullYear();
+
+    // Deals with date overflow, changes the date to the first of next month
+    if (month == '01' || month == '03' || month == '05' || month == '07' || month == '08' || month == '10' || month == '12') {
+        if (day == '32') {
+            month = (dateObj.getMonth() + 2).toString().padStart(2, '0');
+            day = '01'
+        }
+    } else if (month == '04' || month == '06' || month == '09' || month == '11') {
+        if (day == '31') {
+            month = (dateObj.getMonth() + 2).toString().padStart(2, '0');
+            day = '01'
+        }
+    } else if (month == '02') {
+        if (day == '29') {
+            month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+            day = '01'
+            // @todo implement system for leap years
+        }
+    }
 
     return `${year}-${month}-${day}`;
 }
