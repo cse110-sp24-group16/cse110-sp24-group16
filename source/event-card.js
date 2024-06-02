@@ -18,6 +18,7 @@ class eventCard extends HTMLElement {
         '<div class="hidden-slider-container"><label for="importance-slider-hidden" class="slider-label">Importance (out of 100): </label>' +
         '<span id="slider-value-hidden">' + data.importance + '</span>' +
         '<input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value=' + data.importance + '></div>' +
+        '<textarea class="hidden" id="event-notes" placeholder="Add notes">' + data.notes + '</textarea>' +
         '<div class="button-container"><button class="edit-button">Edit</button><button class="delete-button">Delete</button></div>' 
     }
 }

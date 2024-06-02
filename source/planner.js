@@ -124,6 +124,7 @@ function init(){
                 dailyTask['date'] = date;
                 dailyTask['completion'] = false;
                 dailyTask['importance'] = 50;
+                dailyTask['notes'] = '';
                 dailyTask['id'] = data.length == 0 ? 0 : data[data.length-1].id + 1;
                 data.push(dailyTask);
 
@@ -305,6 +306,7 @@ function init(){
                 data[i].description = newDescription;
                 data[i].date = newDate;
                 data[i].completion = newCompleted;
+                data[i].notes = newNotes;
                 data[i].importance = importance;
                 console.log(data[i]);
                 console.log(data);
@@ -344,7 +346,7 @@ function init(){
         const dateString = item.querySelector('.event-date').textContent;
         const date = parseDate(dateString);
         const sliderValue = item.querySelector('#slider-value-hidden').textContent;
-        //const notes = item.querySelector('#event-notes').textContent;
+        const notes = item.querySelector('#event-notes').textContent;
         let [time, eventTitle] = title.split(' - ');
         popupEdit.style.backgroundColor = currentTask.style.backgroundColor;
 
@@ -371,7 +373,7 @@ function init(){
         document.getElementById('importance-slider').value = sliderValue;
         document.getElementById('slider-value').textContent = sliderValue;
         document.getElementById('edit-color').value = rgbToHex(color);
-        //document.getElementById('edit-notes').value = notes;
+        document.getElementById('edit-notes').value = notes;
     }
 
     function hidePopupForDelete() {
