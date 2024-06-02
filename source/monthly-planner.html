@@ -5,39 +5,63 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Monthly View Calendar</title>
+        <script src="monthly-planner-taskbar.js" type="module"></script>
         <link rel="stylesheet" href="styles/monthly-planner-style.css" />
-        <script src="monthly-planner.js" type="module"></script>
         <script src="monthly-parser.js" type="module"></script>   
     </head>
     <body>
         <div class="taskbar-wrapper">
-            <h1>Backlog</h1>
-            <button id="switch-to-weekly">Switch to Weekly View</button>
-            <hr />
-            <h2>Hello, %name%!</h2>
-            <h3 id="task-count">You have 0 tasks due for May 2024.</h3>
-            <form id="task-form">
+            <div class="taskbar-navigator">
+                <button id="options" class="taskbar-navigator-button">
+                    Options
+                </button>
+                <h1>Task List</h1>
+                <button id="switch-to-weekly" class="taskbar-navigator-button">
+                    Switch to Weekly View
+                </button>
+            </div>
+            <div class="taskbar-search-bar">
                 <input
+                    id="taskbar-option-search-bar"
                     type="text"
-                    id="new-task"
-                    placeholder="Enter new task"
-                    required
+                    placeholder="Enter task to search..."
                 />
-                <button type="submit">Add Task</button>
-            </form>
-            <ul id="task-list"></ul>
+            </div>
+            <div class="taskbar-options" hidden>
+                <label>Order by:</label>
+                <select id="taskbar-option-sort-order">
+                    <option value="IMPORTANCE" selected>Importance</option>
+                    <option value="DUE_DATE">Due Date</option>
+                </select>
+                <hr />
+                <label>Completed:</label>
+                <input type="checkbox" id="taskbar-option-completed" checked />
+                <hr />
+                <label>Between:</label>
+                <input type="date" id="taskbar-option-start-date" />
+                ~
+                <input type="date" id="taskbar-option-end-date" />
+            </div>
+            <h4 id="taskbar-search-status" hidden></h4>
+            <ul id="taskbar-list"></ul>
         </div>
         <div class="calendar-wrapper">
             <div class="navigator">
                 <h1 class="month-title">May 2024</h1>
                 <div class="navigator-buttons">
-                    <button id="prevButton" class="navigator-button">
+                    <button
+                        id="add-button"
+                        class="navigator-button edit-button"
+                    >
+                        +
+                    </button>
+                    <button id="prev-button" class="navigator-button">
                         &#x3008;
                     </button>
-                    <button id="curButton" class="navigator-button">
+                    <button id="cur-button" class="navigator-button">
                         Today
                     </button>
-                    <button id="nextButton" class="navigator-button">
+                    <button id="next-button" class="navigator-button">
                         &#x3009;
                     </button>
                 </div>
@@ -50,113 +74,12 @@
                 <li class="day-name">Thu</li>
                 <li class="day-name">Fri</li>
                 <li class="day-name">Sat</li>
-                <!-- original template
-                <li tabindex="0" class="day-extra">
-                    <span class="day-number">28</span>
-                </li>
-                <li tabindex="0" class="day-extra">
-                    <span class="day-number">29</span>
-                </li>
-                <li tabindex="0" class="day-extra">
-                    <span class="day-number">30</span>
-                </li>
-                <li tabindex="0" class="day first-day">
-                    <span class="day-number">1</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">2</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">3</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">4</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">5</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">6</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">7</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">8</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">9</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">10</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">11</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">12</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">13</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">14</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">15</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">16</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">17</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">18</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">19</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">20</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">21</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">22</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">23</span>
-                </li>
-                <li tabindex="0" class="day today"><span class="day-number">24</span></li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">25</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">26</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">27</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">28</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">29</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">30</span>
-                </li>
-                <li tabindex="0" class="day">
-                    <span class="day-number">31</span>
-                </li>
-                <li tabindex="0" class="day-extra">
-                    <span class="day-number">1</span>
-                </li>
-            --></ol>
+
+             </ol>
         </div>
-        <!-- <script src="monthly-planner.js"></script> -->
+      
+        <script src="monthly-planner.js" type="module"></script>
+      
         <script>
             document
                 .getElementById("task-form")
