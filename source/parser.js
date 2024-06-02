@@ -13,6 +13,8 @@ function init() {
         })
         console.log(data);
         const navButtonArr = document.querySelectorAll('.nav-button');
+        const saveEditButton = document.getElementById('save-edit');
+        const confirmDeleteButton = document.getElementById('confirm-delete');
         const weekdays = document.querySelectorAll('.day');
 
             //Tries to match dates to date of task; creates custom element if matches
@@ -51,7 +53,57 @@ function init() {
                     }
                 }
             })
-        })
+        });
+
+        saveEditButton.addEventListener('click', () => {
+            setTimeout(() => {
+                const tasks = document.querySelectorAll('event-card');
+                tasks.forEach((task) => {
+                    task.remove();
+                });
+
+                const weekdays = document.querySelectorAll('.day');
+
+                //Tries to match dates to date of task; creates custom element if matches
+                for (let i = 0; i < weekdays.length; i++) {
+                    for (let j = 0; j < data.length; j++) {
+                        console.log(weekdays[i].id);
+                        console.log(formatDate(data[j].date));
+                        if (weekdays[i].id == formatDate(data[j].date)) {
+                            let eventCard = document.createElement('event-card');
+                            eventCard.data = data[j];
+                            eventCard.id = data[j].id;
+                            weekdays[i].querySelector('ul').appendChild(eventCard);
+                        }
+                    }
+                }
+            }, 100);
+        });
+
+        confirmDeleteButton.addEventListener('click', () => {
+            setTimeout(() => {
+                const tasks = document.querySelectorAll('event-card');
+                tasks.forEach((task) => {
+                    task.remove();
+                });
+
+                const weekdays = document.querySelectorAll('.day');
+
+                //Tries to match dates to date of task; creates custom element if matches
+                for (let i = 0; i < weekdays.length; i++) {
+                    for (let j = 0; j < data.length; j++) {
+                        console.log(weekdays[i].id);
+                        console.log(formatDate(data[j].date));
+                        if (weekdays[i].id == formatDate(data[j].date)) {
+                            let eventCard = document.createElement('event-card');
+                            eventCard.data = data[j];
+                            eventCard.id = data[j].id;
+                            weekdays[i].querySelector('ul').appendChild(eventCard);
+                        }
+                    }
+                }
+            }, 100);
+        });
     
     //catch block in case task.json doesn't exist
     } catch (err) {

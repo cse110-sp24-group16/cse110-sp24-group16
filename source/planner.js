@@ -4,9 +4,19 @@ window.addEventListener('DOMContentLoaded', (e) => {
     setTimeout(init, 2000);
 
     const navButtonArr = document.querySelectorAll('.nav-button');
+    const saveEditButton = document.getElementById('save-edit');
+    const confirmDeleteButton = document.getElementById('confirm-delete');
 
     navButtonArr.forEach((button) => {
         button.addEventListener('click', init);
+    });
+
+    saveEditButton.addEventListener('click', () => {
+        setTimeout(init, 200);
+    });
+
+    confirmDeleteButton.addEventListener('click', () => {
+        setTimeout(init, 200);
     })
 });
 
@@ -72,7 +82,6 @@ function init(){
         const title = document.getElementById('new-task-title').value;
         const description = document.getElementById('new-task-description').value;
         const date = document.getElementById('new-task-date').value;
-        console.log(document.getElementById('new-task-date').value);
         const time = convertTo12Hour(document.getElementById('new-task-time').value);
         if (title && description && date) {
             addNewTask(title, description, date, time);
@@ -108,8 +117,6 @@ function init(){
         taskList.appendChild(taskItem);
     
         calendarDays.forEach(day => {
-            console.log(day.id);
-            console.log(date);
             if (day.id === date) {
                 let dailyTask = {};
                 dailyTask['title'] = time ? `${time} - ${title}` : title;
@@ -279,6 +286,7 @@ function init(){
         // currentTask.querySelector('.event-completed input').checked = newCompleted;
         // currentTask.querySelector('#slider-value-hidden').textContent = importance;
         // currentTask.querySelector('#event-notes').textContent = newNotes;
+        console.log(currentTask);
         currentTask.style.backgroundColor = newColor;
         popupEdit.style.backgroundColor = newColor;
 
@@ -355,7 +363,7 @@ function init(){
         document.getElementById('importance-slider').value = sliderValue;
         document.getElementById('slider-value').textContent = sliderValue;
         document.getElementById('edit-color').value = rgbToHex(color);
-        document.getElementById('edit-notes').value = notes;
+        //document.getElementById('edit-notes').value = notes;
         document.querySelector('.id').textContent = id;
     }
 
