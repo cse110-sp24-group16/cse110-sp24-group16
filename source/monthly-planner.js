@@ -146,13 +146,14 @@ function wipeCalendar() {
 
 makeCalendar(month, year);
 nextButton.addEventListener("click", () => {
-    wipeCalendar();
-    month += 1;
-    if (month > 11) {
-        month = 0;
-        year += 1;
-    }
-    makeCalendar(month, year);
+  wipeCalendar();
+  month += 1;
+  if (month > 11) {
+    month = 0;
+    year += 1;
+  }
+  makeCalendar(month, year);
+  loadTasks();
 });
 
 prevButton.addEventListener("click", () => {
