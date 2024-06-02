@@ -1,6 +1,14 @@
 //planner.js
 let fs = require('fs');
-window.addEventListener('DOMContentLoaded', init);
+window.addEventListener('DOMContentLoaded', (e) => {
+    setTimeout(init, 2000);
+
+    const navButtonArr = document.querySelectorAll('.nav-button');
+
+    navButtonArr.forEach((button) => {
+        button.addEventListener('click', init);
+    })
+});
 
 function init(){
     let data = [];
@@ -12,6 +20,7 @@ function init(){
 
     const deleteButtons = document.querySelectorAll('.delete-button');
     const editButtons = document.querySelectorAll('.edit-button');
+    console.log(editButtons);
     const popupDelete = document.getElementById('popup-delete');
     const popupEdit = document.getElementById('edit-popup');
     const overlay = document.getElementById('overlay');
