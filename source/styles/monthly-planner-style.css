@@ -71,7 +71,7 @@ body {
 
 #taskbar-option-search-bar {
     width: 100%;
-    margin: 2% 2%;
+    margin: 2%;
     padding: 5px;
     border: 1px solid var(--day-border-color);
     border-radius: 5px;
@@ -118,7 +118,7 @@ body {
     font-size: normal;
     display: block;
     text-align: right;
-    padding: 5px 5px 0px 5px;
+    padding: 5px 5px 0;
 }
 
 .task-completed {
@@ -128,13 +128,13 @@ body {
 .task-title {
     font-size: x-large;
     display: inline-block;
-    padding: 0px 5px 0px 5px;
+    padding: 0 5px;
     font-weight: 300;
 }
 
 .task-description {
     display: block;
-    padding: 0px 5px 5px 5px;
+    padding: 0 5px 5px;
     margin: 0;
 }
 
@@ -155,12 +155,12 @@ body {
     display: flex;
 }
 
-#addButton {
+#add-button {
     margin-right: 10px;
     font-size: 25px;
 }
 
-#prevButton, #nextButton {
+#prev-button, #next-button {
     font-size: 20px;
 }
 
