@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weekly View Calendar</title>
+    <script src="event-card.js" type="module"></script>
     <link rel="stylesheet" href="./styles/planner-styles.css" />
+    <script src="parser.js" type="module"></script>
     <script src="planner.js" type="module"></script>
     <script src="weekly-calendar.js"></script>
   </head>
@@ -57,7 +59,7 @@
           <div class="day">
             <header id="monday">Monday</header>
             <ul>
-              <li class="event-item">
+              <!--<li class="event-item">
                 <div class="event-title">9:00 AM - Meeting</div>
                 <div class="event-description">Discuss project requirements and next steps.</div>
                 <div class="event-date">05.20.2024</div>
@@ -110,13 +112,13 @@
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
                 </div>
-              </li>
+              </li>-->
             </ul>
           </div>
           <div class="day">
             <header id="tuesday">Tuesday</header>
             <ul>
-              <li class="event-item">
+              <!--<li class="event-item">
                 <div class="event-title">10:00 AM - Design Workshop</div>
                 <div class="event-description">Participate in the design workshop.</div>
                 <div class="event-date">05.21.2024</div>
@@ -169,13 +171,13 @@
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
                 </div>
-              </li>
+              </li>-->
             </ul>
           </div>
           <div class="day">
             <header id="wednesday">Wednesday</header>
             <ul>
-              <li class="event-item">
+              <!--<li class="event-item">
                 <div class="event-title">9:00 AM - Standup Meeting</div>
                 <div class="event-description">Daily standup meeting with the team.</div>
                 <div class="event-date">05.22.2024</div>
@@ -228,13 +230,13 @@
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
                 </div>
-              </li>
+              </li>-->
             </ul>
           </div>
           <div class="day">
             <header id="thursday">Thursday</header>
             <ul>
-              <li class="event-item">
+              <!--<li class="event-item">
                 <div class="event-title">9:00 AM - Project Planning</div>
                 <div class="event-description">Plan the next phases of the project.</div>
                 <div class="event-date">05.23.2024</div>
@@ -287,13 +289,13 @@
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
                 </div>
-              </li>
+              </li>-->
             </ul>
           </div>
           <div class="day">
             <header id="friday">Friday</header>
             <ul>
-              <li class="event-item">
+              <!--<li class="event-item">
                 <div class="event-title">10:00 AM - Code Review</div>
                 <div class="event-description">Review the latest code submissions.</div>
                 <div class="event-date">05.24.2024</div>
@@ -346,13 +348,13 @@
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
                 </div>
-              </li>
+              </li>-->
             </ul>
           </div>
           <div class="day">
             <header id="saturday">Saturday</header>
             <ul>
-              <li class="event-item">
+              <!--<li class="event-item">
                 <div class="event-title">Free Time</div>
                 <div class="event-description">Enjoy your day off!</div>
                 <div class="event-date">05.25.2024</div>
@@ -369,13 +371,13 @@
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
                 </div>
-              </li>
+              </li>-->
             </ul>
           </div>
           <div class="day">
             <header id="sunday">Sunday</header>
             <ul>
-              <li class="event-item">
+              <!--<li class="event-item">
                 <div class="event-title">Family Day</div>
                 <div class="event-description">Spend quality time with family.</div>
                 <div class="event-date">05.26.2024</div>
@@ -392,7 +394,7 @@
                   <button class="edit-button">Edit</button>
                   <button class="delete-button">Delete</button>
                 </div>
-              </li>
+              </li>-->
             </ul>
           </div>
         </div>
@@ -437,6 +439,7 @@
           <button class="popup-button-save" id="save-edit">Save</button>
           <button class="popup-button-cancel" id="cancel-edit">Cancel</button>
       </div>
+      <span class="id" style="display: none;"></span>
   </div>
   </body>
 </html>

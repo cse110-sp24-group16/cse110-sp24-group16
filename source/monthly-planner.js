@@ -119,6 +119,7 @@ nextButton.addEventListener("click", () => {
     year += 1;
   }
   makeCalendar(month, year);
+  loadTasks();
 });
 
 prevButton.addEventListener("click", () => {

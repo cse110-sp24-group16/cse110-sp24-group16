@@ -141,7 +141,7 @@ body {
     gap: var(--calendar-gap);
 }
 
-.day ul li {
+.day ul li, .day ul event-card {
     padding: var(--list-item-padding);
     border: var(--list-item-border);
     border-radius: var(--list-item-border-radius);
@@ -164,7 +164,7 @@ body {
     margin-top: var(--event-description-margin-top);
 }
 
-.event-item {
+.event-item, event-card {
     position: relative;
     padding: 20px;
 }
@@ -193,7 +193,7 @@ body {
     background-color: #dfad0b;
 }
 
-.event-item:hover .button-container {
+.event-item:hover .button-container, event-card:hover .button-container {
     display: block;
 }
 

@@ -1,7 +1,33 @@
 //planner.js
-window.addEventListener('DOMContentLoaded', init);
+let fs = require('fs');
+window.addEventListener('DOMContentLoaded', (e) => {
+    setTimeout(init, 2000);
+
+    const navButtonArr = document.querySelectorAll('.nav-button');
+    const saveEditButton = document.getElementById('save-edit');
+    const confirmDeleteButton = document.getElementById('confirm-delete');
+
+    navButtonArr.forEach((button) => {
+        button.addEventListener('click', init);
+    });
+
+    saveEditButton.addEventListener('click', () => {
+        setTimeout(init, 200);
+    });
+
+    confirmDeleteButton.addEventListener('click', () => {
+        setTimeout(init, 200);
+    })
+});
 
 function init(){
+    let data = [];
+    try{
+        data = JSON.parse(fs.readFileSync('source/task.json', 'utf8'));
+    } catch (err) {
+        console.error(err);
+    }
+
     const deleteButtons = document.querySelectorAll('.delete-button');
     const editButtons = document.querySelectorAll('.edit-button');
     const popupDelete = document.getElementById('popup-delete');
@@ -54,7 +80,7 @@ function init(){
     addTaskConfirm.addEventListener('click', () => {
         const title = document.getElementById('new-task-title').value;
         const description = document.getElementById('new-task-description').value;
-        const date = new Date(document.getElementById('new-task-date').value);
+        const date = document.getElementById('new-task-date').value;
         const time = convertTo12Hour(document.getElementById('new-task-time').value);
         if (title && description && date) {
             addNewTask(title, description, date, time);
@@ -90,76 +116,97 @@ function init(){
         taskList.appendChild(taskItem);
     
         calendarDays.forEach(day => {
-            if (day.id === date.toDateString()) {
-                const eventItem = document.createElement('li');
-                eventItem.className = 'event-item';
+            if (day.id === date) {
+                let dailyTask = {};
+                dailyTask['title'] = time ? `${time} - ${title}` : title;
+                dailyTask['description'] = description;
+                dailyTask['date'] = date;
+                dailyTask['completion'] = false;
+                dailyTask['importance'] = 50;
+                dailyTask['notes'] = '';
+                dailyTask['id'] = data.length == 0 ? 0 : data[data.length-1].id + 1;
+                data.push(dailyTask);
+
+                let eventCard = document.createElement('event-card');
+                eventCard.data = dailyTask;
+                eventCard.id = dailyTask.id;
+                day.querySelector('ul').appendChild(eventCard);
+
+                try {
+                    fs.writeFileSync('source/task.json', JSON.stringify(data));
+                } catch (err) {
+                    console.log(err);
+                }
+
+                // const eventItem = document.createElement('li');
+                // eventItem.className = 'event-item';
     
-                const eventTitle = document.createElement('div');
-                eventTitle.className = 'event-title';
-                eventTitle.textContent = time ? `${time} - ${title}` : title;
+                // const eventTitle = document.createElement('div');
+                // eventTitle.className = 'event-title';
+                // eventTitle.textContent = time ? `${time} - ${title}` : title;
     
-                const eventDescription = document.createElement('div');
-                eventDescription.className = 'event-description';
-                eventDescription.textContent = description;
+                // const eventDescription = document.createElement('div');
+                // eventDescription.className = 'event-description';
+                // eventDescription.textContent = description;
     
-                const eventDate = document.createElement('div');
-                eventDate.className = 'event-date';
-                eventDate.textContent = formatDate(date);
+                // const eventDate = document.createElement('div');
+                // eventDate.className = 'event-date';
+                // eventDate.textContent = formatDate(date);
     
-                const eventCompleted = document.createElement('div');
-                eventCompleted.className = 'event-completed';
-                const completedCheckbox = document.createElement('input');
-                completedCheckbox.type = 'checkbox';
-                eventCompleted.appendChild(completedCheckbox);
+                // const eventCompleted = document.createElement('div');
+                // eventCompleted.className = 'event-completed';
+                // const completedCheckbox = document.createElement('input');
+                // completedCheckbox.type = 'checkbox';
+                // eventCompleted.appendChild(completedCheckbox);
     
-                const hiddenSliderContainer = document.createElement('div');
-                hiddenSliderContainer.className = 'hidden-slider-container';
-                const sliderLabel = document.createElement('label');
-                sliderLabel.setAttribute('for', 'importance-slider-hidden');
-                sliderLabel.className = 'slider-label';
-                sliderLabel.textContent = 'Importance (out of 100): ';
-                const sliderValueHidden = document.createElement('span');
-                sliderValueHidden.id = 'slider-value-hidden';
-                sliderValueHidden.textContent = '50';
-                const importanceSliderHidden = document.createElement('input');
-                importanceSliderHidden.type = 'range';
-                importanceSliderHidden.className = 'slider';
-                importanceSliderHidden.id = 'importance-slider-hidden';
-                importanceSliderHidden.min = '0';
-                importanceSliderHidden.max = '100';
-                importanceSliderHidden.value = '50';
+                // const hiddenSliderContainer = document.createElement('div');
+                // hiddenSliderContainer.className = 'hidden-slider-container';
+                // const sliderLabel = document.createElement('label');
+                // sliderLabel.setAttribute('for', 'importance-slider-hidden');
+                // sliderLabel.className = 'slider-label';
+                // sliderLabel.textContent = 'Importance (out of 100): ';
+                // const sliderValueHidden = document.createElement('span');
+                // sliderValueHidden.id = 'slider-value-hidden';
+                // sliderValueHidden.textContent = '50';
+                // const importanceSliderHidden = document.createElement('input');
+                // importanceSliderHidden.type = 'range';
+                // importanceSliderHidden.className = 'slider';
+                // importanceSliderHidden.id = 'importance-slider-hidden';
+                // importanceSliderHidden.min = '0';
+                // importanceSliderHidden.max = '100';
+                // importanceSliderHidden.value = '50';
     
-                hiddenSliderContainer.appendChild(sliderLabel);
-                hiddenSliderContainer.appendChild(sliderValueHidden);
-                hiddenSliderContainer.appendChild(importanceSliderHidden);
+                // hiddenSliderContainer.appendChild(sliderLabel);
+                // hiddenSliderContainer.appendChild(sliderValueHidden);
+                // hiddenSliderContainer.appendChild(importanceSliderHidden);
     
-                const eventNotes = document.createElement('textarea');
-                eventNotes.className = 'hidden';
-                eventNotes.id = 'event-notes';
-                eventNotes.placeholder = 'Add notes';
+                // const eventNotes = document.createElement('textarea');
+                // eventNotes.className = 'hidden';
+                // eventNotes.id = 'event-notes';
+                // eventNotes.placeholder = 'Add notes';
     
-                const buttonContainer = document.createElement('div');
-                buttonContainer.className = 'button-container';
-                const editButton = document.createElement('button');
-                editButton.className = 'edit-button';
-                editButton.textContent = 'Edit';
-                const deleteButton = document.createElement('button');
-                deleteButton.className = 'delete-button';
-                deleteButton.textContent = 'Delete';
+                // const buttonContainer = document.createElement('div');
+                // buttonContainer.className = 'button-container';
+                // const editButton = document.createElement('button');
+                // editButton.className = 'edit-button';
+                // editButton.textContent = 'Edit';
+                // const deleteButton = document.createElement('button');
+                // deleteButton.className = 'delete-button';
+                // deleteButton.textContent = 'Delete';
     
-                buttonContainer.appendChild(editButton);
-                buttonContainer.appendChild(deleteButton);
+                // buttonContainer.appendChild(editButton);
+                // buttonContainer.appendChild(deleteButton);
     
-                eventItem.appendChild(eventTitle);
-                eventItem.appendChild(eventDescription);
-                eventItem.appendChild(eventDate);
-                eventItem.appendChild(eventCompleted);
-                eventItem.appendChild(hiddenSliderContainer);
-                eventItem.appendChild(eventNotes);
-                eventItem.appendChild(buttonContainer);
+                // eventItem.appendChild(eventTitle);
+                // eventItem.appendChild(eventDescription);
+                // eventItem.appendChild(eventDate);
+                // eventItem.appendChild(eventCompleted);
+                // eventItem.appendChild(hiddenSliderContainer);
+                // eventItem.appendChild(eventNotes);
+                // eventItem.appendChild(buttonContainer);
     
-                day.querySelector('ul').appendChild(eventItem);
-                addEventListenersToTask(eventItem);
+                // day.querySelector('ul').appendChild(eventItem);
+                addEventListenersToTask(eventCard);
             }
         });
     
@@ -176,23 +223,25 @@ function init(){
 
         if (deleteButton) {
             deleteButton.addEventListener('click', (event) => {
-                currentTask = event.target.closest('.event-item');
+                currentTask = event.target.closest('event-card');
                 showPopupForDelete();
             });
         }
 
         if (editButton) {
             editButton.addEventListener('click', (event) => {
-                currentTask = event.target.closest('.event-item');
+                currentTask = event.target.closest('event-card');
                 showPopupForEdit(currentTask);
             });
         }
     }
     /************ */
     let currentTask;
+    let id;
     deleteButtons.forEach(button => {
         button.addEventListener('click', (event) => {
-            currentTask = event.target.closest('.event-item');
+            currentTask = event.target.closest('event-card');
+            id = currentTask.id;
             showPopupForDelete();
         });
     });
@@ -200,12 +249,21 @@ function init(){
     //brings up the popup for every edit button
     editButtons.forEach(button => {
         button.addEventListener('click', (event) => {
-            currentTask = event.target.closest('.event-item');
+            currentTask = event.target.closest('event-card');
+            id = currentTask.id
             showPopupForEdit(currentTask);
         });
     });
     
     document.getElementById('confirm-delete').addEventListener('click', () => {
+        data = data.filter((entry) => {entry.id = id});
+        
+        try {
+            fs.writeFileSync('source/task.json', JSON.stringify(data));
+        } catch (err) {
+            console.log(err);
+        }
+
         currentTask.remove();
         hidePopupForDelete();
     });
@@ -218,7 +276,7 @@ function init(){
     });
 
     document.getElementById('save-edit').addEventListener('click', () => {
-        const newTitle = document.getElementById('edit-title').value;
+        let newTitle = document.getElementById('edit-title').value;
         const newDescription = document.getElementById('edit-description').value;
         const newDate = new Date(document.getElementById('edit-date').value);
         const newTime = convertTo12Hour(document.getElementById('edit-time').value);
@@ -227,19 +285,41 @@ function init(){
         const newColor = document.getElementById('edit-color').value;
         const newNotes = document.getElementById('edit-notes').value;
 
-        if(newTime == null){
-            currentTask.querySelector('.event-title').textContent = newTitle;
+        if(newTime != null){
+            newTitle = `${newTime} - ${newTitle}`;
         }
-        else{
-            currentTask.querySelector('.event-title').textContent = `${newTime} - ${newTitle}`;
-        }
-        currentTask.querySelector('.event-description').textContent = newDescription;
-        currentTask.querySelector('.event-date').textContent = formatDate(newDate);
-        currentTask.querySelector('.event-completed input').checked = newCompleted;
-        currentTask.querySelector('#slider-value-hidden').textContent = importance;
-        currentTask.querySelector('#event-notes').textContent = newNotes;
-        currentTask.style.backgroundColor = newColor;
+
+        // currentTask.querySelector('.event-title').textContent = newTitle;
+        // currentTask.querySelector('.event-description').textContent = newDescription;
+        // currentTask.querySelector('.event-date').textContent = formatDate(newDate);
+        // currentTask.querySelector('.event-completed input').checked = newCompleted;
+        // currentTask.querySelector('#slider-value-hidden').textContent = importance;
+        // currentTask.querySelector('#event-notes').textContent = newNotes;
+        // @todo fix the issue with style
+        // currentTask.style.backgroundColor = newColor;
         popupEdit.style.backgroundColor = newColor;
+
+        for(let i = 0; i < data.length; i++) {
+            if (data[i].id == id) {
+                data[i].title = newTitle;
+                data[i].description = newDescription;
+                data[i].date = newDate;
+                data[i].completion = newCompleted;
+                data[i].notes = newNotes;
+                data[i].importance = importance;
+
+                let eventCard = currentTask;
+                eventCard.data = data[i];
+                eventCard.id = data[i].id;
+
+                try {
+                    fs.writeFileSync('source/task.json', JSON.stringify(data));
+                } catch (err) {
+                    console.log(err);
+                }
+                break;
+            }
+        }
 
         hidePopupForEdit();
     });
@@ -349,13 +429,13 @@ function init(){
         return `${hour}:${minute} ${period}`;
     }
 
-    //turns html value of the date into the format "mm.dd.yyyy" that the user will read
+    //turns html value of the date into the format "yyyy-mm-dd" that the user will read
     function formatDate(date) {
         const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Add 1 because getMonth() returns zero-based month
         const day = (date.getDate() + 1).toString().padStart(2, '0');
         const year = date.getFullYear();
     
-        return `${month}.${day}.${year}`;
+        return `${year}-${month}-${day}`;
     }
 
     //turns the format "mm.dd.yyyy" into an html value that can be used for the "date" input
