@@ -159,5 +159,3 @@ function refreshTaskList(options) {
         taskList.appendChild(taskItem);
     }
 }
-
-export { tasks };

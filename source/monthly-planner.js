@@ -1,4 +1,27 @@
-import { tasks } from "./monthly-planner-taskbar.js";
+const tasks = [
+    {
+        "task-date": new Date("2024.06.24"),
+        "task-time": "03:00 PM",
+        "task-title": "Team Meeting",
+        "task-description":
+            "Our weekly team meeting to discuss progress and goals.",
+        importance: 0.5,
+        color: "#7db6a3",
+        notes: "Don't forget to bring the project plan.",
+        completed: true,
+    },
+    {
+        "task-date": new Date("2024.06.26"),
+        "task-time": "11:59 PM",
+        "task-title": "Checkpoint Video Due",
+        "task-description":
+            "Submit our checkpoint video by the end of the day.",
+        importance: 0.3,
+        color: "#e69996",
+        notes: "Make sure to include all team members in the video.",
+        completed: true,
+    },
+];
 
 const month_header = document.querySelector(".month-title");
 const calendar = document.querySelector("#calendar");
