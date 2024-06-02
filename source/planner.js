@@ -30,7 +30,6 @@ function init(){
 
     const deleteButtons = document.querySelectorAll('.delete-button');
     const editButtons = document.querySelectorAll('.edit-button');
-    console.log(editButtons);
     const popupDelete = document.getElementById('popup-delete');
     const popupEdit = document.getElementById('edit-popup');
     const overlay = document.getElementById('overlay');
@@ -296,7 +295,7 @@ function init(){
         // currentTask.querySelector('.event-completed input').checked = newCompleted;
         // currentTask.querySelector('#slider-value-hidden').textContent = importance;
         // currentTask.querySelector('#event-notes').textContent = newNotes;
-        console.log(currentTask);
+        // @todo fix the issue with style
         // currentTask.style.backgroundColor = newColor;
         popupEdit.style.backgroundColor = newColor;
 
@@ -308,8 +307,6 @@ function init(){
                 data[i].completion = newCompleted;
                 data[i].notes = newNotes;
                 data[i].importance = importance;
-                console.log(data[i]);
-                console.log(data);
 
                 let eventCard = currentTask;
                 eventCard.data = data[i];
