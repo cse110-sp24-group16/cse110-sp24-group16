@@ -1,5 +1,6 @@
 :root {
     --background-color: #f4f4f4;
+    --background-selected-color: #e7e6e6;
     --header-background-color: #f4f4f4;
     --header-font-size: 1em;
     --header-margin: 10px 0;
@@ -28,10 +29,14 @@
     --nav-button-border-radius: 5px;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     background-color: var(--background-color);
     margin: 0;
-    height: 100vh;
+    height: 100%;
     display: flex;
     font-size: 100%;
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu;
@@ -42,33 +47,150 @@ body {
     background-color: #d8e5e8;
 }
 
+.taskbar-navigator {
+    display: flex;
+    height: 8%;
+    overflow: auto;
+}
+
+.taskbar-navigator > h1 {
+    width: 100%;
+    text-align: center;
+}
+
+.taskbar-navigator-button {
+    margin: 1%;
+}
+
+.taskbar-search-bar {
+    display: flex;
+    border-top: var(--day-border-color) 1px solid;
+    width: 100%;
+    height: 5%;
+}
+
+#taskbar-option-search-bar {
+    width: 100%;
+    margin: 2% 2%;
+    padding: 5px;
+    border: 1px solid var(--day-border-color);
+    border-radius: 5px;
+}
+
+.taskbar-options {
+    border-top: var(--day-border-color) 1px solid;
+}
+
+.taskbar-options > label {
+    font-weight: lighter;
+}
+
+#taskbar-search-status {
+    width: 100%;
+    height: 3%;
+}
+
+#taskbar-list {
+    border-top: var(--day-border-color) 1px solid;
+}
+
+.task-item {
+    padding: var(--list-item-padding);
+    border: var(--list-item-border);
+    border-radius: var(--list-item-border-radius);
+    background-color: var(--background-color);
+    margin: 10px 5px;
+    cursor: pointer;
+    font-weight: lighter;
+    overflow: auto;
+}
+
+.task-item:hover {
+    background-color: var(--background-selected-color);
+}
+
+.task-item > hr {
+    border: none;
+    height: 5px;
+}
+
+.task-date {
+    font-size: normal;
+    display: block;
+    text-align: right;
+    padding: 5px 5px 0px 5px;
+}
+
+.task-completed {
+    display: inline-block;
+}
+
+.task-title {
+    font-size: x-large;
+    display: inline-block;
+    padding: 0px 5px 0px 5px;
+    font-weight: 300;
+}
+
+.task-description {
+    display: block;
+    padding: 0px 5px 5px 5px;
+    margin: 0;
+}
+
 .calendar-wrapper {
     width: 80%;
+    border: 1px solid var(--day-border-color);
 }
 
 .navigator {
     display: flex;
+    height: 8%;
 }
 
 .navigator-buttons {
-    margin: 1% 0;
+    height: 50%;
+    margin: auto 1%;
+    margin-left: auto;
     display: flex;
+}
+
+#addButton {
+    margin-right: 10px;
+    font-size: 25px;
+}
+
+#prevButton, #nextButton {
+    font-size: 20px;
 }
 
 .navigator-button {
     box-shadow: var(--day-box-shadow);
+    background-color: white;
+    border: 1px solid var(--day-border-color);
+    border-radius: 5px;
+}
+
+.navigator-button:hover {
+    background-color: var(--background-color);
 }
 
 #calendar {
     display: grid;
+    grid-template-rows: 35px;
     grid-template-columns: repeat(7, 1fr);
     border: 1px solid var(--day-border-color);
     gap: 1px;
     background-color: var(--day-border-color);
     box-shadow: var(--day-box-shadow);
     margin: 0 1%;
+    height: 90%;
+    width: 98%;
 }
 
+#calendar > li:focus {
+    outline: 1px solid #007bff;
+}
 
 .day-name {
     background: #d8e5e8;
@@ -80,21 +202,19 @@ body {
 .day {
     font-size: larger;
     background-color: white;
-    height: 15vh;
 }
 
 .day-extra {
     font-size: larger;
     background-color: var( --background-color);
-    height: 15vh;
 }
-
 
 .day-number {
     padding: 5px;
     display: inline-block;
     text-align: center;
     vertical-align: middle;
+    margin-bottom: 5px;
 }
 
 #today > .day-number {
@@ -105,13 +225,14 @@ body {
 }
 
 .task {
-    background-color: var(--list-item-background-color);
     padding: var(--list-item-padding);
     font-size: 0.8em;
+    cursor: pointer;
 }
 
-h1, h2, h3 {
-    margin: 1%;
+h1, h2, h3, h4 {
+    margin: auto 1%;
+    font-weight: lighter;
 }
 
 ol {
