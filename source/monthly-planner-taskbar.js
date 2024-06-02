@@ -128,16 +128,34 @@ function refreshTaskList(options) {
 
         const taskItem = document.createElement("li");
         taskItem.className = "task-item";
-        taskItem.innerHTML = `
-          <span class="task-date">${task["task-date"].toDateString()} ${
+
+        const taskDateItem = document.createElement("span");
+        taskDateItem.className = "task-date";
+        taskDateItem.textContent = `${task["task-date"].toDateString()} ${
             task["task-time"]
-        }</span>
-          <span class="task-title"><input type="checkbox" class="task-completed" ${
-              task.completed ? "checked" : ""
-          }/> ${task["task-title"]}</span>
-          <hr style="background-color: ${task["color"]};"/>
-          <p class="task-description">${task["task-description"]}</p>
-      `;
+        }`;
+        taskItem.appendChild(taskDateItem);
+
+        const taskCompletedCheckbox = document.createElement("input");
+        taskCompletedCheckbox.type = "checkbox";
+        taskCompletedCheckbox.className = "task-completed";
+        taskCompletedCheckbox.checked = task.completed;
+        taskItem.appendChild(taskCompletedCheckbox);
+        
+        const taskTitleItem = document.createElement("span");
+        taskTitleItem.className = "task-title";
+
+        taskTitleItem.textContent = `${task["task-title"]}`;
+        taskItem.appendChild(taskTitleItem);
+
+        const hrItem = document.createElement("hr");
+        hrItem.style.backgroundColor = task["color"];
+        taskItem.appendChild(hrItem);
+
+        const taskDescriptionItem = document.createElement("p");
+        taskDescriptionItem.className = "task-description";
+        taskDescriptionItem.textContent = task["task-description"];
+        taskItem.appendChild(taskDescriptionItem);
         taskList.appendChild(taskItem);
     }
 }
