@@ -124,7 +124,7 @@ function init(){
                 dailyTask['date'] = date;
                 dailyTask['completion'] = false;
                 dailyTask['importance'] = 50;
-                dailyTask['id'] = data.length + 1;
+                dailyTask['id'] = data.length == 0 ? 0 : data[data.length-1].id + 1;
                 data.push(dailyTask);
 
                 let eventCard = document.createElement('event-card');
@@ -237,10 +237,11 @@ function init(){
     }
     /************ */
     let currentTask;
-    let currentTaskJson;
+    let id;
     deleteButtons.forEach(button => {
         button.addEventListener('click', (event) => {
             currentTask = event.target.closest('event-card');
+            id = currentTask.id;
             showPopupForDelete();
         });
     });
@@ -249,11 +250,20 @@ function init(){
     editButtons.forEach(button => {
         button.addEventListener('click', (event) => {
             currentTask = event.target.closest('event-card');
+            id = currentTask.id
             showPopupForEdit(currentTask);
         });
     });
     
     document.getElementById('confirm-delete').addEventListener('click', () => {
+        data = data.filter((entry) => {entry.id = id});
+        
+        try {
+            fs.writeFileSync('source/task.json', JSON.stringify(data));
+        } catch (err) {
+            console.log(err);
+        }
+
         currentTask.remove();
         hidePopupForDelete();
     });
@@ -274,7 +284,6 @@ function init(){
         const importance = document.getElementById('importance-slider').value;
         const newColor = document.getElementById('edit-color').value;
         const newNotes = document.getElementById('edit-notes').value;
-        const id = document.querySelector('.id').textContent;
 
         if(newTime != null){
             newTitle = `${newTime} - ${newTitle}`;
@@ -287,7 +296,7 @@ function init(){
         // currentTask.querySelector('#slider-value-hidden').textContent = importance;
         // currentTask.querySelector('#event-notes').textContent = newNotes;
         console.log(currentTask);
-        currentTask.style.backgroundColor = newColor;
+        // currentTask.style.backgroundColor = newColor;
         popupEdit.style.backgroundColor = newColor;
 
         for(let i = 0; i < data.length; i++) {
@@ -335,7 +344,6 @@ function init(){
         const dateString = item.querySelector('.event-date').textContent;
         const date = parseDate(dateString);
         const sliderValue = item.querySelector('#slider-value-hidden').textContent;
-        const id = item.id;
         //const notes = item.querySelector('#event-notes').textContent;
         let [time, eventTitle] = title.split(' - ');
         popupEdit.style.backgroundColor = currentTask.style.backgroundColor;
@@ -364,7 +372,6 @@ function init(){
         document.getElementById('slider-value').textContent = sliderValue;
         document.getElementById('edit-color').value = rgbToHex(color);
         //document.getElementById('edit-notes').value = notes;
-        document.querySelector('.id').textContent = id;
     }
 
     function hidePopupForDelete() {
