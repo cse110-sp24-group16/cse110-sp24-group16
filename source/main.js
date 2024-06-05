@@ -17,7 +17,7 @@ const createWindow = () => {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile("source/planner.html");
+  mainWindow.loadFile("source/weekly-planner.html");
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()

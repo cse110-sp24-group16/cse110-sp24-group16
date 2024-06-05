@@ -1,63 +1,54 @@
+import { showPopupForDelete, showPopupForEdit } from './task-crud.js';
+import { convertTo12Hour } from './util.js';
+
 //create custom event-card element from <li>
-class eventCard extends HTMLElement {
+class EventCard extends HTMLElement {
+
     constructor() {
         super();
     }
 
-
-    /**Set the properties of chlid elements of event-card
-     * @param {Object} data
+    /** Set the properties of chlid elements of event-card
+     * @param {Object} task
      */
-    
-    set data(data) {
-        if (!data) return;
-        this.innerHTML = '<div class="event-title">' + data.title + '</div>' +
-        '<div class="event-description">' + data.description + '</div>' +
-        '<div class="event-date">' + formatDate(data.date) + '</div>' +
-        '<div class="event-completed"><input type="checkbox"' + isChecked(data.completion) + '></div>' +
-        '<div class="hidden-slider-container"><label for="importance-slider-hidden" class="slider-label">Importance (out of 100): </label>' +
-        '<span id="slider-value-hidden">' + data.importance + '</span>' +
-        '<input type="range" class="slider" id="importance-slider-hidden" min="0" max="100" value=' + data.importance + '></div>' +
-        '<textarea class="hidden" id="event-notes" placeholder="Add notes">' + data.notes + '</textarea>' +
-        '<div class="button-container"><button class="edit-button">Edit</button><button class="delete-button">Delete</button></div>' 
+    set data(task) {
+        if (!task) return;
+
+        this.dataset.id = task['id'];
+        this.style.backgroundColor = task['color'];
+
+        const eventTime = document.createElement('div');
+        eventTime.className = 'event-time';
+        eventTime.textContent = convertTo12Hour(task['time']);
+        this.appendChild(eventTime);
+
+        const eventTitle = document.createElement('div');
+        eventTitle.className = 'event-title';
+        eventTitle.textContent = task['title'];
+        this.appendChild(eventTitle);
+
+        const eventDescription = document.createElement('div');
+        eventDescription.className = 'event-description';
+        eventDescription.textContent = task['description'];
+        this.appendChild(eventDescription);
+
+        const buttonContainer = document.createElement('div');
+        buttonContainer.className = 'button-container';
+
+        const editButton = document.createElement('button');
+        editButton.className = 'edit-button';
+        editButton.textContent = 'Edit';
+        editButton.addEventListener('click', () => showPopupForEdit(task['id']));
+        buttonContainer.appendChild(editButton);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'delete-button';
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', () => showPopupForDelete(task['id']));
+        buttonContainer.appendChild(deleteButton);
+
+        this.appendChild(buttonContainer);
     }
 }
 
-customElements.define('event-card', eventCard);
-
-function isChecked(status) {
-    if(status == true) {
-        return "checked";
-    } else {
-        return "";
-    }
-}
-
-//turns html value of the date into the format "mm-dd-yyyy" that the user will read
-function formatDate(date) {
-    const dateObj = new Date(date);
-    let month = (dateObj.getMonth() + 1).toString().padStart(2, '0'); // Add 1 because getMonth() returns zero-based month
-    let day = (dateObj.getDate() + 1).toString().padStart(2, '0');
-    const year = dateObj.getFullYear();
-
-    // Deals with date overflow, changes the date to the first of next month
-    if (month == '01' || month == '03' || month == '05' || month == '07' || month == '08' || month == '10' || month == '12') {
-        if (day == '32') {
-            month = (dateObj.getMonth() + 2).toString().padStart(2, '0');
-            day = '01'
-        }
-    } else if (month == '04' || month == '06' || month == '09' || month == '11') {
-        if (day == '31') {
-            month = (dateObj.getMonth() + 2).toString().padStart(2, '0');
-            day = '01'
-        }
-    } else if (month == '02') {
-        if (day == '29') {
-            month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
-            day = '01'
-            // @todo implement system for leap years
-        }
-    }
-
-    return `${month}.${day}.${year}`;
-}
+customElements.define('event-card', EventCard);

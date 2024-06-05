@@ -1,33 +1,6 @@
-const tasks = [
-    {
-        "task-date": new Date("2024.06.24"),
-        "task-time": "03:00 PM",
-        "task-title": "Team Meeting",
-        "task-description":
-            "Our weekly team meeting to discuss progress and goals.",
-        importance: 0.5,
-        color: "#7db6a3",
-        notes: "Don't forget to bring the project plan.",
-        completed: true,
-    },
-    {
-        "task-date": new Date("2024.06.26"),
-        "task-time": "11:59 PM",
-        "task-title": "Checkpoint Video Due",
-        "task-description":
-            "Submit our checkpoint video by the end of the day.",
-        importance: 0.3,
-        color: "#e69996",
-        notes: "Make sure to include all team members in the video.",
-        completed: true,
-    },
-];
+import { parser } from "./json-parser.js";
+import { showPopupForEdit, addChangeListener } from "./task-crud.js";
 
-const month_header = document.querySelector(".month-title");
-const calendar = document.querySelector("#calendar");
-const prevButton = document.querySelector("#prevButton");
-const curButton = document.querySelector("#curButton");
-const nextButton = document.querySelector("#nextButton");
 const months = [
     "January",
     "Febuary",
@@ -42,9 +15,53 @@ const months = [
     "November",
     "December",
 ];
+
 let date = new Date();
 let month = date.getMonth();
 let year = date.getFullYear();
+
+window.addEventListener('DOMContentLoaded', init);
+
+function init() {
+    addChangeListener(() => {
+        wipeCalendar();
+        makeCalendar(month, year);
+    });
+
+    const prevButton = document.querySelector("#prev-button");
+    const curButton = document.querySelector("#cur-button");
+    const nextButton = document.querySelector("#next-button");
+
+    makeCalendar(month, year);
+
+    nextButton.addEventListener("click", () => {
+      wipeCalendar();
+      month += 1;
+      if (month > 11) {
+        month = 0;
+        year += 1;
+      }
+      makeCalendar(month, year);
+    });
+    
+    prevButton.addEventListener("click", () => {
+        wipeCalendar();
+        month -= 1;
+        if (month < 0) {
+            month = 11;
+            year -= 1;
+        }
+        makeCalendar(month, year);
+    });
+    
+    curButton.addEventListener("click", () => {
+        wipeCalendar();
+        month = date.getMonth();
+        year = date.getFullYear();
+        makeCalendar(month, year);
+    });
+}
+
 
 function checkToday(liElt, day, month, year) {
     if (
@@ -57,8 +74,8 @@ function checkToday(liElt, day, month, year) {
 }
 
 function checkTasks(ulElt, day, month, year) {
-    tasks.forEach((task) => {
-        const date = task["task-date"];
+    parser.getTasks().forEach((task) => {
+        const date = new Date(task["date"]);
 
         if (
             day === date.getDate() &&
@@ -68,13 +85,17 @@ function checkTasks(ulElt, day, month, year) {
             const liElt = document.createElement("li");
             liElt.className = "task";
             liElt.style.backgroundColor = task.color;
-            liElt.textContent = `${task["task-title"]}`;
+            liElt.textContent = `${task["title"]}`;
+            liElt.addEventListener("click", () => {
+                showPopupForEdit(task.id);
+            });
             ulElt.appendChild(liElt);
         }
     });
 }
 
 function createDateEntry(day, month, year, extra) {
+    const calendar = document.querySelector("#calendar");
     const liElt = document.createElement("li");
     liElt.tabIndex = "0";
     const spanElt = document.createElement("span");
@@ -94,7 +115,8 @@ function createDateEntry(day, month, year, extra) {
 //given month and year, make the monthly view
 //populate the calendar with buckets (li elements)
 function makeCalendar(month, year) {
-    month_header.textContent = `${months[month | 0]} ${year | 0}`;
+    const monthTitle = document.querySelector("#month-title");
+    monthTitle.textContent = `${months[month | 0]} ${year | 0}`;
     const startDate = new Date(year, month, 1);
     //returns the day of the week of the first day
     const start = startDate.getDay();
@@ -143,32 +165,3 @@ function wipeCalendar() {
         }
     }
 }
-
-makeCalendar(month, year);
-nextButton.addEventListener("click", () => {
-  wipeCalendar();
-  month += 1;
-  if (month > 11) {
-    month = 0;
-    year += 1;
-  }
-  makeCalendar(month, year);
-  loadTasks();
-});
-
-prevButton.addEventListener("click", () => {
-    wipeCalendar();
-    month -= 1;
-    if (month < 0) {
-        month = 11;
-        year -= 1;
-    }
-    makeCalendar(month, year);
-});
-
-curButton.addEventListener("click", () => {
-    wipeCalendar();
-    month = date.getMonth();
-    year = date.getFullYear();
-    makeCalendar(month, year);
-});

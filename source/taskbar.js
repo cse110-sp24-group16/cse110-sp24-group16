@@ -1,31 +1,19 @@
-const tasks = [
-    {
-        "task-date": new Date("2024.06.24"),
-        "task-time": "03:00 PM",
-        "task-title": "Team Meeting",
-        "task-description":
-            "Our weekly team meeting to discuss progress and goals.",
-        importance: 0.5,
-        color: "#7db6a3",
-        notes: "Don't forget to bring the project plan.",
-        completed: true,
-    },
-    {
-        "task-date": new Date("2024.06.26"),
-        "task-time": "11:59 PM",
-        "task-title": "Checkpoint Video Due",
-        "task-description":
-            "Submit our checkpoint video by the end of the day.",
-        importance: 0.3,
-        color: "#e69996",
-        notes: "Make sure to include all team members in the video.",
-        completed: true,
-    },
-];
+import { parser } from "./json-parser.js";
+import { showPopupForEdit, addChangeListener, toggleTaskCompletion } from "./task-crud.js";
+
+let options = {
+    filterText: "",
+    sortOrder: "DUE_DATE",
+    completed: false,
+    startDate: new Date(),
+    endDate: new Date()
+}
 
 window.addEventListener("DOMContentLoaded", init);
 
 function init() {
+    addChangeListener(refreshTaskList);
+    
     const searchBar = document.getElementById("taskbar-option-search-bar");
     const sortOrder = document.getElementById("taskbar-option-sort-order");
     const completed = document.getElementById("taskbar-option-completed");
@@ -38,14 +26,14 @@ function init() {
     startDate.value = start.toISOString().split("T")[0];
     endDate.value = end.toISOString().split("T")[0];
 
-    const options = {
+    options = {
         filterText: searchBar.value,
         sortOrder: sortOrder.value,
         completed: completed.checked,
         startDate: start,
         endDate: end,
     };
-    refreshTaskList(options);
+    refreshTaskList();
 
     const searchStatus = document.getElementById("taskbar-search-status");
     searchStatus.hidden = true;
@@ -55,27 +43,27 @@ function init() {
         searchStatus.hidden = query.length === 0;
         searchStatus.textContent = `Showing results for "${query}"`;
         options.filterText = query.toLowerCase();
-        refreshTaskList(options);
+        refreshTaskList();
     });
 
     sortOrder.addEventListener("change", (event) => {
         options.sortOrder = event.target.value;
-        refreshTaskList(options);
+        refreshTaskList();
     });
 
     completed.addEventListener("change", (event) => {
         options.completed = event.target.checked;
-        refreshTaskList(options);
+        refreshTaskList();
     });
 
     startDate.addEventListener("change", (event) => {
         options.startDate = new Date(event.target.value);
-        refreshTaskList(options);
+        refreshTaskList();
     });
 
     endDate.addEventListener("change", (event) => {
         options.endDate = new Date(event.target.value);
-        refreshTaskList(options);
+        refreshTaskList();
     });
 
     const optionsButton = document.getElementById("options");
@@ -85,21 +73,29 @@ function init() {
     });
 
     const switchToWeeklyButton = document.getElementById("switch-to-weekly");
+    const switchToMonthlyButton = document.getElementById("switch-to-monthly");
 
     if (switchToWeeklyButton) {
         switchToWeeklyButton.addEventListener("click", () => {
-            window.location.href = escape("planner.html");
+            window.location.href = escape("weekly-planner.html");
+        });
+    }
+
+    if (switchToMonthlyButton) {
+        switchToMonthlyButton.addEventListener("click", () => {
+            window.location.href = escape("monthly-planner.html");
         });
     }
 }
 
-function refreshTaskList(options) {
+export function refreshTaskList() {
+    const tasks = parser.getTasks();
     const taskList = document.querySelector("#taskbar-list");
     taskList.innerHTML = "";
 
     // Sort tasks by importance or due date
     if (options.sortOrder && options.sortOrder === "DUE_DATE") {
-        tasks.sort((a, b) => a["task-date"] - b["task-date"]);
+        tasks.sort((a, b) => new Date(a["date"]) - new Date(b["date"]));
     } else {
         tasks.sort((a, b) => a.importance - b.importance);
     }
@@ -107,8 +103,8 @@ function refreshTaskList(options) {
     for (const task of tasks) {
         // Filter by search query
         if (
-            !task["task-title"].toLowerCase().includes(options.filterText) &&
-            !task["task-description"].toLowerCase().includes(options.filterText)
+            !task["title"].toLowerCase().includes(options.filterText) &&
+            !task["description"].toLowerCase().includes(options.filterText)
         ) {
             continue;
         }
@@ -120,8 +116,8 @@ function refreshTaskList(options) {
 
         // Filter by date range
         if (
-            task["task-date"] < options.startDate ||
-            task["task-date"] > options.endDate
+            new Date(task["date"]) < options.startDate ||
+            new Date(task["date"]) > options.endDate
         ) {
             continue;
         }
@@ -129,10 +125,13 @@ function refreshTaskList(options) {
         const taskItem = document.createElement("li");
         taskItem.className = "task-item";
 
+        // Store the task id in the element
+        taskItem.dataset.id = task["id"];
+
         const taskDateItem = document.createElement("span");
         taskDateItem.className = "task-date";
-        taskDateItem.textContent = `${task["task-date"].toDateString()} ${
-            task["task-time"]
+        taskDateItem.textContent = `${new Date(task["date"]).toDateString()} ${
+            task["time"]
         }`;
         taskItem.appendChild(taskDateItem);
 
@@ -140,12 +139,18 @@ function refreshTaskList(options) {
         taskCompletedCheckbox.type = "checkbox";
         taskCompletedCheckbox.className = "task-completed";
         taskCompletedCheckbox.checked = task.completed;
+        taskCompletedCheckbox.addEventListener("change", (event) => {
+            toggleTaskCompletion(task["id"], event.target.checked);
+        });
+        taskCompletedCheckbox.addEventListener("click", (event) => {
+            event.stopPropagation();
+        });
         taskItem.appendChild(taskCompletedCheckbox);
         
         const taskTitleItem = document.createElement("span");
         taskTitleItem.className = "task-title";
 
-        taskTitleItem.textContent = `${task["task-title"]}`;
+        taskTitleItem.textContent = `${task["title"]}`;
         taskItem.appendChild(taskTitleItem);
 
         const hrItem = document.createElement("hr");
@@ -154,8 +159,12 @@ function refreshTaskList(options) {
 
         const taskDescriptionItem = document.createElement("p");
         taskDescriptionItem.className = "task-description";
-        taskDescriptionItem.textContent = task["task-description"];
+        taskDescriptionItem.textContent = task["description"];
         taskItem.appendChild(taskDescriptionItem);
+
+        taskItem.addEventListener("click", () => {
+            showPopupForEdit(task["id"]);
+        });
         taskList.appendChild(taskItem);
     }
 }
