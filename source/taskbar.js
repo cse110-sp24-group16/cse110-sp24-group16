@@ -6,7 +6,8 @@ let options = {
     sortOrder: "DUE_DATE",
     completed: false,
     startDate: new Date(),
-    endDate: new Date()
+    endDate: new Date(),
+    importance: "ALL"
 }
 
 window.addEventListener("DOMContentLoaded", init);
@@ -19,6 +20,8 @@ function init() {
     const completed = document.getElementById("taskbar-option-completed");
     const startDate = document.getElementById("taskbar-option-start-date");
     const endDate = document.getElementById("taskbar-option-end-date");
+    const importanceFilter = document.getElementById("taskbar-option-importance");
+    const clearFiltersButton = document.getElementById("clear-filters");
 
     const today = new Date();
     const start = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -32,6 +35,7 @@ function init() {
         completed: completed.checked,
         startDate: start,
         endDate: end,
+        importance: importanceFilter.value
     };
     refreshTaskList();
 
@@ -63,6 +67,30 @@ function init() {
 
     endDate.addEventListener("change", (event) => {
         options.endDate = new Date(event.target.value);
+        refreshTaskList();
+    });
+
+    importanceFilter.addEventListener("change", (event) => {
+        options.importance = event.target.value;
+        refreshTaskList();
+    });
+
+    clearFiltersButton.addEventListener("click", () => {
+        searchBar.value = "";
+        sortOrder.value = "DUE_DATE";
+        completed.checked = false;
+        startDate.value = start.toISOString().split("T")[0];
+        endDate.value = end.toISOString().split("T")[0];
+        importanceFilter.value = "ALL";
+        options = {
+            filterText: "",
+            sortOrder: "DUE_DATE",
+            completed: false,
+            startDate: start,
+            endDate: end,
+            importance: "ALL"
+        };
+        searchStatus.hidden = true;
         refreshTaskList();
     });
 
@@ -111,6 +139,11 @@ export function refreshTaskList() {
 
         // Filter by completion status
         if (task.completed && !options.completed) {
+            continue;
+        }
+
+        // Filter by importance
+        if (options.importance !== "ALL" && task.importance !== options.importance) {
             continue;
         }
 
