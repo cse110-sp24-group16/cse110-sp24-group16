@@ -60,6 +60,13 @@ function init() {
      * @function
      */
     addTaskButton.addEventListener("click", () => {
+        const currentDate = new Date();
+        
+        document.getElementById("new-task-title").value = "Untitled Task";
+        document.getElementById("new-task-description").value = "Please write your task description here.";
+        document.getElementById("new-task-date").value = currentDate.toISOString().split('T')[0];
+        document.getElementById("new-task-time").value = new Date(currentDate.getTime() + 60 * 60 * 1000).toTimeString().substring(0, 5);
+        
         addTaskPopup.style.display = "block";
         overlay.style.display = "block";
     });
@@ -83,10 +90,11 @@ function init() {
      */
     addTaskConfirm.addEventListener("click", () => {
         // Get the values from the input fields
-        const title = document.getElementById("new-task-title").value;
-        const description = document.getElementById("new-task-description").value;
-        const date = document.getElementById("new-task-date").value;
-        const time = document.getElementById("new-task-time").value;
+        const title = document.getElementById("new-task-title").value||"Untitled Task";
+        const description = document.getElementById("new-task-description").value||"Please write your task description here.";
+        const currentDate = new Date();
+        const date = document.getElementById("new-task-date").value|| currentDate.toISOString().split('T')[0];
+        const time = document.getElementById("new-task-time").value|| currentDate.toTimeString().substring(0, 5);
 
         if (title && description && date && time) {
             const task = {
@@ -164,14 +172,14 @@ function init() {
         const task = parser.getTask(id);
         parser.deleteTask(id);
 
-        task["title"] = document.getElementById("edit-title").value;
-        task["description"] = document.getElementById("edit-description").value;
+        task["title"] = document.getElementById("edit-title").value||"Untitled Task";
+        task["description"] = document.getElementById("edit-description").value||"Please write your task description here.";
         task["completed"] = document.getElementById("edit-completed").checked;
-        task["date"] = document.getElementById("edit-date").value;
-        task["time"] = document.getElementById("edit-time").value;
-        task["importance"] = document.getElementById("importance-slider").value / 100;
-        task["color"] = document.getElementById("edit-color").value;
-        task["notes"] = document.getElementById("edit-notes").value;
+        task["date"] = document.getElementById("edit-date").value||new Date().toISOString().split('T')[0];
+        task["time"] = document.getElementById("edit-time").value||new Date().toTimeString().substring(0, 5);
+        task["importance"] = document.getElementById("importance-slider").value / 100 || 50;
+        task["color"] = document.getElementById("edit-color").value|| "#cccccc";
+        task["notes"] = document.getElementById("edit-notes").value||"No additional notes";
         parser.addTask(task);
         notifyChangeListeners();
         hidePopupForEdit();
@@ -213,15 +221,15 @@ export function showPopupForEdit(id) {
     popupEdit.dataset.id = id;
     popupEdit.style.display = "block";
     overlay.style.display = "block";
-    document.getElementById("edit-title").value = task["title"];
-    document.getElementById("edit-description").value = task["description"];
-    document.getElementById("edit-completed").checked = task["completed"];
-    document.getElementById("edit-date").value = task["date"];
-    document.getElementById("edit-time").value = task["time"];
-    document.getElementById("importance-slider").value = task["importance"] * 100;
-    document.getElementById("slider-value").textContent = task["importance"] * 100;
-    document.getElementById("edit-color").value = task["color"];
-    document.getElementById("edit-notes").value = task["notes"];
+    document.getElementById("edit-title").value = task["title"]||"Untitiled Task";
+    document.getElementById("edit-description").value = task["description"]||"No description provided";
+    document.getElementById("edit-completed").checked = task["completed"]||false;
+    document.getElementById("edit-date").value = task["date"]||new Date().toISOString().split('T')[0];
+    document.getElementById("edit-time").value = task["time"]||new Date().toTimeString().substring(0, 5);
+    document.getElementById("importance-slider").value = task["importance"] * 100||50;
+    document.getElementById("slider-value").textContent = task["importance"] * 100||50;
+    document.getElementById("edit-color").value = task["color"]||"#cccccc";
+    document.getElementById("edit-notes").value = task["notes"]||"No additional notes.";
 }
 
 /**
