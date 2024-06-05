@@ -16,13 +16,13 @@ const months = [
     "December",
 ];
 const weekdays = [
+    "Sunday",
     "Monday",
     "Tuesday",
     "Wednesday",
     "Thursday",
     "Friday",
-    "Saturday",
-    "Sunday",
+    "Saturday"
 ];
 
 window.addEventListener("DOMContentLoaded", init);
@@ -106,16 +106,16 @@ function checkTasks(ulElt, day, month, year) {
 function makeCalendar(day, month, year) {
     const monthTitle = document.getElementById("month-title");
     const week = [
+        document.getElementById("sunday"),
         document.getElementById("monday"),
         document.getElementById("tuesday"),
         document.getElementById("wednesday"),
         document.getElementById("thursday"),
         document.getElementById("friday"),
         document.getElementById("saturday"),
-        document.getElementById("sunday"),
     ];
     const weekContainers = document.querySelectorAll(".day");
-    const dayInd = new Date(year, month, day).getDay() - 1;
+    const dayInd = new Date(year, month, day).getDay();
     const monthEnd = new Date(year, month + 1, 0).getDate();
     const lastMonthEnd = new Date(year, month, 0).getDate();
     let monthText = months[`${month}`] + " " + year;
