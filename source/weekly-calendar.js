@@ -27,6 +27,12 @@ const weekdays = [
 
 window.addEventListener("DOMContentLoaded", init);
 
+/**
+ * Initializes the weekly calendar view and sets up event listeners for navigation buttons.
+ * 
+ * @name weekly-init
+ * @function init
+ */
 function init() {
     addChangeListener(() => {
         wipeCalendar();
@@ -43,7 +49,12 @@ function init() {
 
     makeCalendar(tday, tmonth, tyear);
 
-    //on pressing the next button, will change to the next week
+    /**
+     * Event listener for navigating to the next week.
+     * 
+     * @name nextButtonClickListener
+     * @function
+     */
     nextButton.addEventListener("click", () => {
         wipeCalendar();
 
@@ -60,7 +71,12 @@ function init() {
         makeCalendar(tday, tmonth, tyear);
     });
 
-    //on pressing the today button, well bring you back to today's week
+    /**
+     * Event listener for navigating to the current week.
+     * 
+     * @name curButtonClickListener
+     * @function
+     */
     curButton.addEventListener("click", () => {
         wipeCalendar();
         tday = date.getDate();
@@ -69,7 +85,12 @@ function init() {
         makeCalendar(tday, tmonth, tyear);
     });
 
-    //on pressing the previous button, will change to the previous week
+    /**
+     * Event listener for navigating to the previous week.
+     * 
+     * @name prevButtonClickListener
+     * @function
+     */
     prevButton.addEventListener("click", () => {
         wipeCalendar();
 
@@ -87,6 +108,15 @@ function init() {
     });
 }
 
+/**
+ * Checks for tasks on a given date and adds them to the provided list element.
+ * 
+ * @function checkTasks
+ * @param {HTMLElement} ulElt - The unordered list element to append tasks to.
+ * @param {number} day - The day of the month.
+ * @param {number} month - The month (0-11).
+ * @param {number} year - The full year.
+ */
 function checkTasks(ulElt, day, month, year) {
     parser.getTasks().forEach((task) => {
         const date = new Date(task["date"].replace(/-/g, '\/'));
@@ -103,6 +133,14 @@ function checkTasks(ulElt, day, month, year) {
     });
 }
 
+/**
+ * Generates the weekly calendar view for the specified day, month, and year.
+ * 
+ * @function makeCalendar
+ * @param {number} day - The starting day of the week.
+ * @param {number} month - The month (0-11).
+ * @param {number} year - The full year.
+ */
 function makeCalendar(day, month, year) {
     const monthTitle = document.getElementById("month-title");
     const week = [
@@ -166,6 +204,11 @@ function makeCalendar(day, month, year) {
     }
 }
 
+/**
+ * Clears the weekly calendar view by removing all task elements.
+ * 
+ * @function wipeCalendar
+ */
 function wipeCalendar() {
     const weekContainers = document.querySelectorAll(".day");
 
