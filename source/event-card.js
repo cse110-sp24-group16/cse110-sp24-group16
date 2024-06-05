@@ -1,15 +1,25 @@
 import { showPopupForDelete, showPopupForEdit } from './task-crud.js';
 import { convertTo12Hour } from './util.js';
 
-//create custom event-card element from <li>
+/**
+ * Represents a custom event-card element derived from an HTML <li> element.
+ * 
+ * @name EventCard
+ * @class
+ * @extends HTMLElement
+ */
 class EventCard extends HTMLElement {
 
     constructor() {
         super();
     }
 
-    /** Set the properties of chlid elements of event-card
-     * @param {Object} task
+    /** 
+     * Set the properties of chlid elements of event-card
+     * @name data
+     * @method
+     * @param {Object} task task object from parser
+     * @memberOf EventCard
      */
     set data(task) {
         if (!task) return;
