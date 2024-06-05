@@ -75,7 +75,7 @@ function checkToday(liElt, day, month, year) {
 
 function checkTasks(ulElt, day, month, year) {
     parser.getTasks().forEach((task) => {
-        const date = new Date(task["date"]);
+        const date = new Date(task["date"].replace(/-/g, '\/'));
 
         if (
             day === date.getDate() &&
