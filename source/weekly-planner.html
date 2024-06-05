@@ -2,16 +2,18 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Monthly View Calendar</title>
+        <title>Weekly View Calendar</title>
         <script src="util.js" type="module"></script>
         <script src="json-parser.js" type="module"></script>
         <script src="taskbar.js" type="module"></script>
-        <script src="monthly-calendar.js" type="module"></script>
+        <script src="weekly-calendar.js" type="module"></script>
+        <script src="event-card.js" type="module"></script>
+        <script src="task-crud.js" type="module"></script>
+        <!-- <script src="parser.js" type="module"></script> -->
         <link rel="stylesheet" href="styles/taskbar-style.css" />
-        <link rel="stylesheet" href="styles/monthly-planner-style.css" />
-        <link rel="stylesheet" href="styles/task-crud-style.css" />
+        <link rel="stylesheet" href="./styles/weekly-planner-style.css" />
+        <link rel="stylesheet" href="./styles/task-crud-style.css" />
     </head>
     <body>
         <div class="taskbar-container">
@@ -20,8 +22,8 @@
                     Options
                 </button>
                 <h1>Task List</h1>
-                <button id="switch-to-weekly" class="taskbar-navigator-button">
-                    Switch to Weekly View
+                <button id="switch-to-monthly" class="taskbar-navigator-button">
+                    Switch to Monthly View
                 </button>
             </div>
             <div class="taskbar-search-bar">
@@ -49,31 +51,51 @@
             <h4 id="taskbar-search-status" hidden></h4>
             <ul id="taskbar-list"></ul>
         </div>
-        <div class="calendar-wrapper">
+
+        <div class="content-container">
             <div class="navigator">
                 <h1 id="month-title">May 2024</h1>
                 <div class="navigator-buttons">
-                    <button id="add-button" class="navigator-button">+</button>
-                    <button id="prev-button" class="navigator-button">
+                    <button id="add-button" class="nav-button">+</button>
+                    <button id="prev-button" class="nav-button">
                         &#x3008;
                     </button>
-                    <button id="cur-button" class="navigator-button">
-                        Today
-                    </button>
-                    <button id="next-button" class="navigator-button">
+                    <button id="cur-button" class="nav-button">Today</button>
+                    <button id="next-button" class="nav-button">
                         &#x3009;
                     </button>
                 </div>
             </div>
-            <ol id="calendar">
-                <li class="day-name">Sun</li>
-                <li class="day-name">Mon</li>
-                <li class="day-name">Tue</li>
-                <li class="day-name">Wed</li>
-                <li class="day-name">Thu</li>
-                <li class="day-name">Fri</li>
-                <li class="day-name">Sat</li>
-            </ol>
+            <div class="calendar">
+                <div class="day">
+                    <header id="monday">Monday</header>
+                    <ul></ul>
+                </div>
+                <div class="day">
+                    <header id="tuesday">Tuesday</header>
+                    <ul></ul>
+                </div>
+                <div class="day">
+                    <header id="wednesday">Wednesday</header>
+                    <ul></ul>
+                </div>
+                <div class="day">
+                    <header id="thursday">Thursday</header>
+                    <ul></ul>
+                </div>
+                <div class="day">
+                    <header id="friday">Friday</header>
+                    <ul></ul>
+                </div>
+                <div class="day">
+                    <header id="saturday">Saturday</header>
+                    <ul></ul>
+                </div>
+                <div class="day">
+                    <header id="sunday">Sunday</header>
+                    <ul></ul>
+                </div>
+            </div>
         </div>
 
         <!-- Overlay for pop-ups -->
