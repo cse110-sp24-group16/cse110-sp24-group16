@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: event-card.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,82 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: event-card.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { showPopupForDelete, showPopupForEdit } from './task-crud.js';
+import { convertTo12Hour } from './util.js';
 
+/**
+ * Represents a custom event-card element derived from an HTML &lt;li> element.
+ * 
+ * @name EventCard
+ * @class
+ * @extends HTMLElement
+ */
+class EventCard extends HTMLElement {
 
-    <h3> </h3>
+    constructor() {
+        super();
+    }
 
+    /** 
+     * Set the properties of chlid elements of event-card
+     * @name data
+     * @method
+     * @param {Object} task task object from parser
+     * @memberOf EventCard
+     */
+    set data(task) {
+        if (!task) return;
 
+        this.dataset.id = task['id'];
+        this.style.backgroundColor = task['color'];
 
+        const eventTime = document.createElement('div');
+        eventTime.className = 'event-time';
+        eventTime.textContent = convertTo12Hour(task['time']);
+        this.appendChild(eventTime);
 
+        const eventTitle = document.createElement('div');
+        eventTitle.className = 'event-title';
+        eventTitle.textContent = task['title'];
+        this.appendChild(eventTitle);
 
+        const eventDescription = document.createElement('div');
+        eventDescription.className = 'event-description';
+        eventDescription.textContent = task['description'];
+        this.appendChild(eventDescription);
 
+        const buttonContainer = document.createElement('div');
+        buttonContainer.className = 'button-container';
 
+        const editButton = document.createElement('button');
+        editButton.className = 'edit-button';
+        editButton.textContent = 'Edit';
+        editButton.addEventListener('click', () => showPopupForEdit(task['id']));
+        buttonContainer.appendChild(editButton);
 
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'delete-button';
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', () => showPopupForDelete(task['id']));
+        buttonContainer.appendChild(deleteButton);
 
+        this.appendChild(buttonContainer);
+    }
+}
 
-    
-
-
-
-
-
+customElements.define('event-card', EventCard);
+</code></pre>
+        </article>
+    </section>
 
 
 

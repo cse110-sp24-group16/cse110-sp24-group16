@@ -1,4 +1,32 @@
-import { parser } from "./json-parser.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: monthly-calendar.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: monthly-calendar.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { parser } from "./json-parser.js";
 import { showPopupForEdit, addChangeListener } from "./task-crud.js";
 
 const months = [
@@ -71,7 +99,7 @@ function init() {
     prevButton.addEventListener("click", () => {
         wipeCalendar();
         month -= 1;
-        if (month < 0) {
+        if (month &lt; 0) {
             month = 11;
             year -= 1;
         }
@@ -103,8 +131,8 @@ function init() {
  */
 function checkToday(liElt, day, month, year) {
     if (
-        day === date.getDate() &&
-        month === date.getMonth() &&
+        day === date.getDate() &amp;&amp;
+        month === date.getMonth() &amp;&amp;
         year === date.getFullYear()
     ) {
         liElt.id = "today";
@@ -125,8 +153,8 @@ function checkTasks(ulElt, day, month, year) {
         const date = new Date(task["date"].replace(/-/g, '\/'));
 
         if (
-            day === date.getDate() &&
-            month === date.getMonth() &&
+            day === date.getDate() &amp;&amp;
+            month === date.getMonth() &amp;&amp;
             year === date.getFullYear()
         ) {
             const liElt = document.createElement("li");
@@ -198,13 +226,13 @@ function makeCalendar(month, year) {
     }
 
     //buckets for months days
-    for (let i = 1; i < endDate + 1; i++) {
+    for (let i = 1; i &lt; endDate + 1; i++) {
         const day = i;
         createDateEntry(day, month, year, false);
     }
 
     //buckets for extra days at end
-    for (let i = end; i < 6; i++) {
+    for (let i = end; i &lt; 6; i++) {
         const day = i - end + 1;
         var nextMo = new Date(startDate.getTime());
         nextMo.setMonth(nextMo.getMonth() + 1, 1);
@@ -232,3 +260,26 @@ function wipeCalendar() {
         }
     }
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="EventCard.html">EventCard</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addChangeListener">addChangeListener</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#addTaskButtonClickListener">addTaskButtonClickListener</a></li><li><a href="global.html#addTaskCancelClickListener">addTaskCancelClickListener</a></li><li><a href="global.html#addTaskConfirmClickListener">addTaskConfirmClickListener</a></li><li><a href="global.html#changeListenerCallback">changeListenerCallback</a></li><li><a href="global.html#checkTasks">checkTasks</a></li><li><a href="global.html#checkToday">checkToday</a></li><li><a href="global.html#completedChangeListener">completedChangeListener</a></li><li><a href="global.html#convertTo12Hour">convertTo12Hour</a></li><li><a href="global.html#createDateEntry">createDateEntry</a></li><li><a href="global.html#curButtonClickHandler">curButtonClickHandler</a></li><li><a href="global.html#deleteTask">deleteTask</a></li><li><a href="global.html#deleteTaskCancelClickListener">deleteTaskCancelClickListener</a></li><li><a href="global.html#deleteTaskConfirmClickListener">deleteTaskConfirmClickListener</a></li><li><a href="global.html#editTaskCancelClickListener">editTaskCancelClickListener</a></li><li><a href="global.html#editTaskConfirmClickListener">editTaskConfirmClickListener</a></li><li><a href="global.html#endDateChangeListener">endDateChangeListener</a></li><li><a href="global.html#getTask">getTask</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#getTimeBasedId">getTimeBasedId</a></li><li><a href="global.html#hidePopupForDelete">hidePopupForDelete</a></li><li><a href="global.html#hidePopupForEdit">hidePopupForEdit</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isStrongPassword">isStrongPassword</a></li><li><a href="global.html#makeCalendar">makeCalendar</a></li><li><a href="global.html#nextButtonClickHandler">nextButtonClickHandler</a></li><li><a href="global.html#notifyChangeListeners">notifyChangeListeners</a></li><li><a href="global.html#optionsButtonClickListener">optionsButtonClickListener</a></li><li><a href="global.html#prevButtonClickHandler">prevButtonClickHandler</a></li><li><a href="global.html#refreshTaskList">refreshTaskList</a></li><li><a href="global.html#saveTasks">saveTasks</a></li><li><a href="global.html#searchBarInputListener">searchBarInputListener</a></li><li><a href="global.html#showPopupForDelete">showPopupForDelete</a></li><li><a href="global.html#showPopupForEdit">showPopupForEdit</a></li><li><a href="global.html#sortOrderChangeListener">sortOrderChangeListener</a></li><li><a href="global.html#startDateChangeListener">startDateChangeListener</a></li><li><a href="global.html#switchToMonthlyButtonClickListener">switchToMonthlyButtonClickListener</a></li><li><a href="global.html#switchToWeeklyButtonClickListener">switchToWeeklyButtonClickListener</a></li><li><a href="global.html#taskCompletedCheckboxChangeListener">taskCompletedCheckboxChangeListener</a></li><li><a href="global.html#taskItemClickListener">taskItemClickListener</a></li><li><a href="global.html#toggleTaskCompletion">toggleTaskCompletion</a></li><li><a href="global.html#wipeCalendar">wipeCalendar</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Jun 05 2024 00:23:52 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

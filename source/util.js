@@ -1,3 +1,10 @@
+/**
+ * Converts a 24-hour time string to a 12-hour time string with AM/PM.
+ * 
+ * @function convertTo12Hour
+ * @param {string} time - The time string in 24-hour format (HH:MM)
+ * @returns {string|null} The time string in 12-hour format with AM/PM, or null if the input is invalid
+ */
 export function convertTo12Hour(time) {
     if (time == null || time == undefined) {
         return null;
@@ -27,7 +34,12 @@ export function convertTo12Hour(time) {
     return `${hour}:${minute} ${period}`;
 }
 
-// Function to generate a unique id based on the current time
+/**
+ * Generates a unique ID based on the current time.
+ * 
+ * @function getTimeBasedId
+ * @returns {string} A unique ID string
+ */
 export function getTimeBasedId() {
     return String(new Date().getTime());
 }
