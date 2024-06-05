@@ -161,9 +161,9 @@ function init() {
      */
     editTaskConfirm.addEventListener("click", () => {
         const id = popupEdit.dataset.id;
+        const task = parser.getTask(id);
         parser.deleteTask(id);
 
-        const task = {};
         task["title"] = document.getElementById("edit-title").value;
         task["description"] = document.getElementById("edit-description").value;
         task["completed"] = document.getElementById("edit-completed").checked;
