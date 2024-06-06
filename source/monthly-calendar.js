@@ -185,7 +185,7 @@ function createDateEntry(day, month, year, extra) {
             button.className = 'journal-button';
             button.textContent = 'Journal';
             button.style.position = 'relative';
-            button.addEventListener('click', (event) => {
+            button.addEventListener('click', () => {
                 const markdownText = document.getElementById('markdownInput');
                 markdownText.value = textElt.value;
                 document.getElementById('popup-journal').style.display = 'block';
