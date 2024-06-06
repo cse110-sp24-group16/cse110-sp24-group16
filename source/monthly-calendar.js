@@ -188,6 +188,8 @@ function createDateEntry(day, month, year, extra) {
             button.addEventListener('click', () => {
                 const markdownText = document.getElementById('markdownInput');
                 markdownText.value = textElt.value;
+                const htmlContent = marked.parse(markdownText.value);
+                document.getElementById('markdownPreview').innerHTML = htmlContent;
                 document.getElementById('popup-journal').style.display = 'block';
                 overlay.style.display = 'block';
             });
