@@ -166,6 +166,62 @@ function createDateEntry(day, month, year, extra) {
     liElt.appendChild(ulElt);
     checkToday(liElt, day, month, year);
     checkTasks(ulElt, day, month, year);
+    
+    liElt.addEventListener('mouseover', function() {
+
+        let container = liElt.querySelector('.journal-container');
+        let button = liElt.querySelector('.journal-button');
+        const overlay = document.getElementById("overlay");
+        let textElt;
+
+        if (!container) {
+            container = document.createElement('div');
+            container.className = 'journal-container';
+            textElt = document.createElement('textarea');
+            textElt.className = 'journal-placeholder';
+            container.appendChild(textElt);
+
+            button = document.createElement('button');
+            button.className = 'journal-button';
+            button.textContent = 'Journal';
+            button.style.position = 'relative';
+            button.addEventListener('click', (event) => {
+                const markdownText = document.getElementById('markdownInput');
+                markdownText.value = textElt.value;
+                document.getElementById('popup-journal').style.display = 'block';
+                overlay.style.display = 'block';
+            });
+
+            // Ensure this is only added once to prevent multiple listeners
+            if (!document.getElementById('closePopup-journal').hasListener) {
+                document.getElementById('closePopup-journal').addEventListener('click', function() {
+                    const textElt = container.querySelector('.journal-placeholder');
+                    textElt.value = document.getElementById('markdownInput').value;
+                    document.getElementById('popup-journal').style.display = 'none';
+                    overlay.style.display = 'none';
+                });
+                document.getElementById('closePopup-journal').hasListener = true; // Custom property to avoid duplicate listeners
+            }
+
+            document.getElementById('markdownInput').addEventListener('input', function() {
+                const markdownText = this.value;
+                const htmlContent = marked.parse(markdownText);
+                document.getElementById('markdownPreview').innerHTML = htmlContent;
+            });
+
+            container.appendChild(button);
+            liElt.appendChild(container); // Append container to liElt
+        } 
+    });
+
+    // Remove the button when the mouse leaves the li element
+    liElt.addEventListener('mouseleave', function() {
+        let button = liElt.querySelector('.journal-button');
+        let container = liElt.querySelector('.journal-container');
+        if (button && container) {
+            liElt.removeChild(container);
+        }
+    });
 }
 
 /**
