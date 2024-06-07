@@ -1,7 +1,7 @@
 // json-parser.js
-const FILE_NAME = "source/task.json";
-
-let fs = require("fs");
+const fs = require("fs");
+const path = require("path");
+const FILE_NAME = path.join(__dirname, 'task.json');
 
 // Create a wrapper object to hold all of the parser functions for easy exporting.
 export const parser = {};
