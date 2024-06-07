@@ -7,7 +7,7 @@ let options = {
     completed: false,
     startDate: new Date(),
     endDate: new Date()
-}
+};
 
 window.addEventListener("DOMContentLoaded", init);
 

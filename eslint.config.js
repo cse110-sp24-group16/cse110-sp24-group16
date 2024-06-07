@@ -1,10 +1,11 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-
-export default [
-  { languageOptions: { globals: globals.browser } },
-  pluginJs.configs.recommended,
+module.exports = [
   {
     ignores: ["**/*.test.js", "**/*.config.js", "**/out/*"],
+  },
+  {
+    rules: {
+      semi: "error",
+      "prefer-const": "error",
+    },
   },
 ];
