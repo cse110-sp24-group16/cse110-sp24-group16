@@ -18,6 +18,9 @@ window.addEventListener("DOMContentLoaded", init);
  * @function init
  */
 function init() {
+    if (Notification.permission !== "granted") {
+        Notification.requestPermission();
+    }
     addChangeListener(refreshTaskList);
     
     const searchBar = document.getElementById("taskbar-option-search-bar");
@@ -147,6 +150,34 @@ function init() {
     }
 }
 
+function showNotification(title, body) {
+    if (Notification.permission === "granted") {
+        const notification = new Notification(title, {
+            body: body,
+            icon: 'path/to/icon.png' // Optional icon
+        });
+
+        notification.onclick = () => {
+            console.log("Notification clicked");
+        };
+    } else {
+        console.log("Notification permission denied");
+    }
+}
+
+function scheduleNotification(task) {
+    const taskTime = new Date(`${task.date}T${task.time}`);
+    const currentTime = new Date();
+
+    const delay = taskTime - currentTime;
+
+    if (delay > 0) {
+        setTimeout(() => {
+            showNotification("Task Due", `Task: ${task.title} is due now.`);
+        }, delay);
+    }
+}
+
 /**
  * Refreshes the task list based on the current options.
  * 
@@ -244,5 +275,6 @@ export function refreshTaskList() {
             showPopupForEdit(task["id"]);
         });
         taskList.appendChild(taskItem);
+        scheduleNotification(task);
     }
 }
