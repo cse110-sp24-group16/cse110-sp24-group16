@@ -42,7 +42,7 @@ function init() {
     const prevButton = document.querySelector("#prev-button");
     const curButton = document.querySelector("#cur-button");
     const nextButton = document.querySelector("#next-button");
-    let date = new Date();
+    const date = new Date();
     let tday = date.getDate();
     let tmonth = date.getMonth();
     let tyear = date.getFullYear();
@@ -58,7 +58,7 @@ function init() {
     nextButton.addEventListener("click", () => {
         wipeCalendar();
 
-        let tmonthEnd = new Date(tyear, tmonth + 1, 0).getDate();
+        const tmonthEnd = new Date(tyear, tmonth + 1, 0).getDate();
         tday += 7;
         if (tday > tmonthEnd) {
             tday -= tmonthEnd;
@@ -94,7 +94,7 @@ function init() {
     prevButton.addEventListener("click", () => {
         wipeCalendar();
 
-        let tlastMonthEnd = new Date(tyear, tmonth, 0).getDate();
+        const tlastMonthEnd = new Date(tyear, tmonth, 0).getDate();
         tday -= 7;
         if (tday < 1) {
             tday += tlastMonthEnd;
@@ -126,7 +126,7 @@ function checkTasks(ulElt, day, month, year) {
             month === date.getMonth() &&
             year === date.getFullYear()
         ) {
-            let eventCard = document.createElement("event-card");
+            const eventCard = document.createElement("event-card");
             eventCard.data = task;
             ulElt.appendChild(eventCard);
         }
