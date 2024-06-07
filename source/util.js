@@ -30,7 +30,7 @@ export function convertTo12Hour(time) {
         hour -= 12; // After 12 PM
         period = "PM";
     }
-
+    minute = minute;
     return `${hour}:${minute} ${period}`;
 }
 
