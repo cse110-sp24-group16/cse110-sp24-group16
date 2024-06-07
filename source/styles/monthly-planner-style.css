@@ -44,19 +44,19 @@ body {
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu;
 }
 
-h1, h2, h3, h4 {
+.header {
     margin: auto 1%;
     font-weight: lighter;
 }
 
-ol {
+.ol {
     list-style: none;
     margin: 0;
     padding: 0;
     text-align: right;
 }
 
-ul {
+.ul {
     list-style: none;
     margin: 0;
     padding: 0;
