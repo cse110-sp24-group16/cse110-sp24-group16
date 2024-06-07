@@ -9,7 +9,9 @@ export function convertTo12Hour(time) {
     if (time == null || time == undefined) {
         return null;
     }
-    let [hour, minute] = time.split(":");
+    let [hour] = time.split(":");
+    const minute = time.split(":")[1];
+
     if (
         isNaN(hour) ||
         isNaN(minute) ||
@@ -30,7 +32,6 @@ export function convertTo12Hour(time) {
         hour -= 12; // After 12 PM
         period = "PM";
     }
-    minute = minute;
     return `${hour}:${minute} ${period}`;
 }
 
