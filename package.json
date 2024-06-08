@@ -36,8 +36,8 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "make-all": "npm run make-win && npm run make-linux && npm run make-darwin",
-    "make-win": "npm run make -- --platform=\"win32\" --arch=\"x64,arm64\"",
-    "make-linux": "npm run make -- --platform=\"linux\" --arch=\"x64,arm64\"",
+    "make-win": "npm run make -- --platform=\"win32\" --arch=\"x64\"",
+    "make-linux": "npm run make -- --platform=\"linux\" --arch=\"x64\"",
     "make-darwin": "npm run make -- --platform=\"darwin\" --arch=\"x64\""
   },
   "jest": {
