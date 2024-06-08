@@ -161,6 +161,13 @@ function createDateEntry(day, month, year, extra) {
     liElt.className = !extra ? "day" : "day-extra";
     spanElt.textContent = `${day}`;
 
+     // Check if the day is a weekend
+     const date = new Date(year, month, day);
+     const dayOfWeek = date.getDay();
+     if (dayOfWeek === 0 || dayOfWeek === 6) {
+         liElt.classList.add("weekend");
+     }
+
     const ulElt = document.createElement("ul");
     ulElt.className = "task-list";
     liElt.appendChild(ulElt);
