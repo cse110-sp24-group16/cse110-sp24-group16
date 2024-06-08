@@ -1,5 +1,6 @@
 import { parser } from "./json-parser.js";
 import { mdParser } from "./md-parser.js";
+import { showPopupForMarkdown } from "./md-crud.js";
 import { showPopupForEdit, addChangeListener } from "./task-crud.js";
 
 const months = [
@@ -197,59 +198,30 @@ function createDateEntry(day, month, year, extra) {
     checkToday(liElt, day, month, year);
     checkTasks(ulElt, day, month, year);
     
-    liElt.addEventListener('mouseover', function() {
-        let container = liElt.querySelector('.journal-container');
-        let button = liElt.querySelector('.journal-button');
-        const overlay = document.getElementById("overlay");
-        
-        if (!container) {
-            container = document.createElement('div');
-            container.className = 'journal-container';
+    const dateStr = date.toISOString().split('T')[0];
+    const hasJournal = mdParser.hasJournal(dateStr);
+    const container = document.createElement('div');
+    container.className = 'journal-container';
+    container.hidden = !hasJournal;
 
-            button = document.createElement('button');
-            button.className = 'journal-button';
-            button.textContent = 'Journal';
+    const button = document.createElement('button');
+    button.className = 'journal-button';
+    button.textContent = 'Journal';
 
-            button.addEventListener('click', () => {
-                const markdownText = document.getElementById('markdownInput');
-                const date = new Date(year, month, day).toISOString().split('T')[0];
-                markdownText.value = mdParser.loadJournal(date);
-                const htmlContent = marked.parse(markdownText.value);
-                document.getElementById('markdownPreview').innerHTML = htmlContent;
-                document.getElementById('popup-journal').style.display = 'block';
-                overlay.style.display = 'block';
-            });
-
-            // Ensure this is only added once to prevent multiple listeners
-            if (!document.getElementById('closePopup-journal').hasListener) {
-                document.getElementById('closePopup-journal').addEventListener('click', function() {
-                    const date = new Date(year, month, day).toISOString().split('T')[0];
-                    const text = document.getElementById('markdownInput').value;
-                    mdParser.saveJournal(date, text);
-                    document.getElementById('popup-journal').style.display = 'none';
-                    overlay.style.display = 'none';
-                });
-
-                document.getElementById('closePopup-journal').hasListener = true; // Custom property to avoid duplicate listeners
-            }
-
-            document.getElementById('markdownInput').addEventListener('input', function() {
-                const markdownText = this.value;
-                const htmlContent = marked.parse(markdownText);
-                document.getElementById('markdownPreview').innerHTML = htmlContent;
-            });
-
-            container.appendChild(button);
-            liElt.prepend(container); // Prepend container to liElt
-        } 
+    button.addEventListener('click', () => {
+        showPopupForMarkdown(dateStr);
     });
 
-    // Remove the button when the mouse leaves the li element
-    liElt.addEventListener('mouseleave', function() {
-        const button = liElt.querySelector('.journal-button');
-        const container = liElt.querySelector('.journal-container');
-        if (button && container) {
-            liElt.removeChild(container);
+    container.appendChild(button);
+    liElt.prepend(container); // Prepend container to liElt
+
+    liElt.addEventListener('mouseover', () => {
+        container.hidden = false;
+    });
+
+    liElt.addEventListener('mouseleave', () => {
+        if (!mdParser.hasJournal(dateStr)) {
+            container.hidden = true;
         }
     });
 }
