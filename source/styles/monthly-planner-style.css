@@ -131,7 +131,11 @@ body {
 
 .day-extra {
     font-size: larger;
-    background-color: var( --background-color);
+    background-color: white;
+}
+
+.day-extra > .day-number {
+    color: darkgray;
 }
 
 .day-number {
@@ -153,6 +157,10 @@ body {
     padding: var(--list-item-padding);
     font-size: 0.8em;
     cursor: pointer;
+}
+
+.journal-container {
+    position: absolute;
 }
 
 .popup-journal {
@@ -196,8 +204,9 @@ body {
 }
 
 .popup-header-journal button {
-    position: relative;
-    margin-left: 95%;
+    position: absolute;
+    right: 10px;
+    top: 5px;
 }
 
 .overlay {
