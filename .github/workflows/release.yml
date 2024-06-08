@@ -19,6 +19,7 @@ jobs:
         with:
           node-version: latest
           cache: "npm"
+      - run: node --version
       - run: npm install
       - run: npm run make
       - run: npx semantic-release
