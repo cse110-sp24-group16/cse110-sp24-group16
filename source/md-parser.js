@@ -15,7 +15,6 @@ export const mdParser = {};
  * @returns {String} Markdown Text as string
  */
 mdParser.loadJournal = function (date) {
-    console.log(date);
     const fileName = path.join(FOLDER_NAME, date + ".md");
     return (() => {
         try {
@@ -38,7 +37,6 @@ mdParser.loadJournal = function (date) {
  * @returns {void}
  */
 mdParser.saveJournal = function (date, text) {
-    console.log(date, text);
     const fileName = path.join(FOLDER_NAME, date + ".md");
     try {
         fs.writeFileSync(fileName, text);
