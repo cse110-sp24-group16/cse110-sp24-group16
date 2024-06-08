@@ -223,3 +223,8 @@ body {
 .weekend {
     background-color: #f0f8ff; /* Light blue background for weekends */
 }
+
+.day-hover {
+    background-color: #338bce; /* Change this color to your desired hover color */
+    cursor: pointer;
+}
