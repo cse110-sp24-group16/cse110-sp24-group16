@@ -18,22 +18,12 @@ jobs:
           cache: "npm"
       - run: node --version
       - run: npm install
-      - run: npm run make-all-linux
-      - name: Upload linux deb_arm64
-        uses: actions/upload-artifact@v4
-        with:
-          name: deb_arm64
-          path: out/make/deb/arm64/*.deb
+      - run: npm run make-linux-x64
       - name: Upload linux deb_x64
         uses: actions/upload-artifact@v4
         with:
           name: deb_x64
           path: out/make/deb/x64/*.deb
-      - name: Upload linux rpm_arm64
-        uses: actions/upload-artifact@v4
-        with:
-          name: rpm_arm64
-          path: out/make/rpm/arm64/*.rpm
       - name: Upload linux rpm_x64
         uses: actions/upload-artifact@v4
         with:
@@ -105,18 +95,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: deb_x64
-      - name: Download linux deb_arm64
-        uses: actions/download-artifact@v4
-        with:
-          name: deb_arm64
       - name: Download linux rpm_x64
         uses: actions/download-artifact@v4
         with:
           name: rpm_x64
-      - name: Download linux rpm_arm64
-        uses: actions/download-artifact@v4
-        with:
-          name: rpm_arm64
       - name: Download mac darwin_x64
         uses: actions/download-artifact@v4
         with:
@@ -132,3 +114,8 @@ jobs:
       - run: npx --package=node@22 -c semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: Shopify/upload-to-release@v2.0.0
+        with:
+          name: win_x64.exe
+          path: out/make/squirrel.windows/x64/*.exe
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
