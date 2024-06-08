@@ -1,6 +1,6 @@
 {
   "name": "Developer-Journal",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "main": "source/main.js",
   "author": "Team 16",
   "devDependencies": {
