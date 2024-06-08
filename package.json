@@ -3,7 +3,17 @@
   "version": "1.0.0",
   "main": "source/main.js",
   "author": "Team 16",
+  "license": "GPL-3.0-only",
+  "description": "Journaling app for developers",
   "devDependencies": {
+    "@electron-forge/cli": "^7.4.0",
+    "@electron-forge/maker-deb": "^7.4.0",
+    "@electron-forge/maker-rpm": "^7.4.0",
+    "@electron-forge/maker-squirrel": "^7.4.0",
+    "@electron-forge/maker-zip": "^7.4.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
+    "@electron-forge/plugin-fuses": "^7.4.0",
+    "@electron/fuses": "^1.8.0",
     "@eslint/js": "^9.2.0",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^10.0.6",
@@ -21,16 +31,20 @@
     "e2e": "node ./source/__tests__/tmp2.js",
     "lint": "eslint",
     "jsdoc": "node --experimental-vm-modules node_modules/jsdoc/jsdoc.js -r ./source/",
-    "start": "electron --trace-warnings .",
-    "build": "electron-packager . quantum-journal --all --overwrite",
-    "build-win": "electron-packager . quantum-journal --platform=win32 --arch=x64",
-    "pack": "bash ./build.sh"
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "make-all": "npm run make-win && npm run make-linux && npm run make-darwin",
+    "make-win": "npm run make -- --platform=\"win32\" --arch=\"x64,arm64\"",
+    "make-linux": "npm run make -- --platform=\"linux\" --arch=\"x64,arm64\"",
+    "make-darwin": "npm run make -- --platform=\"darwin\" --arch=\"x64\""
   },
   "jest": {
     "transform": {},
     "verbose": true
   },
   "dependencies": {
+    "electron-squirrel-startup": "^1.0.1",
     "node": "^18.20.3"
   }
 }
