@@ -36,6 +36,7 @@ jobs:
         with:
           node-version: latest
           cache: "npm"
+      - run: npm install
       - run: npx --package=node@22 -c semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
