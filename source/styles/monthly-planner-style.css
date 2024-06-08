@@ -217,3 +217,7 @@ body {
     z-index: 1000;
     display: none;
 }
+
+.weekend {
+    background-color: #f0f8ff; /* Light blue background for weekends */
+}
