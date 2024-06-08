@@ -17,8 +17,8 @@ const months = [
 ];
 
 const date = new Date();
-const month = date.getMonth();
-const year = date.getFullYear();
+let month = date.getMonth();
+let year = date.getFullYear();
 
 window.addEventListener('DOMContentLoaded', init);
 
