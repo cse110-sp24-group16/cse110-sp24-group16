@@ -16,9 +16,9 @@ const months = [
     "December",
 ];
 
-let date = new Date();
-let month = date.getMonth();
-let year = date.getFullYear();
+const date = new Date();
+const month = date.getMonth();
+const year = date.getFullYear();
 
 window.addEventListener('DOMContentLoaded', init);
 
@@ -218,8 +218,8 @@ function createDateEntry(day, month, year, extra) {
 
     // Remove the button when the mouse leaves the li element
     liElt.addEventListener('mouseleave', function() {
-        let button = liElt.querySelector('.journal-button');
-        let container = liElt.querySelector('.journal-container');
+        const button = liElt.querySelector('.journal-button');
+        const container = liElt.querySelector('.journal-container');
         if (button && container) {
             liElt.removeChild(container);
         }
@@ -276,8 +276,8 @@ function makeCalendar(month, year) {
  * @function wipeCalendar
  */
 function wipeCalendar() {
-    let exdays = document.querySelectorAll(".day-extra");
-    let days = document.querySelectorAll(".day");
+    const exdays = document.querySelectorAll(".day-extra");
+    const days = document.querySelectorAll(".day");
 
     for (const exday of exdays) {
         if (exday instanceof HTMLElement) {
