@@ -1,4 +1,5 @@
 import { parser } from "./json-parser.js";
+import { mdParser } from "./md-parser.js";
 import { showPopupForEdit, addChangeListener } from "./task-crud.js";
 
 const months = [
@@ -191,31 +192,28 @@ function createDateEntry(day, month, year, extra) {
     
     const ulElt = document.createElement("ul");
     ulElt.className = "task-list";
+    ulElt.classList.add("ul");
     liElt.appendChild(ulElt);
     checkToday(liElt, day, month, year);
     checkTasks(ulElt, day, month, year);
     
     liElt.addEventListener('mouseover', function() {
-
         let container = liElt.querySelector('.journal-container');
         let button = liElt.querySelector('.journal-button');
         const overlay = document.getElementById("overlay");
-        let textElt;
-
+        
         if (!container) {
             container = document.createElement('div');
             container.className = 'journal-container';
-            textElt = document.createElement('textarea');
-            textElt.className = 'journal-placeholder';
-            container.appendChild(textElt);
 
             button = document.createElement('button');
             button.className = 'journal-button';
             button.textContent = 'Journal';
-            button.style.position = 'relative';
+
             button.addEventListener('click', () => {
                 const markdownText = document.getElementById('markdownInput');
-                markdownText.value = textElt.value;
+                const date = new Date(year, month, day).toISOString().split('T')[0];
+                markdownText.value = mdParser.loadJournal(date);
                 const htmlContent = marked.parse(markdownText.value);
                 document.getElementById('markdownPreview').innerHTML = htmlContent;
                 document.getElementById('popup-journal').style.display = 'block';
@@ -225,11 +223,13 @@ function createDateEntry(day, month, year, extra) {
             // Ensure this is only added once to prevent multiple listeners
             if (!document.getElementById('closePopup-journal').hasListener) {
                 document.getElementById('closePopup-journal').addEventListener('click', function() {
-                    const textElt = container.querySelector('.journal-placeholder');
-                    textElt.value = document.getElementById('markdownInput').value;
+                    const date = new Date(year, month, day).toISOString().split('T')[0];
+                    const text = document.getElementById('markdownInput').value;
+                    mdParser.saveJournal(date, text);
                     document.getElementById('popup-journal').style.display = 'none';
                     overlay.style.display = 'none';
                 });
+
                 document.getElementById('closePopup-journal').hasListener = true; // Custom property to avoid duplicate listeners
             }
 
@@ -240,7 +240,7 @@ function createDateEntry(day, month, year, extra) {
             });
 
             container.appendChild(button);
-            liElt.appendChild(container); // Append container to liElt
+            liElt.prepend(container); // Prepend container to liElt
         } 
     });
 
