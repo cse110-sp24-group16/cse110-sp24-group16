@@ -170,6 +170,7 @@ function createDateEntry(day, month, year, extra) {
 
     const ulElt = document.createElement("ul");
     ulElt.className = "task-list";
+    ulElt.classList.add("ul");
     liElt.appendChild(ulElt);
     checkToday(liElt, day, month, year);
     checkTasks(ulElt, day, month, year);

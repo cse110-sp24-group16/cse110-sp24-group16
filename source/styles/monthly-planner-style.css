@@ -63,13 +63,6 @@ body {
     text-align: left;
 }
 
-.task-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
-
 .navigator {
     display: flex;
     height: 8%;
