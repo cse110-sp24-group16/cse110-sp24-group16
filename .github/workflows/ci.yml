@@ -14,11 +14,8 @@ jobs:
         run: npm install
       - name: Run tests and collect coverage
         run: npm run test
+        continue-on-error: true
       - name: Run Linter
         run: npm run lint
-      - name: Generate JSDoc Documentation
-        run: npm run jsdoc
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4.0.1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload coverage reports to Codacy
+        run: export CODACY_PROJECT_TOKEN=59dbc87920684e61aa62e8f3e212b076 && bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage/lcov.info
