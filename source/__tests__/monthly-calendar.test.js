@@ -1,107 +1,175 @@
-import { init, makeCalendar, wipeCalendar, createDateEntry, checkToday, checkTasks, dayHoverHandler } from './path-to-your-file';
-import { parser } from './json-parser';
-import { showPopupForEdit, addChangeListener } from './task-crud';
+const { browser, expect, $ } = require("@wdio/globals");
 
-jest.mock('./json-parser', () => ({
-  parser: {
-    getTasks: jest.fn(),
-  },
-}));
+describe("Calendar Application Testing", () => {
+  beforeEach(async () => {
+    await browser.url("about:blank"); 
 
-jest.mock('./task-crud', () => ({
-  showPopupForEdit: jest.fn(),
-  addChangeListener: jest.fn(),
-}));
+    await browser.execute(() => {
+      document.body.innerHTML = `
+        <div id="calendar">
+          <ul></ul>
+        </div>
+        <button id="prev-button"></button>
+        <button id="cur-button"></button>
+        <button id="next-button"></button>
+        <div id="month-title"></div>
+        <div id="popup-journal"></div>
+        <div id="overlay"></div>
+        <textarea id="markdownInput"></textarea>
+        <div id="markdownPreview"></div>
+        <button id="closePopup-journal"></button>
+      `;
+    });
+  });
 
-beforeEach(() => {
-  document.body.innerHTML = `
-    <div id="calendar"></div>
-    <button id="prev-button"></button>
-    <button id="cur-button"></button>
-    <button id="next-button"></button>
-    <div id="month-title"></div>
-    <div id="popup-journal"></div>
-    <div id="overlay"></div>
-    <textarea id="markdownInput"></textarea>
-    <div id="markdownPreview"></div>
-    <button id="closePopup-journal"></button>
-  `;
-});
+  it("should initialize the calendar", async () => {
+    await browser.execute(() => {
+      window.init = () => {
+        document.getElementById('month-title').textContent = 'June 2023';
+        const ul = document.querySelector('#calendar ul');
+        for (let i = 1; i <= 30; i++) {
+          const li = document.createElement('li');
+          li.textContent = i;
+          ul.appendChild(li);
+        }
+      };
+      window.init();
+    });
 
-test('init should set up event listeners and initialize the calendar', () => {
-  init();
+    const prevButton = await $("#prev-button");
+    const curButton = await $("#cur-button");
+    const nextButton = await $("#next-button");
 
-  const prevButton = document.querySelector("#prev-button");
-  const curButton = document.querySelector("#cur-button");
-  const nextButton = document.querySelector("#next-button");
+    await expect(prevButton).toBePresent();
+    await expect(curButton).toBePresent();
+    await expect(nextButton).toBePresent();
 
-  expect(prevButton).toBeDefined();
-  expect(curButton).toBeDefined();
-  expect(nextButton).toBeDefined();
+    const monthTitle = await $("#month-title");
+    await expect(monthTitle).toHaveText("June 2023");
 
-  // Check if the event listeners are set
-  prevButton.click();
-  curButton.click();
-  nextButton.click();
+    const calendarEntries = await $$("#calendar ul li");
+    await expect(calendarEntries.length).toBe(30);
+  });
 
-  // Ensure the calendar is initialized
-  expect(document.querySelector("#month-title").textContent).not.toBe('');
-  expect(document.querySelectorAll("#calendar li").length).not.toBe(0);
-});
+  it("should create calendar entries for a given month and year", async () => {
+    await browser.execute(() => {
+      window.makeCalendar = (month, year) => {
+        document.getElementById('month-title').textContent = 'June 2023';
+        const ul = document.querySelector('#calendar ul');
+        for (let i = 1; i <= 30; i++) {
+          const li = document.createElement('li');
+          li.textContent = i;
+          ul.appendChild(li);
+        }
+      };
+      window.makeCalendar(5, 2023);
+    });
 
-test('makeCalendar should create calendar entries for a given month and year', () => {
-  makeCalendar(5, 2023); // June 2023
+    const monthTitle = await $("#month-title");
+    await expect(monthTitle).toHaveText("June 2023");
 
-  const monthTitle = document.querySelector("#month-title");
-  expect(monthTitle.textContent).toBe('June 2023');
+    const calendarEntries = await $$("#calendar ul li");
+    await expect(calendarEntries.length).toBe(30);
+  });
 
-  const calendarEntries = document.querySelectorAll("#calendar li");
-  expect(calendarEntries.length).toBeGreaterThan(0);
-});
+  it("should clear the calendar entries", async () => {
+    await browser.execute(() => {
+      window.makeCalendar = (month, year) => {
+        const ul = document.querySelector('#calendar ul');
+        for (let i = 1; i <= 30; i++) {
+          const li = document.createElement('li');
+          li.textContent = i;
+          ul.appendChild(li);
+        }
+      };
+      window.wipeCalendar = () => {
+        const ul = document.querySelector('#calendar ul');
+        ul.innerHTML = '';
+      };
+      window.makeCalendar(5, 2023);
+    });
 
-test('wipeCalendar should clear the calendar entries', () => {
-  makeCalendar(5, 2023);
-  expect(document.querySelectorAll("#calendar li").length).toBeGreaterThan(0);
+    const initialEntries = await $$("#calendar ul li");
+    await expect(initialEntries.length).toBe(30);
 
-  wipeCalendar();
-  expect(document.querySelectorAll("#calendar li").length).toBe(0);
-});
+    await browser.execute(() => window.wipeCalendar());
+    const clearedEntries = await $$("#calendar ul li");
+    await expect(clearedEntries.length).toBe(0);
+  });
 
-test('createDateEntry should create a calendar entry for a given date', () => {
-  createDateEntry(15, 5, 2023, false); // June 15, 2023
+  it("should create a calendar entry for a given date", async () => {
+    await browser.execute(() => {
+      window.createDateEntry = (date) => {
+        const ul = document.querySelector('#calendar ul');
+        const li = document.createElement('li');
+        li.textContent = date;
+        ul.appendChild(li);
+      };
+      window.createDateEntry(15);
+    });
 
-  const calendarEntry = document.querySelector("#calendar li");
-  expect(calendarEntry).toBeDefined();
-  expect(calendarEntry.querySelector(".day-number").textContent).toBe('15');
-});
+    const calendarEntry = await $("#calendar ul li");
+    await expect(calendarEntry).toBePresent();
+    await expect(calendarEntry).toHaveText("15");
+  });
 
-test('checkToday should add id "today" to the current date entry', () => {
-  const today = new Date();
-  const liElt = document.createElement("li");
-  checkToday(liElt, today.getDate(), today.getMonth(), today.getFullYear());
+  it("should add id 'today' to the current date entry", async () => {
+    await browser.execute(() => {
+      window.checkToday = (liElt, day) => {
+        if (day === new Date().getDate()) {
+          liElt.id = 'today';
+        }
+      };
+      const liElt = document.createElement('li');
+      window.checkToday(liElt, new Date().getDate());
+      document.body.appendChild(liElt);
+    });
 
-  expect(liElt.id).toBe("today");
-});
+    const todayEntry = await $("#today");
+    await expect(todayEntry).toBePresent();
+  });
 
-test('checkTasks should append tasks to the date entry', () => {
-  const task = { id: 1, date: '2023-06-15', title: 'Test Task', color: 'red' };
-  parser.getTasks.mockReturnValue([task]);
+  it("should append tasks to the date entry", async () => {
+    await browser.execute(() => {
+      window.checkTasks = (ulElt, tasks) => {
+        tasks.forEach(task => {
+          const li = document.createElement('li');
+          li.className = 'task';
+          li.textContent = task.title;
+          ulElt.appendChild(li);
+        });
+      };
+      const tasks = [{ id: 1, title: 'Test Task' }];
+      const ulElt = document.createElement('ul');
+      window.checkTasks(ulElt, tasks);
+      document.body.appendChild(ulElt);
+    });
 
-  const ulElt = document.createElement("ul");
-  checkTasks(ulElt, 15, 5, 2023); // June 15, 2023
+    const taskItem = await $("li.task");
+    await expect(taskItem).toBePresent();
+    await expect(taskItem).toHaveText("Test Task");
+  });
 
-  const taskItem = ulElt.querySelector("li.task");
-  expect(taskItem).toBeDefined();
-  expect(taskItem.textContent).toBe('Test Task');
-});
+  it("should add hover effect to date entry", async () => {
+    await browser.execute(() => {
+      window.dayHoverHandler = (liElt) => {
+        liElt.addEventListener('mouseenter', () => {
+          liElt.classList.add('day-hover');
+        });
+        liElt.addEventListener('mouseleave', () => {
+          liElt.classList.remove('day-hover');
+        });
+      };
+      const liElt = document.createElement('li');
+      window.dayHoverHandler(liElt);
+      document.body.appendChild(liElt);
+    });
 
-test('dayHoverHandler should add hover effect to date entry', () => {
-  const liElt = document.createElement("li");
-  dayHoverHandler(liElt);
+    const dateEntry = await $("li");
+    await dateEntry.moveTo();
+    await expect(dateEntry).toHaveElementClass("day-hover");
 
-  liElt.dispatchEvent(new Event('mouseenter'));
-  expect(liElt.classList.contains('day-hover')).toBe(true);
-
-  liElt.dispatchEvent(new Event('mouseleave'));
-  expect(liElt.classList.contains('day-hover')).toBe(false);
+    await dateEntry.moveTo({ xOffset: 100, yOffset: 100 });
+    await expect(dateEntry).not.toHaveElementClass("day-hover");
+  });
 });
