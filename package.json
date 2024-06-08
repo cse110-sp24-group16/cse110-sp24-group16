@@ -29,14 +29,15 @@
     "jest": "^29.7.0",
     "jsdoc": "^4.0.3",
     "mocha": "^10.4.0",
+    "nyc": "^15.1.0",
     "puppeteer-core": "^22.10.0",
     "puppeteer-in-electron": "^3.0.5",
     "semantic-release": "^24.0.0",
     "wdio-electron-service": "^6.6.1"
   },
   "scripts": {
-    "test": "mocha ./source/__tests__/",
-    "e2e": "node ./source/__tests__/tmp2.js",
+    "test": "npm run wdio",
+    "e2e": "npm run wdio",
     "lint": "eslint",
     "jsdoc": "node --experimental-vm-modules node_modules/jsdoc/jsdoc.js -r ./source/",
     "start": "electron-forge start",
@@ -52,7 +53,7 @@
     "make-linux-arm64": "npm run make -- --platform=\"linux\" --arch=\"arm64\"",
     "make-darwin-x64": "npm run make -- --platform=\"darwin\" --arch=\"x64\"",
     "make-darwin-arm64": "npm run make -- --platform=\"darwin\" --arch=\"arm64\"",
-    "wdio": "wdio run ./wdio.conf.js"
+    "wdio": "nyc wdio run ./wdio.conf.js"
   },
   "jest": {
     "transform": {},
