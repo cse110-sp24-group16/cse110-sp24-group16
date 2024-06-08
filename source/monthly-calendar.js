@@ -160,39 +160,6 @@ function dayHoverHandler(liElt) {
 }
 
 /**
- * Event handler for clicking on a day to add a task.
- * 
- * @name dayClickHandler
- * @function
- * @param {HTMLElement} liElt - The list item element representing the date.
- * @param {number} day - The day of the month.
- * @param {number} month - The month (0-11).
- * @param {number} year - The full year.
- */
-function dayClickHandler(liElt, day, month, year) {
-    liElt.addEventListener('click', function() {
-        const taskTitle = prompt("Enter task title:");
-        if (taskTitle) {
-            const taskDate = new Date(year, month, day);
-            const taskColor = prompt("Enter task color (optional):");
-            const task = {
-                title: taskTitle,
-                date: taskDate.toISOString().split('T')[0],
-                color: taskColor || 'inherit' // default to 'inherit' if no color provided
-            };
-            // Save task to your data source
-            // For example:
-            // parser.saveTask(task);
-            // Then, you might want to update the calendar to reflect the new task
-            wipeCalendar();
-            makeCalendar(month, year);
-        }
-    });
-}
-
-
-
-/**
  * Creates a calendar date entry for the specified day, month, and year, and populates it with tasks.
  * 
  * @function createDateEntry
@@ -221,11 +188,7 @@ function createDateEntry(day, month, year, extra) {
 
          // Add hover effect
     dayHoverHandler(liElt);
-
-    // Add click handler to add task
-    dayClickHandler(liElt, day, month, year);
     
-
     const ulElt = document.createElement("ul");
     ulElt.className = "task-list";
     liElt.appendChild(ulElt);
