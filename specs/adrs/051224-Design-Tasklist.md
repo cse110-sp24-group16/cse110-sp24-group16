@@ -1,10 +1,8 @@
 # Implement Tasklist or Not
 
----
 * Status: Approved
 * Deciders: Everyone
 * Date: 05/12/2024
----
 
 ## Context and Problem Statement
 
@@ -17,9 +15,13 @@ Many journals have ways to create tasks for future events in addition to journal
 
 ## Decision Outcome
 
-Chosen option: "Add Task List in addition to Journal Entries", because it is almost an expected feature and it will not interfere with the functionality and useability of the application as a whole in any detrimental way.
+Chosen option: 
+* "Add Task List in addition to Journal Entries", because it is almost an expected feature and it will not interfere with the functionality and useability of the application as a whole in any detrimental way.
 
-### Consequences
+## Positive Consequences
 
-* Good, because it will add much more functionality and makes sense for something that will be accessed on a daily basis.
-* Bad, because it will require more dev time in order to design, create, and test.
+* __Functionality__: It will add much more functionality and makes sense for something that will be accessed on a daily basis.
+
+## Negative Consequences
+
+* __Workload and Time Constraints__: It will require more dev time in order to design, create, and test.

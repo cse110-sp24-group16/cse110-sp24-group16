@@ -44,6 +44,7 @@ function init() {
     const curButton = document.querySelector("#cur-button");
     const nextButton = document.querySelector("#next-button");
 
+
     makeCalendar(month, year);
 
     /**
@@ -142,6 +143,23 @@ function checkTasks(ulElt, day, month, year) {
 }
 
 /**
+ * Event handler for hovering over a day to highlight it.
+ * 
+ * @name dayHoverHandler
+ * @function
+ * @param {HTMLElement} liElt - The list item element representing the date.
+ */
+function dayHoverHandler(liElt) {
+    liElt.addEventListener('mouseenter', function() {
+        liElt.classList.add('day-hover');
+    });
+
+    liElt.addEventListener('mouseleave', function() {
+        liElt.classList.remove('day-hover');
+    });
+}
+
+/**
  * Creates a calendar date entry for the specified day, month, and year, and populates it with tasks.
  * 
  * @function createDateEntry
@@ -168,6 +186,9 @@ function createDateEntry(day, month, year, extra) {
          liElt.classList.add("weekend");
      }
 
+         // Add hover effect
+    dayHoverHandler(liElt);
+    
     const ulElt = document.createElement("ul");
     ulElt.className = "task-list";
     liElt.appendChild(ulElt);
@@ -285,6 +306,7 @@ function makeCalendar(month, year) {
 function wipeCalendar() {
     const exdays = document.querySelectorAll(".day-extra");
     const days = document.querySelectorAll(".day");
+    const dayNames = document.querySelectorAll(".day-name"); // Add this line to select day name headers
 
     for (const exday of exdays) {
         if (exday instanceof HTMLElement) {
@@ -294,6 +316,11 @@ function wipeCalendar() {
     for (const day of days) {
         if (day instanceof HTMLElement) {
             day.parentNode.removeChild(day);
+        }
+    }
+    for (const dayName of dayNames) { // Add this loop to remove day name headers
+        if (dayName instanceof HTMLElement) {
+            dayName.parentNode.removeChild(dayName);
         }
     }
 }
