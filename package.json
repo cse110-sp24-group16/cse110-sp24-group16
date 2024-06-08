@@ -35,7 +35,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "make-all": "npm run make-win && npm run make-linux && npm run make-darwin",
+    "make-all": "npm run make-win-x64 && npm run make-all-linux && npm run make-all-darwin",
     "make-all-linux": "npm run make-linux-arm64 && npm run make-linux-x64",
     "make-all-win": "npm run make-win-arm64 && npm run make-win-x64",
     "make-all-darwin": "npm run make-darwin-arm64 && npm run make-darwin-x64",
