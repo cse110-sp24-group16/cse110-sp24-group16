@@ -1,5 +1,9 @@
 # Journal: Monthly View or Yearly View
 
+* Status: Approved
+* Deciders: Everyone
+* Date: 05/26/2024
+
 ## Context and Problem Statement
 
 When creating a journal, there are many ways to display past information and entries. You can either use a monthly view which only shows the month or you can use a yearly one that will show the entire year.
@@ -11,8 +15,7 @@ When creating a journal, there are many ways to display past information and ent
 
 ## Decision Outcome
 
-Chosen options:
-
+Chosen option: 
 * __Monthly__: Due to the nature of the journal being geared towards developers, a monthly view is more convient as many developers are involved in agile workflows which are typically short time frames. Thus, the most important information will likely be within the month. Users can go to other months as they with.
 
 ## Positive Consequences
