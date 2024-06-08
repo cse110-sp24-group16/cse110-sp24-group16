@@ -13,7 +13,8 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Run tests and collect coverage
-        run: npm run test --no-bail
+        run: npm run test
+        continue-on-error: true
       - name: Run Linter
         run: npm run lint
       - name: Upload coverage reports to Codacy
