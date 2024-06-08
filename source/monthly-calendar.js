@@ -17,8 +17,8 @@ const months = [
 ];
 
 const date = new Date();
-const month = date.getMonth();
-const year = date.getFullYear();
+let month = date.getMonth();
+let year = date.getFullYear();
 
 window.addEventListener('DOMContentLoaded', init);
 
@@ -160,6 +160,13 @@ function createDateEntry(day, month, year, extra) {
     calendar.appendChild(liElt);
     liElt.className = !extra ? "day" : "day-extra";
     spanElt.textContent = `${day}`;
+
+     // Check if the day is a weekend
+     const date = new Date(year, month, day);
+     const dayOfWeek = date.getDay();
+     if (dayOfWeek === 0 || dayOfWeek === 6) {
+         liElt.classList.add("weekend");
+     }
 
     const ulElt = document.createElement("ul");
     ulElt.className = "task-list";
