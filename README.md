@@ -33,7 +33,7 @@ CI/CD Pipeline:
   - Automatically converts comments into documentation on push/PR.
   - Can locally update documentation with `npm run jsdoc` in project root.
   - Documentation output is in `out/` directory.
-- e2e testing: Puppeteer for electron
+- e2e testing: Puppeteer
   - On PR into `main`, at least 1 person will manually check all functionality of the app.
 
 Project status and work:
