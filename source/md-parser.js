@@ -1,4 +1,4 @@
-// markdown-parser.js
+// md-parser.js
 const fs = require("fs");
 const path = require("path");
 const FOLDER_NAME = path.join(__dirname, "journals");
@@ -43,4 +43,17 @@ mdParser.saveJournal = function (date, text) {
     } catch (err) {
         console.log("Could not save to file", err);
     }
+};
+
+/**
+ * Checks if journal entry exists for a given date.
+ *
+ * @name hasJournal
+ * @param {String} date The date of the journal to check
+ * @function
+ * @returns {Boolean} True if a journal entry exists for the given date, false otherwise
+ */
+mdParser.hasJournal = function (date) {
+    const fileName = path.join(FOLDER_NAME, date + ".md");
+    return fs.existsSync(fileName);
 };

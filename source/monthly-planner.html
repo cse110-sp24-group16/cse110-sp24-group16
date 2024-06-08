@@ -8,6 +8,8 @@
         <script src="util.js" type="module"></script>
         <script src="json-parser.js" type="module"></script>
         <script src="taskbar.js" type="module"></script>
+        <script src="md-parser.js" type="module"></script>
+        <script src="md-crud.js" type="module"></script>
         <script src="monthly-calendar.js" type="module"></script>
         <link rel="stylesheet" href="styles/taskbar-style.css" />
         <link rel="stylesheet" href="styles/monthly-planner-style.css" />
@@ -168,11 +170,14 @@
         <!-- Journal Task Pop Up -->
         <div id="popup-journal" class="popup-journal">
             <div class="popup-header-journal">
-                <h2 class="header"> Journal Entry </h2>
-                <button id="closePopup-journal">Close</button>
+                <h2 class="header" id="date-journal">Journal Entry for %date%</h2>
+                <button id="closePopup-journal">Done</button>
             </div>
             <div class="popup-content-journal">
-                <textarea id="markdownInput" placeholder="Type Markdown here..."></textarea>
+                <textarea
+                    id="markdownInput"
+                    placeholder="Type Markdown here..."
+                ></textarea>
                 <div id="markdownPreview" class="preview"></div>
             </div>
         </div>
