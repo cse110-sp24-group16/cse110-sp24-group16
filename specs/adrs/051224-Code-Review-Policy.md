@@ -1,4 +1,4 @@
-# ADR 5: Code Review Policy for GitHub Repository
+# Code Review Policy for GitHub Repository
 
 * Status: Approved
 * Deciders: Everyone
@@ -22,7 +22,8 @@ In our software development process, it is crucial to maintain high code quality
 
 ## Decision Outcome
 
-Chosen option: "2. Pull Request from Dev to Main Branch", because it ensures a higher standard of code review and testing while enabling continuous integration and delivery in a controlled manner.
+Chosen option: 
+* **Pull Request from Dev to Main Branch:**: because it ensures a higher standard of code review and testing while enabling continuous integration and delivery in a controlled manner.
 
 ### Positive Consequences
 
