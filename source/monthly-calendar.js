@@ -17,8 +17,8 @@ const months = [
 ];
 
 const date = new Date();
-let month = date.getMonth();
-let year = date.getFullYear();
+const month = date.getMonth();
+const year = date.getFullYear();
 
 window.addEventListener('DOMContentLoaded', init);
 
@@ -43,6 +43,7 @@ function init() {
     const prevButton = document.querySelector("#prev-button");
     const curButton = document.querySelector("#cur-button");
     const nextButton = document.querySelector("#next-button");
+
 
     makeCalendar(month, year);
 
@@ -142,6 +143,56 @@ function checkTasks(ulElt, day, month, year) {
 }
 
 /**
+ * Event handler for hovering over a day to highlight it.
+ * 
+ * @name dayHoverHandler
+ * @function
+ * @param {HTMLElement} liElt - The list item element representing the date.
+ */
+function dayHoverHandler(liElt) {
+    liElt.addEventListener('mouseenter', function() {
+        liElt.classList.add('day-hover');
+    });
+
+    liElt.addEventListener('mouseleave', function() {
+        liElt.classList.remove('day-hover');
+    });
+}
+
+/**
+ * Event handler for clicking on a day to add a task.
+ * 
+ * @name dayClickHandler
+ * @function
+ * @param {HTMLElement} liElt - The list item element representing the date.
+ * @param {number} day - The day of the month.
+ * @param {number} month - The month (0-11).
+ * @param {number} year - The full year.
+ */
+function dayClickHandler(liElt, day, month, year) {
+    liElt.addEventListener('click', function() {
+        const taskTitle = prompt("Enter task title:");
+        if (taskTitle) {
+            const taskDate = new Date(year, month, day);
+            const taskColor = prompt("Enter task color (optional):");
+            const task = {
+                title: taskTitle,
+                date: taskDate.toISOString().split('T')[0],
+                color: taskColor || 'inherit' // default to 'inherit' if no color provided
+            };
+            // Save task to your data source
+            // For example:
+            // parser.saveTask(task);
+            // Then, you might want to update the calendar to reflect the new task
+            wipeCalendar();
+            makeCalendar(month, year);
+        }
+    });
+}
+
+
+
+/**
  * Creates a calendar date entry for the specified day, month, and year, and populates it with tasks.
  * 
  * @function createDateEntry
@@ -167,6 +218,13 @@ function createDateEntry(day, month, year, extra) {
      if (dayOfWeek === 0 || dayOfWeek === 6) {
          liElt.classList.add("weekend");
      }
+
+         // Add hover effect
+    dayHoverHandler(liElt);
+
+    // Add click handler to add task
+    dayClickHandler(liElt, day, month, year);
+    
 
     const ulElt = document.createElement("ul");
     ulElt.className = "task-list";
@@ -285,6 +343,7 @@ function makeCalendar(month, year) {
 function wipeCalendar() {
     const exdays = document.querySelectorAll(".day-extra");
     const days = document.querySelectorAll(".day");
+    const dayNames = document.querySelectorAll(".day-name"); // Add this line to select day name headers
 
     for (const exday of exdays) {
         if (exday instanceof HTMLElement) {
@@ -294,6 +353,11 @@ function wipeCalendar() {
     for (const day of days) {
         if (day instanceof HTMLElement) {
             day.parentNode.removeChild(day);
+        }
+    }
+    for (const dayName of dayNames) { // Add this loop to remove day name headers
+        if (dayName instanceof HTMLElement) {
+            dayName.parentNode.removeChild(dayName);
         }
     }
 }
