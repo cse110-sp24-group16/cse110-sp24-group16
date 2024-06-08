@@ -22,6 +22,6 @@ jobs:
       - run: node --version
       - run: npm install
       - run: npm run make
-      - run: npx semantic-release
+      - run: npx --package=node@22 -c semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
