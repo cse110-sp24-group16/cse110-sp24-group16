@@ -34,7 +34,7 @@
     "jsdoc": "node --experimental-vm-modules node_modules/jsdoc/jsdoc.js -r ./source/",
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make --arch=\"x64,arm64\"",
+    "make": "electron-forge make",
     "make-all": "npm run make-win && npm run make-linux && npm run make-darwin",
     "make-all-linux": "npm run make-linux-arm64 && npm run make-linux-x64",
     "make-all-win": "npm run make-win-arm64 && npm run make-win-x64",

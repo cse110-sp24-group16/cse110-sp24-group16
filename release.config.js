@@ -28,11 +28,6 @@ const config = {
             label: "rpm_x64 (${nextRelease.gitTag}) distribution",
           },
           {
-            path: "out/make/squirrel.windows/arm64/*.exe*",
-            name: "win_arm64-${nextRelease.gitTag}.exe",
-            label: "win_arm64 (${nextRelease.gitTag}) distribution",
-          },
-          {
             path: "out/make/squirrel.windows/x64/*.exe*",
             name: "win_x64-${nextRelease.gitTag}.exe",
             label: "win_x64 (${nextRelease.gitTag}) distribution",
