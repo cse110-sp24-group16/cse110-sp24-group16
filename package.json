@@ -36,9 +36,15 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "make-all": "npm run make-win && npm run make-linux && npm run make-darwin",
-    "make-win": "npm run make -- --platform=\"win32\" --arch=\"x64\"",
-    "make-linux": "npm run make -- --platform=\"linux\" --arch=\"x64\"",
-    "make-darwin": "npm run make -- --platform=\"darwin\" --arch=\"x64\""
+    "make-all-linux": "npm run make-linux-arm64 && npm run make-linux-x64",
+    "make-all-win": "npm run make-win-arm64 && npm run make-win-x64",
+    "make-all-darwin": "npm run make-darwin-arm64 && npm run make-darwin-x64",
+    "make-win-x64": "npm run make -- --platform=\"win32\" --arch=\"x64\"",
+    "make-win-arm64": "npm run make -- --platform=\"win32\" --arch=\"arm64\"",
+    "make-linux-x64": "npm run make -- --platform=\"linux\" --arch=\"x64\"",
+    "make-linux-arm64": "npm run make -- --platform=\"linux\" --arch=\"arm64\"",
+    "make-darwin-x64": "npm run make -- --platform=\"darwin\" --arch=\"x64\"",
+    "make-darwin-arm64": "npm run make -- --platform=\"darwin\" --arch=\"arm64\""
   },
   "jest": {
     "transform": {},

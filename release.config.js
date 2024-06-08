@@ -7,13 +7,41 @@ const config = {
       "@semantic-release/git",
       {
         assets: [
-          "./out/make/deb/arm64/*.deb",
-          ".out/make/deb/x64/*.deb",
-          "./out/make/rpm/arm64/*.rpm",
-          "./out/make/rpm/arm64/*.rpm",
-          ".out/make/squirrel.windows/arm64/*.exe*",
-          ".out/make/squirrel.windows/x64/*.exe*",
-          ".out/make/zip/darwin/x64/*.zip",
+          {
+            path: "out/make/deb/arm64/*.deb",
+            name: "deb_arm64-${nextRelease.gitTag}.deb",
+            label: "deb_arm64 (${nextRelease.gitTag}) distribution",
+          },
+          {
+            path: "out/make/deb/x64/*.deb",
+            name: "deb_x64-${nextRelease.gitTag}.deb",
+            label: "deb_x64 (${nextRelease.gitTag}) distribution",
+          },
+          {
+            path: "out/make/rpm/arm64/*.rpm",
+            name: "rpm_arm64-${nextRelease.gitTag}.rpm",
+            label: "rpm_arm64 (${nextRelease.gitTag}) distribution",
+          },
+          {
+            path: "out/make/rpm/x64/*.rpm",
+            name: "rpm_x64-${nextRelease.gitTag}.rpm",
+            label: "rpm_x64 (${nextRelease.gitTag}) distribution",
+          },
+          {
+            path: "out/make/squirrel.windows/x64/*.exe*",
+            name: "win_x64-${nextRelease.gitTag}.exe",
+            label: "win_x64 (${nextRelease.gitTag}) distribution",
+          },
+          {
+            path: "out/make/zip/darwin/arm64/*.zip",
+            name: "mac_arm64-${nextRelease.gitTag}.zip",
+            label: "mac_arm64 (${nextRelease.gitTag}) distribution",
+          },
+          {
+            path: "out/make/zip/darwin/x64/*.zip",
+            name: "mac_x64-${nextRelease.gitTag}.zip",
+            label: "mac_x64 (${nextRelease.gitTag}) distribution",
+          },
         ],
         message:
           "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}",
