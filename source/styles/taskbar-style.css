@@ -11,6 +11,7 @@
 .taskbar-container {
     width: 20%;
     background-color: var(--taskbar-background-color);
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .taskbar-navigator {

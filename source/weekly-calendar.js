@@ -16,17 +16,23 @@ const months = [
     "December",
 ];
 const weekdays = [
+    "Sunday",
     "Monday",
     "Tuesday",
     "Wednesday",
     "Thursday",
     "Friday",
-    "Saturday",
-    "Sunday",
+    "Saturday"
 ];
 
 window.addEventListener("DOMContentLoaded", init);
 
+/**
+ * Initializes the weekly calendar view and sets up event listeners for navigation buttons.
+ * 
+ * @name weekly-init
+ * @function init
+ */
 function init() {
     addChangeListener(() => {
         wipeCalendar();
@@ -36,18 +42,23 @@ function init() {
     const prevButton = document.querySelector("#prev-button");
     const curButton = document.querySelector("#cur-button");
     const nextButton = document.querySelector("#next-button");
-    let date = new Date();
+    const date = new Date();
     let tday = date.getDate();
     let tmonth = date.getMonth();
     let tyear = date.getFullYear();
 
     makeCalendar(tday, tmonth, tyear);
 
-    //on pressing the next button, will change to the next week
+    /**
+     * Event listener for navigating to the next week.
+     * 
+     * @name nextButtonClickListener
+     * @function
+     */
     nextButton.addEventListener("click", () => {
         wipeCalendar();
 
-        let tmonthEnd = new Date(tyear, tmonth + 1, 0).getDate();
+        const tmonthEnd = new Date(tyear, tmonth + 1, 0).getDate();
         tday += 7;
         if (tday > tmonthEnd) {
             tday -= tmonthEnd;
@@ -60,7 +71,12 @@ function init() {
         makeCalendar(tday, tmonth, tyear);
     });
 
-    //on pressing the today button, well bring you back to today's week
+    /**
+     * Event listener for navigating to the current week.
+     * 
+     * @name curButtonClickListener
+     * @function
+     */
     curButton.addEventListener("click", () => {
         wipeCalendar();
         tday = date.getDate();
@@ -69,11 +85,16 @@ function init() {
         makeCalendar(tday, tmonth, tyear);
     });
 
-    //on pressing the previous button, will change to the previous week
+    /**
+     * Event listener for navigating to the previous week.
+     * 
+     * @name prevButtonClickListener
+     * @function
+     */
     prevButton.addEventListener("click", () => {
         wipeCalendar();
 
-        let tlastMonthEnd = new Date(tyear, tmonth, 0).getDate();
+        const tlastMonthEnd = new Date(tyear, tmonth, 0).getDate();
         tday -= 7;
         if (tday < 1) {
             tday += tlastMonthEnd;
@@ -87,6 +108,15 @@ function init() {
     });
 }
 
+/**
+ * Checks for tasks on a given date and adds them to the provided list element.
+ * 
+ * @function checkTasks
+ * @param {HTMLElement} ulElt - The unordered list element to append tasks to.
+ * @param {number} day - The day of the month.
+ * @param {number} month - The month (0-11).
+ * @param {number} year - The full year.
+ */
 function checkTasks(ulElt, day, month, year) {
     parser.getTasks().forEach((task) => {
         const date = new Date(task["date"].replace(/-/g, '\/'));
@@ -96,26 +126,34 @@ function checkTasks(ulElt, day, month, year) {
             month === date.getMonth() &&
             year === date.getFullYear()
         ) {
-            let eventCard = document.createElement("event-card");
+            const eventCard = document.createElement("event-card");
             eventCard.data = task;
             ulElt.appendChild(eventCard);
         }
     });
 }
 
+/**
+ * Generates the weekly calendar view for the specified day, month, and year.
+ * 
+ * @function makeCalendar
+ * @param {number} day - The starting day of the week.
+ * @param {number} month - The month (0-11).
+ * @param {number} year - The full year.
+ */
 function makeCalendar(day, month, year) {
     const monthTitle = document.getElementById("month-title");
     const week = [
+        document.getElementById("sunday"),
         document.getElementById("monday"),
         document.getElementById("tuesday"),
         document.getElementById("wednesday"),
         document.getElementById("thursday"),
         document.getElementById("friday"),
         document.getElementById("saturday"),
-        document.getElementById("sunday"),
     ];
     const weekContainers = document.querySelectorAll(".day");
-    const dayInd = new Date(year, month, day).getDay() - 1;
+    const dayInd = new Date(year, month, day).getDay();
     const monthEnd = new Date(year, month + 1, 0).getDate();
     const lastMonthEnd = new Date(year, month, 0).getDate();
     let monthText = months[`${month}`] + " " + year;
@@ -166,6 +204,11 @@ function makeCalendar(day, month, year) {
     }
 }
 
+/**
+ * Clears the weekly calendar view by removing all task elements.
+ * 
+ * @function wipeCalendar
+ */
 function wipeCalendar() {
     const weekContainers = document.querySelectorAll(".day");
 

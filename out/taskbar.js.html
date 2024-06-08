@@ -1,4 +1,32 @@
-import { parser } from "./json-parser.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: taskbar.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: taskbar.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { parser } from "./json-parser.js";
 import { showPopupForEdit, addChangeListener, toggleTaskCompletion } from "./task-crud.js";
 
 let options = {
@@ -7,7 +35,7 @@ let options = {
     completed: false,
     startDate: new Date(),
     endDate: new Date()
-};
+}
 
 window.addEventListener("DOMContentLoaded", init);
 
@@ -18,9 +46,6 @@ window.addEventListener("DOMContentLoaded", init);
  * @function init
  */
 function init() {
-    if (Notification.permission !== "granted") {
-        Notification.requestPermission();
-    }
     addChangeListener(refreshTaskList);
     
     const searchBar = document.getElementById("taskbar-option-search-bar");
@@ -150,34 +175,6 @@ function init() {
     }
 }
 
-function showNotification(title, body) {
-    if (Notification.permission === "granted") {
-        const notification = new Notification(title, {
-            body: body,
-            icon: 'path/to/icon.png' // Optional icon
-        });
-
-        notification.onclick = () => {
-            console.log("Notification clicked");
-        };
-    } else {
-        console.log("Notification permission denied");
-    }
-}
-
-function scheduleNotification(task) {
-    const taskTime = new Date(`${task.date}T${task.time}`);
-    const currentTime = new Date();
-
-    const delay = taskTime - currentTime;
-
-    if (delay > 0) {
-        setTimeout(() => {
-            showNotification("Task Due", `Task: ${task.title} is due now.`);
-        }, delay);
-    }
-}
-
 /**
  * Refreshes the task list based on the current options.
  * 
@@ -189,7 +186,7 @@ export function refreshTaskList() {
     taskList.innerHTML = "";
 
     // Sort tasks by importance or due date
-    if (options.sortOrder && options.sortOrder === "DUE_DATE") {
+    if (options.sortOrder &amp;&amp; options.sortOrder === "DUE_DATE") {
         tasks.sort((a, b) => new Date(a["date"]) - new Date(b["date"]));
     } else {
         tasks.sort((a, b) => a.importance - b.importance);
@@ -198,20 +195,20 @@ export function refreshTaskList() {
     for (const task of tasks) {
         // Filter by search query
         if (
-            !task["title"].toLowerCase().includes(options.filterText) &&
+            !task["title"].toLowerCase().includes(options.filterText) &amp;&amp;
             !task["description"].toLowerCase().includes(options.filterText)
         ) {
             continue;
         }
 
         // Filter by completion status
-        if (task.completed && !options.completed) {
+        if (task.completed &amp;&amp; !options.completed) {
             continue;
         }
 
         // Filter by date range
         if (
-            new Date(task["date"]) < options.startDate ||
+            new Date(task["date"]) &lt; options.startDate ||
             new Date(task["date"]) > options.endDate
         ) {
             continue;
@@ -275,6 +272,28 @@ export function refreshTaskList() {
             showPopupForEdit(task["id"]);
         });
         taskList.appendChild(taskItem);
-        scheduleNotification(task);
     }
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="EventCard.html">EventCard</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addChangeListener">addChangeListener</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#addTaskButtonClickListener">addTaskButtonClickListener</a></li><li><a href="global.html#addTaskCancelClickListener">addTaskCancelClickListener</a></li><li><a href="global.html#addTaskConfirmClickListener">addTaskConfirmClickListener</a></li><li><a href="global.html#changeListenerCallback">changeListenerCallback</a></li><li><a href="global.html#checkTasks">checkTasks</a></li><li><a href="global.html#checkToday">checkToday</a></li><li><a href="global.html#completedChangeListener">completedChangeListener</a></li><li><a href="global.html#convertTo12Hour">convertTo12Hour</a></li><li><a href="global.html#createDateEntry">createDateEntry</a></li><li><a href="global.html#curButtonClickHandler">curButtonClickHandler</a></li><li><a href="global.html#deleteTask">deleteTask</a></li><li><a href="global.html#deleteTaskCancelClickListener">deleteTaskCancelClickListener</a></li><li><a href="global.html#deleteTaskConfirmClickListener">deleteTaskConfirmClickListener</a></li><li><a href="global.html#editTaskCancelClickListener">editTaskCancelClickListener</a></li><li><a href="global.html#editTaskConfirmClickListener">editTaskConfirmClickListener</a></li><li><a href="global.html#endDateChangeListener">endDateChangeListener</a></li><li><a href="global.html#getTask">getTask</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#getTimeBasedId">getTimeBasedId</a></li><li><a href="global.html#hidePopupForDelete">hidePopupForDelete</a></li><li><a href="global.html#hidePopupForEdit">hidePopupForEdit</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isStrongPassword">isStrongPassword</a></li><li><a href="global.html#makeCalendar">makeCalendar</a></li><li><a href="global.html#nextButtonClickHandler">nextButtonClickHandler</a></li><li><a href="global.html#notifyChangeListeners">notifyChangeListeners</a></li><li><a href="global.html#optionsButtonClickListener">optionsButtonClickListener</a></li><li><a href="global.html#prevButtonClickHandler">prevButtonClickHandler</a></li><li><a href="global.html#refreshTaskList">refreshTaskList</a></li><li><a href="global.html#saveTasks">saveTasks</a></li><li><a href="global.html#searchBarInputListener">searchBarInputListener</a></li><li><a href="global.html#showPopupForDelete">showPopupForDelete</a></li><li><a href="global.html#showPopupForEdit">showPopupForEdit</a></li><li><a href="global.html#sortOrderChangeListener">sortOrderChangeListener</a></li><li><a href="global.html#startDateChangeListener">startDateChangeListener</a></li><li><a href="global.html#switchToMonthlyButtonClickListener">switchToMonthlyButtonClickListener</a></li><li><a href="global.html#switchToWeeklyButtonClickListener">switchToWeeklyButtonClickListener</a></li><li><a href="global.html#taskCompletedCheckboxChangeListener">taskCompletedCheckboxChangeListener</a></li><li><a href="global.html#taskItemClickListener">taskItemClickListener</a></li><li><a href="global.html#toggleTaskCompletion">toggleTaskCompletion</a></li><li><a href="global.html#wipeCalendar">wipeCalendar</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Jun 05 2024 00:23:52 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
