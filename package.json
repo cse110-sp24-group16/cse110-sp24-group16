@@ -25,6 +25,7 @@
     "verbose": true
   },
   "dependencies": {
+    "dmg-builder": "^24.13.3",
     "node": "^18.20.3"
   }
 }
