@@ -214,3 +214,27 @@ ul {
 .weekend {
     background-color: #f0f8ff; /* Light blue background for weekends */
 }
+
+.task {
+    position: relative;
+    padding-right: 30px;
+}
+
+.delete-task-button {
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 10px; 
+    padding: 2px 4px; 
+    border-radius: 3px; 
+}
+
+.task:hover .delete-task-button {
+    display: block;
+}
