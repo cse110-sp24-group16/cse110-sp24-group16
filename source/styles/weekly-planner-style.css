@@ -54,23 +54,23 @@ body {
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu;
 }
 
-h1, h2, h3, h4 {
+.content-container h1, .content-container h2, .content-container h3, .content-container h4 {
     margin: auto 1%;
     font-weight: lighter;
 }
 
-h1{
+.content-container h1 {
     font-size: var(--h1-font-size);
 }
 
-ol {
+.calendar-wrapper ol {
     list-style: none;
     margin: 0;
     padding: 0;
     text-align: right;
 }
 
-ul {
+.calendar-wrapper ul {
     list-style: none;
     margin: 0;
     padding: 0;

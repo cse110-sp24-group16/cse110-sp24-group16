@@ -8,6 +8,29 @@
     --taskbar-task-hover-color: #e7e6e6;
 }
 
+.taskbar-container h1, .taskbar-container h2, .taskbar-container h3, .taskbar-container h4 {
+    margin: auto 1%;
+    font-weight: lighter;
+}
+
+.taskbar-container h1 {
+    font-size: var(--h1-font-size);
+}
+
+.taskbar-container ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+
+.taskbar-container ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
 .taskbar-container {
     width: 20%;
     background-color: var(--taskbar-background-color);

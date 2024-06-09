@@ -49,7 +49,10 @@ body {
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu;
 }
 
-h1, h2, h3, h4 {
+.calendar-wrapper h1, 
+.calendar-wrapper h2, 
+.calendar-wrapper h3, 
+.calendar-wrapper h4 {
     margin: auto 1%;
     font-weight: lighter;
 }
