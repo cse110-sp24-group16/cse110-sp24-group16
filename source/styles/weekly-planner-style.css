@@ -1,5 +1,5 @@
 :root {
-    --background-color: #f4f4f4;
+    --background-color: white;
     --header-background-color: #f4f4f4;
     --header-font-size: 1em;
     --header-margin: 10px 0;
@@ -134,7 +134,8 @@ ul {
     border-width: 1px;
     border-style: solid;
     border-color: var(--day-border-color);
-    border-left: hidden;
+    border-left: none;
+    border-bottom: none;
     box-shadow: var(--day-box-shadow);
     display: flex;
     flex-direction: column;

@@ -1,5 +1,5 @@
 :root {
-    --background-color: #f4f4f4;
+    --background-color: white;
     --background-selected-color: #e7e6e6;
     --header-background-color: #f4f4f4;
     --header-font-size: 1em;
@@ -98,7 +98,6 @@ h1, h2, h3, h4 {
 }
 
 .navigator-button {
-    box-shadow: var(--day-box-shadow);
     background-color: white;
     border: 1px solid var(--day-border-color);
     border-radius: 5px;
@@ -129,7 +128,7 @@ h1, h2, h3, h4 {
 }
 
 .day-name {
-    background-color: #d8e5e8;
+    background-color: white;
     font-size: larger;
     font-weight: var(--header-font-weight);
     text-align: center;
