@@ -1,5 +1,5 @@
 :root {
-    --background-color: #f4f4f4;
+    --background-color: white;
     --header-background-color: #f4f4f4;
     --header-font-size: 1em;
     --header-margin: 10px 0;
@@ -32,6 +32,11 @@
     --task-item-border: 1px solid #ccc;
     --task-item-border-radius: 5px;
     --task-item-background-color: #d1ecf1;
+
+    --add-button-font-size: 2.5vh;
+    --arrow-font-size: 2vh;
+    --cur-button-font-size: 2vh;
+    --h1-font-size: 4vh;
 }
 
 html {
@@ -49,19 +54,23 @@ body {
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu;
 }
 
-h1, h2, h3, h4 {
+.content-container h1, .content-container h2, .content-container h3, .content-container h4 {
     margin: auto 1%;
     font-weight: lighter;
 }
 
-ol {
+.content-container h1 {
+    font-size: var(--h1-font-size);
+}
+
+.calendar-wrapper ol {
     list-style: none;
     margin: 0;
     padding: 0;
     text-align: right;
 }
 
-ul {
+.calendar-wrapper ul {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -83,11 +92,15 @@ ul {
 
 #add-button {
     margin-right: 10px;
-    font-size: 25px;
+    font-size: var(--add-button-font-size);
 }
 
 #prev-button, #next-button {
-    font-size: 20px;
+    font-size: var(--arrow-font-size);
+}
+
+#cur-button {
+    font-size: var(--cur-button-font-size);
 }
 
 .nav-button {
@@ -112,30 +125,36 @@ ul {
 .calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: var(--calendar-gap);
-    padding: var(--calendar-padding);
     flex: 1;
     background-color: var(--background-color);
 }
 
 .day {
     background-color: var(--day-background-color);
-    border: 1px solid var(--day-border-color);
-    padding: var(--day-padding);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--day-border-color);
+    border-left: none;
+    border-bottom: none;
     box-shadow: var(--day-box-shadow);
     display: flex;
     flex-direction: column;
 }
 
 .day header {
+    box-sizing: border-box;
+    font-size: larger;
     font-weight: var(--header-font-weight);
     border-bottom: var(--header-border-bottom);
     margin-bottom: var(--header-margin-bottom);
     padding-bottom: var(--header-padding-bottom);
+    text-align: center;
+    height: 30px;
 }
 
 .day ul {
     list-style-type: none;
+    margin: var(--day-padding);
     padding: 0;
     flex: 1;
     display: flex;

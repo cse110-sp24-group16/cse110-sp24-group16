@@ -30,6 +30,7 @@
     background-color: white;
     padding: 20px;
     border-radius: 5px;
+    border: 2px solid #ccc;
     z-index: 1000;
     display: none;
 }
@@ -44,13 +45,16 @@
 }
 
 .popup-button-confirm {
-    background-color: red;
-    color: white;
+    border-radius: 5px;
+    border: 2px solid #db4e4e;
+    background-color: #ee9d9d;
     cursor: pointer;
 }
 
 .popup-button-cancel {
-    background-color: #ccc;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: white;
     cursor: pointer;
 }
 
@@ -70,52 +74,69 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 30%;
+    width: 60%;
+    max-width: 600px;
     transform: translate(-50%, -50%);
-    background-color: var(--list-item-background-color);
-    padding: 20px;
+    background-color: white;
+    padding: 30px;
     border-radius: 5px;
-    box-shadow: 0 2px 10px rgb(0 0 0 / 10%);
+    border: 2px solid #ccc;
     z-index: 1000;
 }
 
+.due-date-container {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+}
+
+#edit-title {
+    width: 300px;
+} 
+
+.edit-popup h3 {
+    margin: 0px 5px 0px 0px;
+}
 .edit-popup input {
-    width: 100%;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    border: 1px solid #ccc;
     cursor: pointer;
 }
 
-.edit-popup .popup-buttons {
+.edit-popup textarea{
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    height: 100px;
+}
+
+.slider-container input{
+    width: 100%;
+}
+
+.edit-popup .section3 {
     display: flex;
     justify-content: space-between;
 }
 
-#edit-completed {
-    width: 5%;
-}
-
-.due-date-container {
-    display: flex;
-    align-items: center;
-}
-
-.due-date-container h4 {
-    margin: 0 10px 0 0;
-}
-
-#edit-date, #edit-time {
-    margin-right: 20px;
-    width: 40%;
-}
-
 .edit-popup .popup-button-save {
-    background-color: green;
-    color: white;
+    background-color: white;
+    border: 1px solid #ccc;
     cursor: pointer;
+    border-radius: 5px;
+    margin-left: 10px
 }
 
 .edit-popup .popup-button-cancel {
     background-color: #ccc;
+    border: 1px solid #ccc;
     cursor: pointer;
+    border-radius: 5px;
+    
 }
 
 .hidden-slider-container, .hidden {
@@ -130,75 +151,67 @@
     margin-bottom: 15px;
 }
 
-.edit-completed{
-    display: flex;
-    align-items: center;
-    margin-left: 37.5%;
-    margin-top: auto;
-}
-
-.text-area, #edit-title {
-    width: 100%;
-    cursor: auto;
-}
-
-.text-area {
-    height: 60px;
-}
-
 #add-task-popup {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
+    width: 60%;
+    max-width: 600px;
     transform: translate(-50%, -50%);
     background-color: #fff;
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0 0 15px #0000001a;
     z-index: 1000;
-    width: 500px; /* Adjust width as needed */
     font-family: Arial, sans-serif;
 }
 
-#add-task-popup h2 {
-    font-size: 1.2em;
+#add-task-popup .section1 {
     margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-#add-task-popup input[type="text"],
-#add-task-popup textarea,
-#add-task-popup input[type="date"],
-#add-task-popup input[type="time"] {
-    width: 95%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
+#add-task-popup h3 {
+    margin: 0px 5px 0px 0px;
+}
+
+#add-task-popup input{
+    background-color: #f4f4f4;
     border-radius: 5px;
-    font-size: 1em;
+    border: 1px solid #ccc;
+}
+
+#new-task-title {
+    width: 300px;
+}
+
+#add-task-popup textarea{
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 15px;
 }
 
 #add-task-popup .popup-buttons {
-    display: flex;
-    justify-content: space-between;
+    justify-content: right;
+    width: 100%;
 }
 
 #add-task-popup .popup-button-confirm,
 #add-task-popup .popup-button-cancel {
-    background-color: #007bff;
+    margin-left: 10px;
+    background-color: #8dbaeb;
     border: none;
-    color: white;
-    padding: 10px;
-    font-size: 1em;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 10px;
-    width: 45%;
 }
 
 #add-task-popup .popup-button-cancel {
-    background-color: #ccc;
-    color: #333;
+    border: 2px solid #ccc;
+    background-color: white;
 }
 
 #add-task-popup .tags-container {
