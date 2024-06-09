@@ -1,7 +1,7 @@
 import { parser } from "./json-parser.js";
 import { mdParser } from "./md-parser.js";
 import { showPopupForMarkdown } from "./md-crud.js";
-import { showPopupForEdit, addChangeListener } from "./task-crud.js";
+import { showPopupForEdit, addChangeListener, showPopupForDelete } from "./task-crud.js";  // Updated import
 
 const months = [
     "January",
@@ -137,14 +137,12 @@ function checkTasks(ulElt, day, month, year) {
             liElt.style.backgroundColor = task.color;
             liElt.textContent = `${task["title"]}`;
             
-            // Add delete button
             const deleteButton = document.createElement("button");
             deleteButton.textContent = "Delete";
             deleteButton.className = "delete-button";
             deleteButton.addEventListener("click", (event) => {
                 event.stopPropagation(); 
-                deleteTask(task.id);
-                ulElt.removeChild(liElt); 
+                showPopupForDelete(task.id); 
             });
             liElt.appendChild(deleteButton);
             
@@ -154,12 +152,6 @@ function checkTasks(ulElt, day, month, year) {
             ulElt.appendChild(liElt);
         }
     });
-}
-
-function deleteTask(taskId) {
-    parser.deleteTask(taskId);
-    wipeCalendar();
-    makeCalendar(month, year);
 }
 
 /**
