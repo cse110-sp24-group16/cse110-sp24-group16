@@ -83,19 +83,30 @@
 
         <!-- Add task pop-up -->
         <div class="popup" id="add-task-popup">
-            <input type="text" id="new-task-title" placeholder="Task Title" />
+            <div class="section1">
+                <div class="title1">
+                    <h3>Task Title</h3>
+                    <input type="text" id="new-task-title" placeholder="Task Title" />
+                </div>
+                <div class="due1">
+                    <h3 id="date">Due Date</h3>
+                    <input type="date" id="new-task-date" />
+                </div>
+                <div class="due2">
+                    <h3 id="time">Time</h3>
+                    <input type="time" id="new-task-time" />
+                </div>
+            </div>
             <textarea
-                id="new-task-description"
-                placeholder="Task Description"
+                    id="new-task-description"
+                    placeholder="Task Description"
             ></textarea>
-            <input type="date" id="new-task-date" />
-            <input type="time" id="new-task-time" />
             <div class="popup-buttons">
-                <button class="popup-button-confirm" id="add-task-confirm">
-                    Add Task
-                </button>
                 <button class="popup-button-cancel" id="add-task-cancel">
                     Cancel
+                </button>
+                <button class="popup-button-confirm" id="add-task-confirm">
+                    Add Task
                 </button>
             </div>
         </div>
@@ -106,36 +117,41 @@
                 Are you sure you want to delete this task?
             </div>
             <div class="popup-buttons">
-                <button class="popup-button-confirm" id="confirm-delete">
-                    Yes
-                </button>
                 <button class="popup-button-cancel" id="cancel-delete">
                     No
+                </button>
+                <button class="popup-button-confirm" id="confirm-delete">
+                    Yes
                 </button>
             </div>
         </div>
 
         <!-- Edit task pop-up -->
         <div class="edit-popup" id="edit-popup">
-            <h2 class="header">Task's Title:</h2>
-            <input type="text" id="edit-title" placeholder="Edit title" />
-            <h2 class="header">Task's Description:</h2>
+            <div class="due-date-container">
+                <div class="title1">
+                    <h3>Task Title</h3>
+                    <input type="text" id="edit-title" placeholder="Edit title" />
+                </div>
+                <div class="due1">
+                    <h3 id="date-label">Due Date</h3>
+                    <input type="date" id="edit-date" />
+                </div>
+                <div class="due2">
+                    <h3 id="time-label">Time</h3>
+                    <input type="time" id="edit-time" />
+                </div>
+            </div>
+
             <textarea
                 class="text-area"
                 id="edit-description"
                 placeholder="Edit description"
             ></textarea>
-            <h2 class="header">Task's Due Date:</h2>
-            <div class="due-date-container">
-                <h4 class="header" id="date-label">Date:</h4>
-                <input type="date" id="edit-date" />
-                <h4 class="header" id="time-label">Time:</h4>
-                <input type="time" id="edit-time" />
-            </div>
-            <h2 class="header">Miscellaneous:</h2>
+
             <div class="slider-container">
-                <label for="importance-slider" class="slider-label"
-                    >Importance (out of 100):
+                <label for="importance-slider" class="slider-label">
+                    <h3>Importance</h3>
                 </label>
                 <span id="slider-value">50</span>
                 <input
@@ -155,15 +171,18 @@
                 id="edit-notes"
                 placeholder="Add notes"
             ></textarea>
-            <label class="edit-completed">
-                <input type="checkbox" id="edit-completed" /> Completed?
-            </label>
-            <div class="popup-buttons">
-                <button class="popup-button-save" id="save-edit">Save</button>
-                <button class="popup-button-cancel" id="cancel-edit">
-                    Cancel
-                </button>
+            <div class="section3">
+                <label class="edit-completed">
+                    <input type="checkbox" id="edit-completed" /> Completed?
+                </label>
+                <div class="popup-buttons">
+                    <button class="popup-button-cancel" id="cancel-edit">
+                        Cancel
+                    </button>
+                    <button class="popup-button-save" id="save-edit">Save</button>
+                </div>
             </div>
+
             <span class="id" style="display: none"></span>
         </div>
 
