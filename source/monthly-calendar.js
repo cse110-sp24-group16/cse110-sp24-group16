@@ -133,12 +133,29 @@ function checkTasks(ulElt, day, month, year) {
             liElt.className = "task";
             liElt.style.backgroundColor = task.color;
             liElt.textContent = `${task["title"]}`;
+             // Add delete button
+             const deleteButton = document.createElement("button");
+             deleteButton.className = "delete-task-button";
+             deleteButton.textContent = "Delete";
+             deleteButton.addEventListener("click", (e) => {
+                 e.stopPropagation(); 
+                 deleteTask(task.id);
+             });
+             liElt.appendChild(deleteButton);
+
+
             liElt.addEventListener("click", () => {
                 showPopupForEdit(task.id);
             });
             ulElt.appendChild(liElt);
         }
     });
+}
+
+function deleteTask(taskId) {
+    parser.deleteTask(taskId); 
+    wipeCalendar();
+    makeCalendar(month, year);
 }
 
 /**
