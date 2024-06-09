@@ -1,7 +1,7 @@
 import { parser } from "./json-parser.js";
 import { mdParser } from "./md-parser.js";
 import { showPopupForMarkdown } from "./md-crud.js";
-import { showPopupForEdit, addChangeListener } from "./task-crud.js";
+import { showPopupForEdit, addChangeListener, showPopupForDelete } from "./task-crud.js";  // Updated import
 
 const months = [
     "January",
@@ -125,7 +125,7 @@ function checkToday(liElt, day, month, year) {
  */
 function checkTasks(ulElt, day, month, year) {
     parser.getTasks().forEach((task) => {
-        const date = new Date(task["date"].replace(/-/g, '\/'));
+        const date = new Date(task["date"].replace(/-/g, '/'));
 
         if (
             day === date.getDate() &&
@@ -136,6 +136,16 @@ function checkTasks(ulElt, day, month, year) {
             liElt.className = "task";
             liElt.style.backgroundColor = task.color;
             liElt.textContent = `${task["title"]}`;
+            
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.className = "delete-button";
+            deleteButton.addEventListener("click", (event) => {
+                event.stopPropagation(); 
+                showPopupForDelete(task.id); 
+            });
+            liElt.appendChild(deleteButton);
+            
             liElt.addEventListener("click", () => {
                 showPopupForEdit(task.id);
             });
