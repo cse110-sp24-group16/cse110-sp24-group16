@@ -261,9 +261,11 @@ body {
 .delete-button {
     display: none;
     position: absolute;
-    right: 10px;
+    height: 80%;
+    right: 5px;
     top: 50%;
     transform: translateY(-50%);
+    font-size: 70%;
 }
 
 .task:hover .delete-button {
