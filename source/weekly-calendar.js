@@ -16,13 +16,13 @@ const months = [
     "December",
 ];
 const weekdays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat"
 ];
 
 window.addEventListener("DOMContentLoaded", init);

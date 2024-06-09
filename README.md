@@ -35,6 +35,8 @@ CI/CD Pipeline:
   - Documentation output is in `out/` directory.
 - e2e testing: Puppeteer
   - On PR into `main`, at least 1 person will manually check all functionality of the app.
+- Manual Testing: 
+  - [Manual Testing Report](./source/__tests__/060824-Manual-Testing-Report.md)
 
 Project status and work:
 
