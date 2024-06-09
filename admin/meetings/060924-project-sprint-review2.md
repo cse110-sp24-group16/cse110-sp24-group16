@@ -12,7 +12,7 @@
 **Jordan:**
 - Primarily engaged in manual testing of the application. Conducted thorough testing to identify and document bugs, ensuring that the application functions correctly and meets user requirements.
 
-**Neel:**
+**Neelkanth:**
 - Developed a delete function specifically for the monthly view, enhancing the application's data management capabilities.
 - Conducted unit testing to verify the functionality and reliability of individual components, ensuring code quality and robustness.
 
