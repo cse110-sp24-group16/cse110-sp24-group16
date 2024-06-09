@@ -113,7 +113,7 @@ body {
     width: 98%;
 }
 
-#calendar > li:focus {
+#calendar > li:hover {
     outline: 1px solid #007bff;
 }
 
@@ -224,7 +224,6 @@ body {
     background-color: #f0f8ff; /* Light blue background for weekends */
 }
 
-.day-hover {
-    background-color: #338bce; /* Change this color to your desired hover color */
+.journal-button {
     cursor: pointer;
 }

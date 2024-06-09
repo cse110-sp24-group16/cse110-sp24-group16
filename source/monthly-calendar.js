@@ -290,9 +290,4 @@ function wipeCalendar() {
             day.parentNode.removeChild(day);
         }
     }
-    for (const dayName of dayNames) { // Add this loop to remove day name headers
-        if (dayName instanceof HTMLElement) {
-            dayName.parentNode.removeChild(dayName);
-        }
-    }
 }
