@@ -204,15 +204,16 @@ function createDateEntry(day, month, year, extra) {
     container.className = 'journal-container';
     container.hidden = !hasJournal;
 
-    const button = document.createElement('button');
-    button.className = 'journal-button';
-    button.textContent = 'Journal';
+    const img = document.createElement('img');
+    img.src = './assets/journal-icon.png';
+    img.alt = 'Journal';
+    img.className = 'journal-button';
 
-    button.addEventListener('click', () => {
+    img.addEventListener('click', () => {
         showPopupForMarkdown(dateStr);
     });
 
-    container.appendChild(button);
+    container.appendChild(img);
     liElt.prepend(container); // Prepend container to liElt
 
     liElt.addEventListener('mouseover', () => {
