@@ -137,8 +137,34 @@ function checkTasks(ulElt, day, month, year) {
             liElt.style.backgroundColor = task.color;
             liElt.textContent = `${task["title"]}`;
             liElt.addEventListener("click", () => {
+
+            const taskTitle = document.createElement("span");
+            taskTitle.textContent = `${task["title"]}`;
+            taskTitle.addEventListener("click", () => {
                 showPopupForEdit(task.id);
             });
+            liElt.appendChild(taskTitle);
+
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.className = "delete-button";
+            deleteButton.style.display = "none";  
+            deleteButton.addEventListener("click", (event) => {
+                event.stopPropagation();
+                ulElt.removeChild(liElt);
+                parser.deleteTask(task.id);
+                wipeCalendar();
+                makeCalendar(month, year);
+            });
+            liElt.appendChild(deleteButton);
+
+            liElt.addEventListener('mouseenter', () => {
+                deleteButton.style.display = "block";
+            });
+            liElt.addEventListener('mouseleave', () => {
+                deleteButton.style.display = "none";
+            });
+
             ulElt.appendChild(liElt);
         }
     });
