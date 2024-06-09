@@ -125,7 +125,7 @@ function checkToday(liElt, day, month, year) {
  */
 function checkTasks(ulElt, day, month, year) {
     parser.getTasks().forEach((task) => {
-        const date = new Date(task["date"].replace(/-/g, '\/'));
+        const date = new Date(task["date"].replace(/-/g, '/'));
 
         if (
             day === date.getDate() &&
@@ -135,37 +135,31 @@ function checkTasks(ulElt, day, month, year) {
             const liElt = document.createElement("li");
             liElt.className = "task";
             liElt.style.backgroundColor = task.color;
-
-            const taskTitle = document.createElement("span");
-            taskTitle.textContent = `${task["title"]}`;
-            taskTitle.addEventListener("click", () => {
-                showPopupForEdit(task.id);
-            });
-            liElt.appendChild(taskTitle);
-
+            liElt.textContent = `${task["title"]}`;
+            
+            // Add delete button
             const deleteButton = document.createElement("button");
             deleteButton.textContent = "Delete";
             deleteButton.className = "delete-button";
-            deleteButton.style.display = "none";  
             deleteButton.addEventListener("click", (event) => {
-                event.stopPropagation();
-                ulElt.removeChild(liElt);
-                parser.deleteTask(task.id);
-                wipeCalendar();
-                makeCalendar(month, year);
+                event.stopPropagation(); 
+                deleteTask(task.id);
+                ulElt.removeChild(liElt); 
             });
             liElt.appendChild(deleteButton);
-
-            liElt.addEventListener('mouseenter', () => {
-                deleteButton.style.display = "block";
+            
+            liElt.addEventListener("click", () => {
+                showPopupForEdit(task.id);
             });
-            liElt.addEventListener('mouseleave', () => {
-                deleteButton.style.display = "none";
-            });
-
             ulElt.appendChild(liElt);
         }
     });
+}
+
+function deleteTask(taskId) {
+    parser.deleteTask(taskId);
+    wipeCalendar();
+    makeCalendar(month, year);
 }
 
 /**
