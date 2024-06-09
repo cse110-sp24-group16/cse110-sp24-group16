@@ -227,3 +227,19 @@ body {
 .journal-button {
     cursor: pointer;
 }
+
+.task {
+    position: relative;
+}
+
+.delete-button {
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.task:hover .delete-button {
+    display: block;
+}
