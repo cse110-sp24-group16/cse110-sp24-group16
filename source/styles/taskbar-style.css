@@ -12,6 +12,7 @@
     width: 20%;
     background-color: var(--taskbar-background-color);
     overflow-y: auto; /* Enable vertical scrolling */
+    border: 1px solid var(--day-border-color);
 }
 
 .taskbar-navigator {
@@ -30,10 +31,11 @@
 }
 
 .taskbar-search-bar {
+    box-sizing: border-box;
     display: flex;
     border-top: var(--taskbar-border-color) 1px solid;
     width: 100%;
-    height: 5%;
+    height: 30px;
 }
 
 #taskbar-option-search-bar {

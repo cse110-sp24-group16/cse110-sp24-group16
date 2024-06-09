@@ -27,6 +27,11 @@
     --nav-button-font-size: 1em;
     --nav-button-margin-left: 5px;
     --nav-button-border-radius: 5px;
+
+    --add-button-font-size: 2.5vh;
+    --arrow-font-size: 2vh;
+    --cur-button-font-size: 2vh;
+    --h1-font-size: 4vh;
 }
 
 html {
@@ -44,9 +49,13 @@ body {
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu;
 }
 
-.header {
+h1, h2, h3, h4 {
     margin: auto 1%;
     font-weight: lighter;
+}
+
+.header{
+    font-size: var(--h1-font-size);
 }
 
 .ol {
@@ -77,11 +86,15 @@ body {
 
 #add-button {
     margin-right: 10px;
-    font-size: 25px;
+    font-size: var(--add-button-font-size);
 }
 
 #prev-button, #next-button {
-    font-size: 20px;
+    font-size: var(--arrow-font-size);
+}
+
+#cur-button {
+    font-size: var(--cur-button-font-size);
 }
 
 .navigator-button {
@@ -104,13 +117,10 @@ body {
     display: grid;
     grid-template-rows: 35px;
     grid-template-columns: repeat(7, 1fr);
-    border: 1px solid var(--day-border-color);
+    border-top: 1px solid var(--day-border-color);
     gap: 1px;
     background-color: var(--day-border-color);
-    box-shadow: var(--day-box-shadow);
-    margin: 0 1%;
-    height: 90%;
-    width: 98%;
+    height: 100%;
 }
 
 #calendar > li:hover {
@@ -118,10 +128,14 @@ body {
 }
 
 .day-name {
+    box-sizing: border-box;
     background: #d8e5e8;
     font-size: larger;
-    font-weight: bold;
+    font-weight: var(--header-font-weight);
+    text-align: center;
+    border-bottom: 1px solid var(--header-border-bottom);
     padding: 5px;
+    height: 30px;
 }
 
 .day {
