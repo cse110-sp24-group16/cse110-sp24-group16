@@ -115,12 +115,13 @@ h1, h2, h3, h4 {
 
 #calendar {
     display: grid;
-    grid-template-rows: 35px;
+    grid-template-rows: 29px;
     grid-template-columns: repeat(7, 1fr);
     border-top: 1px solid var(--day-border-color);
     gap: 1px;
     background-color: var(--day-border-color);
-    height: 100%;
+    width: 100%;
+    height: 92%;
 }
 
 #calendar > li:hover {
@@ -128,14 +129,12 @@ h1, h2, h3, h4 {
 }
 
 .day-name {
-    box-sizing: border-box;
-    background: #d8e5e8;
+    background-color: #d8e5e8;
     font-size: larger;
     font-weight: var(--header-font-weight);
     text-align: center;
     border-bottom: 1px solid var(--header-border-bottom);
-    padding: 5px;
-    height: 30px;
+    padding-bottom: var(--header-padding-bottom);
 }
 
 .day {
