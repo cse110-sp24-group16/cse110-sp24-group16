@@ -2,7 +2,7 @@ const { browser } = require('@wdio/globals');
 const path = require("path");
 
 describe("Testing of the task element", () => {
-
+    //Check functionality of clicking on add button, check if popup works
     it("check clicking on add button", async () => {
       const monthlyButton = await browser.$('#switch-to-monthly'); 
       await monthlyButton.click();
@@ -12,24 +12,26 @@ describe("Testing of the task element", () => {
       await expect($("#overlay")).toHaveAttribute("style", expect.stringContaining("display: none;"));
     });
 
-    
+    //Clicks on task in calendar, brings up popup for edit
     it("check clicking on edit button", async () => {
-      await $(".task").click();
+      await $(".task").click({x:-15});
       await expect($("#edit-popup")).toHaveAttribute("style", expect.stringContaining("display: block;"));
       await $("#cancel-edit").click();
       await expect($("#edit-popup")).toHaveAttribute("style", expect.stringContaining("display: none;"));
     });
-
+    
     // Check the functionality of the cancel button of a specific task
     it("check clicking on delete button", async () => {
-      const task = await $("event-card");
+      const task = await $(".task");
       await task.moveTo();
-      await $(".delete-button").click();
+      const button = await $(".delete-button");
+      await button.click();
       await expect($("#popup-delete")).toHaveAttribute("style", expect.stringContaining("display: block;"));
       await $("#cancel-delete").click();
       await expect($("#popup-delete")).toHaveAttribute("style", expect.stringContaining("display: none;"));
     });
     
+    //Check Clicking on next month button, goes to next month
     it('check navigation to the previous month', async () => {
       const prevButton = await $('#prev-button');
       await prevButton.click();
@@ -37,6 +39,7 @@ describe("Testing of the task element", () => {
       expect(monthTitle).toBe('May 2024'); 
     });
 
+    //Check Clicking on today button, goes to today's month
     it('should navigate to current', async () => {
       const nextButton = await $('#cur-button');
       await nextButton.click();
@@ -44,6 +47,7 @@ describe("Testing of the task element", () => {
       expect(monthTitle).toBe('June 2024'); 
     });
 
+    //Check clicking on previous month button, goes to last month
     it('should navigate to the next month', async () => {
         const nextButton = await $('#next-button');
         await nextButton.click();
@@ -61,7 +65,8 @@ describe("Testing of the task element", () => {
       await monthlyButton.click();
     });
   
-
+    //when clicking on journal icon, bring up journal popup.
+    //Should convert markdown text into html and display on screen
     it("test on entry into journal with markdown", async () => {
       const journalButton = await browser.$(".journal-button"); 
       await journalButton.click();
@@ -75,7 +80,6 @@ describe("Testing of the task element", () => {
       const saveButton = await browser.$("#closePopup-journal");
       await saveButton.click();
     });
-
 
 });
 
