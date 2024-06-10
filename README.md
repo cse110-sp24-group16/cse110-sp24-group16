@@ -35,7 +35,7 @@ CI/CD Pipeline:
   - Documentation output is in `out/` directory.
 - e2e testing: Puppeteer
   - On PR into `main`, at least 1 person will manually check all functionality of the app.
-- Manual Testing: 
+- Manual Testing:
   - [Manual Testing Report](./source/__tests__/060824-Manual-Testing-Report.md)
 
 Project status and work:
@@ -49,4 +49,6 @@ Project status and work:
 
 ### Automatic code evaluation scores
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/a35b12c515d74f70811350a600bf47b3)](https://app.codacy.com/gh/cse110-sp24-group16/cse110-sp24-group16/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Coverage Badge](https://app.codacy.com/project/badge/Coverage/a35b12c515d74f70811350a600bf47b3)](https://app.codacy.com/gh/cse110-sp24-group16/cse110-sp24-group16/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
+
+[![Codacy Quality Badge](https://app.codacy.com/project/badge/Grade/a35b12c515d74f70811350a600bf47b3)](https://app.codacy.com/gh/cse110-sp24-group16/cse110-sp24-group16/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
