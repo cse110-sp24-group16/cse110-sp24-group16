@@ -1,0 +1,105 @@
+name: Build and Upload
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  build-linux:
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
+          cache: "npm"
+      - run: node --version
+      - run: npm install
+      - run: npm run make-all-linux
+      - name: Upload Linux x64 Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./out/make/deb/x64/*.deb
+          asset_name: linux_x64.deb
+          asset_content_type: application/deb
+      - name: Upload Linux arm64 Release Asset
+        id: upload-release-asset2
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./out/make/deb/arm64/*.deb
+          asset_name: linux_arm64.deb
+          asset_content_type: application/deb
+
+  build-mac:
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
+          cache: "npm"
+      - run: node --version
+      - run: npm install
+      - run: npm run make-all-darwin
+      - name: Upload Mac arm64 Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./out/make/zip/darwin/arm64/*.zip
+          asset_name: mac_arm64.zip
+          asset_content_type: application/zip
+      - name: Upload Mac x64 Release Asset
+        id: upload-release-asset2
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./out/make/zip/darwin/x64/*.zip
+          asset_name: mac_x64.zip
+          asset_content_type: application/zip
+
+  build-win:
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
+          cache: "npm"
+      - run: node --version
+      - run: npm install
+      - run: npm run make-win-x64
+      - name: Upload Windows x64 Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./out/make/squirrel.windows/x64/*.exe
+          asset_name: windows_x64.zip
+          asset_content_type: application/exe
