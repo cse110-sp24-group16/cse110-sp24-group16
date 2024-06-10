@@ -8,6 +8,8 @@
         <script src="util.js" type="module"></script>
         <script src="json-parser.js" type="module"></script>
         <script src="taskbar.js" type="module"></script>
+        <script src="md-parser.js" type="module"></script>
+        <script src="md-crud.js" type="module"></script>
         <script src="monthly-calendar.js" type="module"></script>
         <link rel="stylesheet" href="styles/taskbar-style.css" />
         <link rel="stylesheet" href="styles/monthly-planner-style.css" />
@@ -19,7 +21,7 @@
                 <button id="options" class="taskbar-navigator-button">
                     Options
                 </button>
-                <h1>Task List</h1>
+                <h1 class="header">Task List</h1>
                 <button id="switch-to-weekly" class="taskbar-navigator-button">
                     Switch to Weekly View
                 </button>
@@ -46,12 +48,12 @@
                 ~
                 <input type="date" id="taskbar-option-end-date" />
             </div>
-            <h4 id="taskbar-search-status" hidden></h4>
-            <ul id="taskbar-list"></ul>
+            <h4 class="header" id="taskbar-search-status" hidden></h4>
+            <ul class="ul" id="taskbar-list"></ul>
         </div>
         <div class="calendar-wrapper">
             <div class="navigator">
-                <h1 id="month-title">May 2024</h1>
+                <h1 class="header" id="month-title">May 2024</h1>
                 <div class="navigator-buttons">
                     <button id="add-button" class="navigator-button">+</button>
                     <button id="prev-button" class="navigator-button">
@@ -65,7 +67,7 @@
                     </button>
                 </div>
             </div>
-            <ol id="calendar">
+            <ol class="ol" id="calendar">
                 <li class="day-name">Sun</li>
                 <li class="day-name">Mon</li>
                 <li class="day-name">Tue</li>
@@ -115,22 +117,22 @@
 
         <!-- Edit task pop-up -->
         <div class="edit-popup" id="edit-popup">
-            <h2>Task's Title:</h2>
+            <h2 class="header">Task's Title:</h2>
             <input type="text" id="edit-title" placeholder="Edit title" />
-            <h2>Task's Description:</h2>
+            <h2 class="header">Task's Description:</h2>
             <textarea
                 class="text-area"
                 id="edit-description"
                 placeholder="Edit description"
             ></textarea>
-            <h2>Task's Due Date:</h2>
+            <h2 class="header">Task's Due Date:</h2>
             <div class="due-date-container">
-                <h4 id="date-label">Date:</h4>
+                <h4 class="header" id="date-label">Date:</h4>
                 <input type="date" id="edit-date" />
-                <h4 id="time-label">Time:</h4>
+                <h4 class="header" id="time-label">Time:</h4>
                 <input type="time" id="edit-time" />
             </div>
-            <h2>Miscellaneous:</h2>
+            <h2 class="header">Miscellaneous:</h2>
             <div class="slider-container">
                 <label for="importance-slider" class="slider-label"
                     >Importance (out of 100):
@@ -168,11 +170,14 @@
         <!-- Journal Task Pop Up -->
         <div id="popup-journal" class="popup-journal">
             <div class="popup-header-journal">
-                <h2> Journal Entry </h2>
-                <button id="closePopup-journal">Close</button>
+                <h2 class="header" id="date-journal">Journal Entry for %date%</h2>
+                <button id="closePopup-journal">Done</button>
             </div>
             <div class="popup-content-journal">
-                <textarea id="markdownInput" placeholder="Type Markdown here..."></textarea>
+                <textarea
+                    id="markdownInput"
+                    placeholder="Type Markdown here..."
+                ></textarea>
                 <div id="markdownPreview" class="preview"></div>
             </div>
         </div>
