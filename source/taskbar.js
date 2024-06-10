@@ -225,7 +225,7 @@ export function refreshTaskList() {
 
         const taskDateItem = document.createElement("span");
         taskDateItem.className = "task-date";
-        taskDateItem.textContent = `${new Date(task["date"]).toDateString()} ${
+        taskDateItem.textContent = `${new Date(task["date"].split('-')).toDateString()} ${
             task["time"]
         }`;
         taskItem.appendChild(taskDateItem);
