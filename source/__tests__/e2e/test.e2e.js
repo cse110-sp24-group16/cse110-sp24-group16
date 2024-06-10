@@ -67,7 +67,7 @@ describe("Electron Testing", () => {
     (await $("#cur-button")).click();
     const currentweekDate = (await (await $(".day > header")).getText()).slice(-2);
     await expect(todayDate - currentweekDate).toBe(0);
-  })
+  });
 
   //  it("check adding a new task with time", async() => {
   //   (await $("#add-button")).click();
