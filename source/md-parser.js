@@ -58,4 +58,17 @@ mdParser.hasJournal = function (date) {
     return fs.existsSync(fileName);
 };
 
+/**
+ * Deletes the journal entry for a given date.
+ *
+ * @name deleteJournal
+ * @param {String} date The date of the journal to delete
+ * @function
+ * @returns {void}
+ */
+mdParser.deleteJournal = function (date) {
+    const fileName = path.join(FOLDER_NAME, date + ".md");
+    fs.unlinkSync(fileName);
+};
+
 module.exports = { mdParser };
