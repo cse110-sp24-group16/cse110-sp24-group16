@@ -34,7 +34,7 @@ CI/CD Pipeline:
   - Can locally update documentation with `npm run jsdoc` in project root.
   - Documentation output is in `out/` directory.
 - e2e testing: WebDriverIO
-  - On PR into `main`, at least 1 person will manually check all functionality of the app.
+  - On PR into `main` and `dev`, automation runs that verifies correctness using wdio e2e tests.
 - Manual Testing:
   - [Manual Testing Report](./source/__tests__/060824-Manual-Testing-Report.md)
 
