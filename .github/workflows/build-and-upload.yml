@@ -57,6 +57,9 @@ jobs:
       - run: node --version
       - run: npm install
       - run: npm run make-all-darwin
+      - run: pwd
+      - run: ls -a
+      - run: cd out
       - name: Upload Mac arm64 Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
@@ -67,9 +70,6 @@ jobs:
           asset_path: out/make/zip/darwin/arm64/Developer-Journal-darwin-x64-1.0.0.zip
           asset_name: mac_arm64.zip
           asset_content_type: application/zip
-      - run: pwd
-      - run: ls -a
-      - run: cd out
       - name: Upload Mac x64 Release Asset
         id: upload-release-asset2
         uses: actions/upload-release-asset@v1
