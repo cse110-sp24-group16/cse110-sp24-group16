@@ -33,3 +33,8 @@
 **Wilson:**
 - Completed the implementation of the add function, enabling users to add new tasks or entries efficiently.
 - Reviewed code for pull requests, providing critical assessments to ensure high standards of code quality and functionality before merging into the main codebase.
+
+**Jungwoo:**
+- Created the parsers for JSON and Markdown for task and journal saving capability.
+- Developed unit tests to ensure API functions behaved as intended.
+- Added taskbar, sorting, searching, date ranges, etc.

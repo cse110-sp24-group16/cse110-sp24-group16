@@ -34,3 +34,8 @@
 **Wilson:**
 - Created sketches for the weekly and monthly views.
 - Developed the skeleton HTML and CSS for the weekly calendar, including task lists and placeholder buttons with example tasks in the calendar.
+
+**Jungwoo:**
+- Created the skeleton HTML and CSS for the monthly calendar.
+- Refactored and cleaned up code to reduce duplicate code as much as possible.
+- Incorporated single responsibility principle for the data storage mechanisms.
