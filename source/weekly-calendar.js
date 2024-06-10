@@ -1,5 +1,5 @@
-import { parser } from "./json-parser.js";
-import { addChangeListener } from "./task-crud.js";
+const { parser } = require("./json-parser.js");
+const { addChangeListener } = require("./task-crud.js");
 
 const months = [
     "January",

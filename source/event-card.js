@@ -1,5 +1,5 @@
-import { showPopupForDelete, showPopupForEdit } from './task-crud.js';
-import { convertTo12Hour } from './util.js';
+const { showPopupForDelete, showPopupForEdit } = require('./task-crud.js');
+const { convertTo12Hour } = require('./util.js');
 
 /**
  * Represents a custom event-card element derived from an HTML <li> element.

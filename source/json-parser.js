@@ -4,7 +4,7 @@ const path = require("path");
 const FILE_NAME = path.join(__dirname, "task.json");
 
 // Create a wrapper object to hold all of the parser functions for easy exporting.
-export const parser = {};
+const parser = {};
 
 /**
  * Returns a dictionary with all tasks from a file in the format of id: task.
@@ -88,3 +88,5 @@ parser.deleteTask = function (id) {
     tasks = tasks.filter((task) => task.id != id);
     saveTasks(tasks);
 };
+
+module.exports = { parser };

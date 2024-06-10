@@ -1,7 +1,7 @@
-import { parser } from "./json-parser.js";
-import { mdParser } from "./md-parser.js";
-import { showPopupForMarkdown } from "./md-crud.js";
-import { showPopupForEdit, addChangeListener, showPopupForDelete } from "./task-crud.js";  // Updated import
+const { parser } = require("./json-parser.js");
+const { mdParser } = require("./md-parser.js");
+const { showPopupForMarkdown } = require("./md-crud.js");
+const { showPopupForEdit, addChangeListener, showPopupForDelete } = require("./task-crud.js");
 
 const months = [
     "January",
