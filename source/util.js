@@ -5,7 +5,7 @@
  * @param {string} time - The time string in 24-hour format (HH:MM)
  * @returns {string|null} The time string in 12-hour format with AM/PM, or null if the input is invalid
  */
-export function convertTo12Hour(time) {
+function convertTo12Hour(time) {
     if (time == null || time == undefined) {
         return null;
     }
@@ -41,6 +41,8 @@ export function convertTo12Hour(time) {
  * @function getTimeBasedId
  * @returns {string} A unique ID string
  */
-export function getTimeBasedId() {
+function getTimeBasedId() {
     return String(new Date().getTime());
 }
+
+module.exports = { convertTo12Hour, getTimeBasedId };

@@ -1,5 +1,7 @@
-import { parser } from "./json-parser.js";
-import { showPopupForEdit, addChangeListener } from "./task-crud.js";
+const { parser } = require("./json-parser.js");
+const { mdParser } = require("./md-parser.js");
+const { showPopupForMarkdown } = require("./md-crud.js");
+const { showPopupForEdit, addChangeListener, showPopupForDelete } = require("./task-crud.js");
 
 const months = [
     "January",
@@ -43,6 +45,7 @@ function init() {
     const prevButton = document.querySelector("#prev-button");
     const curButton = document.querySelector("#cur-button");
     const nextButton = document.querySelector("#next-button");
+
 
     makeCalendar(month, year);
 
@@ -122,7 +125,7 @@ function checkToday(liElt, day, month, year) {
  */
 function checkTasks(ulElt, day, month, year) {
     parser.getTasks().forEach((task) => {
-        const date = new Date(task["date"].replace(/-/g, '\/'));
+        const date = new Date(task["date"].replace(/-/g, '/'));
 
         if (
             day === date.getDate() &&
@@ -133,11 +136,38 @@ function checkTasks(ulElt, day, month, year) {
             liElt.className = "task";
             liElt.style.backgroundColor = task.color;
             liElt.textContent = `${task["title"]}`;
+            
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.className = "delete-button";
+            deleteButton.addEventListener("click", (event) => {
+                event.stopPropagation(); 
+                showPopupForDelete(task.id); 
+            });
+            liElt.appendChild(deleteButton);
+            
             liElt.addEventListener("click", () => {
                 showPopupForEdit(task.id);
             });
             ulElt.appendChild(liElt);
         }
+    });
+}
+
+/**
+ * Event handler for hovering over a day to highlight it.
+ * 
+ * @name dayHoverHandler
+ * @function
+ * @param {HTMLElement} liElt - The list item element representing the date.
+ */
+function dayHoverHandler(liElt) {
+    liElt.addEventListener('mouseenter', function() {
+        liElt.classList.add('day-hover');
+    });
+
+    liElt.addEventListener('mouseleave', function() {
+        liElt.classList.remove('day-hover');
     });
 }
 
@@ -168,67 +198,41 @@ function createDateEntry(day, month, year, extra) {
          liElt.classList.add("weekend");
      }
 
+         // Add hover effect
+    dayHoverHandler(liElt);
+    
     const ulElt = document.createElement("ul");
     ulElt.className = "task-list";
+    ulElt.classList.add("ul");
     liElt.appendChild(ulElt);
     checkToday(liElt, day, month, year);
     checkTasks(ulElt, day, month, year);
     
-    liElt.addEventListener('mouseover', function() {
+    const dateStr = date.toISOString().split('T')[0];
+    const hasJournal = mdParser.hasJournal(dateStr);
+    const container = document.createElement('div');
+    container.className = 'journal-container';
+    container.hidden = !hasJournal;
 
-        let container = liElt.querySelector('.journal-container');
-        let button = liElt.querySelector('.journal-button');
-        const overlay = document.getElementById("overlay");
-        let textElt;
+    const img = document.createElement('img');
+    img.src = './assets/journal-icon.png';
+    img.alt = 'Journal';
+    img.className = 'journal-button';
 
-        if (!container) {
-            container = document.createElement('div');
-            container.className = 'journal-container';
-            textElt = document.createElement('textarea');
-            textElt.className = 'journal-placeholder';
-            container.appendChild(textElt);
-
-            button = document.createElement('button');
-            button.className = 'journal-button';
-            button.textContent = 'Journal';
-            button.style.position = 'relative';
-            button.addEventListener('click', () => {
-                const markdownText = document.getElementById('markdownInput');
-                markdownText.value = textElt.value;
-                const htmlContent = marked.parse(markdownText.value);
-                document.getElementById('markdownPreview').innerHTML = htmlContent;
-                document.getElementById('popup-journal').style.display = 'block';
-                overlay.style.display = 'block';
-            });
-
-            // Ensure this is only added once to prevent multiple listeners
-            if (!document.getElementById('closePopup-journal').hasListener) {
-                document.getElementById('closePopup-journal').addEventListener('click', function() {
-                    const textElt = container.querySelector('.journal-placeholder');
-                    textElt.value = document.getElementById('markdownInput').value;
-                    document.getElementById('popup-journal').style.display = 'none';
-                    overlay.style.display = 'none';
-                });
-                document.getElementById('closePopup-journal').hasListener = true; // Custom property to avoid duplicate listeners
-            }
-
-            document.getElementById('markdownInput').addEventListener('input', function() {
-                const markdownText = this.value;
-                const htmlContent = marked.parse(markdownText);
-                document.getElementById('markdownPreview').innerHTML = htmlContent;
-            });
-
-            container.appendChild(button);
-            liElt.appendChild(container); // Append container to liElt
-        } 
+    img.addEventListener('click', () => {
+        showPopupForMarkdown(dateStr);
     });
 
-    // Remove the button when the mouse leaves the li element
-    liElt.addEventListener('mouseleave', function() {
-        const button = liElt.querySelector('.journal-button');
-        const container = liElt.querySelector('.journal-container');
-        if (button && container) {
-            liElt.removeChild(container);
+    container.appendChild(img);
+    liElt.prepend(container); // Prepend container to liElt
+
+    liElt.addEventListener('mouseover', () => {
+        container.hidden = false;
+    });
+
+    liElt.addEventListener('mouseleave', () => {
+        if (!mdParser.hasJournal(dateStr)) {
+            container.hidden = true;
         }
     });
 }
@@ -285,6 +289,7 @@ function makeCalendar(month, year) {
 function wipeCalendar() {
     const exdays = document.querySelectorAll(".day-extra");
     const days = document.querySelectorAll(".day");
+    const dayNames = document.querySelectorAll(".day-name"); // Add this line to select day name headers
 
     for (const exday of exdays) {
         if (exday instanceof HTMLElement) {
