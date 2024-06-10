@@ -38,6 +38,7 @@
   "scripts": {
     "test": "npm run wdio",
     "e2e": "npm run wdio",
+    "unit": "jest source/__tests__/unit/",
     "lint": "eslint",
     "jsdoc": "node --experimental-vm-modules node_modules/jsdoc/jsdoc.js -r ./source/",
     "start": "electron-forge start",

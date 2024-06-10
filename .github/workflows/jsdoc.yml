@@ -1,24 +1,34 @@
 name: JSDoc generation
 
-on: [push, pull_request]
+on:
+  pull_request:
+    branches:
+      - main
+      - dev
+
+permissions:
+  contents: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Build
-        uses: andstor/jsdoc-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr checkout ${{ github.event.pull_request.number }}
+      - name: JSDoc Generation
+        uses: andstor/jsdoc-action@v1.2.1
         with:
           source_dir: ./source
-          output_dir: ./out
-          template: minami
+          recurse: true
+          output_dir: ./docs
+          config_file: jsdoc_config.json
           front_page: README.md
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          publish_dir: ./out
+      - name: Commit JSDoc
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git diff --quiet || (git add . && git commit -m "Documentation Generated")
+          git push

@@ -1,10 +1,15 @@
 name: Release
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
 
 jobs:
-  build-linux:
+  create-release:
     permissions:
       contents: write
       issues: write
@@ -18,117 +23,6 @@ jobs:
           cache: "npm"
       - run: node --version
       - run: npm install
-      - run: npm run make-all-linux
-      - name: Upload linux deb_arm64
-        uses: actions/upload-artifact@v4
-        with:
-          name: deb_arm64
-          path: out/make/deb/arm64/*.deb
-      - name: Upload linux deb_x64
-        uses: actions/upload-artifact@v4
-        with:
-          name: deb_x64
-          path: out/make/deb/x64/*.deb
-      - name: Upload linux rpm_arm64
-        uses: actions/upload-artifact@v4
-        with:
-          name: rpm_arm64
-          path: out/make/rpm/arm64/*.rpm
-      - name: Upload linux rpm_x64
-        uses: actions/upload-artifact@v4
-        with:
-          name: rpm_x64
-          path: out/make/rpm/x64/*.rpm
-
-  build-mac:
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: latest
-          cache: "npm"
-      - run: node --version
-      - run: npm install
-      - run: npm run make-all-darwin
-      - name: Upload mac darwin_arm64
-        uses: actions/upload-artifact@v4
-        with:
-          name: darwin_arm64
-          path: out/make/zip/darwin/arm64/*.zip
-      - name: Upload mac darwin_x64
-        uses: actions/upload-artifact@v4
-        with:
-          name: darwin_x64
-          path: out/make/zip/darwin/x64/*.zip
-
-  build-win:
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: latest
-          cache: "npm"
-      - run: node --version
-      - run: npm install
-      - run: npm run make-win-x64
-      - name: Upload windows win_x64
-        uses: actions/upload-artifact@v4
-        with:
-          name: win_x64
-          path: out/make/squirrel.windows/x64/*.exe
-
-  release:
-    needs: [build-linux, build-mac, build-win]
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: latest
-          cache: "npm"
-      - run: npm install
-      - name: Download linux deb_x64
-        uses: actions/download-artifact@v4
-        with:
-          name: deb_x64
-      - name: Download linux deb_arm64
-        uses: actions/download-artifact@v4
-        with:
-          name: deb_arm64
-      - name: Download linux rpm_x64
-        uses: actions/download-artifact@v4
-        with:
-          name: rpm_x64
-      - name: Download linux rpm_arm64
-        uses: actions/download-artifact@v4
-        with:
-          name: rpm_arm64
-      - name: Download mac darwin_x64
-        uses: actions/download-artifact@v4
-        with:
-          name: darwin_x64
-      - name: Download mac darwin_arm64
-        uses: actions/download-artifact@v4
-        with:
-          name: darwin_arm64
-      - name: Download windows win_x64
-        uses: actions/download-artifact@v4
-        with:
-          name: win_x64
       - run: npx --package=node@22 -c semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

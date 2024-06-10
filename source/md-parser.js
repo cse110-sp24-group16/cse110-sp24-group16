@@ -4,7 +4,7 @@ const path = require("path");
 const FOLDER_NAME = path.join(__dirname, "journals");
 
 // Create a wrapper object to hold all of the markdown parser functions for easy exporting.
-export const mdParser = {};
+const mdParser = {};
 
 /**
  * Returns the journal entry for a given date from file.
@@ -57,3 +57,5 @@ mdParser.hasJournal = function (date) {
     const fileName = path.join(FOLDER_NAME, date + ".md");
     return fs.existsSync(fileName);
 };
+
+module.exports = { mdParser };

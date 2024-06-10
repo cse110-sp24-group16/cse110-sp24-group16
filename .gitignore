@@ -2,6 +2,6 @@
 *.DS_Store
 node_modules
 binaries
-coverage
 out
+coverage
 .nyc_output
