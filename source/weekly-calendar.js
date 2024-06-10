@@ -1,5 +1,5 @@
-import { parser } from "./json-parser.js";
-import { addChangeListener } from "./task-crud.js";
+const { parser } = require("./json-parser.js");
+const { addChangeListener } = require("./task-crud.js");
 
 const months = [
     "January",
@@ -16,13 +16,13 @@ const months = [
     "December",
 ];
 const weekdays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat"
 ];
 
 window.addEventListener("DOMContentLoaded", init);

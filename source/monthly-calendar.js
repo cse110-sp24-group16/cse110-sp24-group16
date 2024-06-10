@@ -1,7 +1,7 @@
-import { parser } from "./json-parser.js";
-import { mdParser } from "./md-parser.js";
-import { showPopupForMarkdown } from "./md-crud.js";
-import { showPopupForEdit, addChangeListener } from "./task-crud.js";
+const { parser } = require("./json-parser.js");
+const { mdParser } = require("./md-parser.js");
+const { showPopupForMarkdown } = require("./md-crud.js");
+const { showPopupForEdit, addChangeListener, showPopupForDelete } = require("./task-crud.js");
 
 const months = [
     "January",
@@ -125,7 +125,7 @@ function checkToday(liElt, day, month, year) {
  */
 function checkTasks(ulElt, day, month, year) {
     parser.getTasks().forEach((task) => {
-        const date = new Date(task["date"].replace(/-/g, '\/'));
+        const date = new Date(task["date"].replace(/-/g, '/'));
 
         if (
             day === date.getDate() &&
@@ -136,6 +136,16 @@ function checkTasks(ulElt, day, month, year) {
             liElt.className = "task";
             liElt.style.backgroundColor = task.color;
             liElt.textContent = `${task["title"]}`;
+            
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.className = "delete-button";
+            deleteButton.addEventListener("click", (event) => {
+                event.stopPropagation(); 
+                showPopupForDelete(task.id); 
+            });
+            liElt.appendChild(deleteButton);
+            
             liElt.addEventListener("click", () => {
                 showPopupForEdit(task.id);
             });
@@ -204,15 +214,16 @@ function createDateEntry(day, month, year, extra) {
     container.className = 'journal-container';
     container.hidden = !hasJournal;
 
-    const button = document.createElement('button');
-    button.className = 'journal-button';
-    button.textContent = 'Journal';
+    const img = document.createElement('img');
+    img.src = './assets/journal-icon.png';
+    img.alt = 'Journal';
+    img.className = 'journal-button';
 
-    button.addEventListener('click', () => {
+    img.addEventListener('click', () => {
         showPopupForMarkdown(dateStr);
     });
 
-    container.appendChild(button);
+    container.appendChild(img);
     liElt.prepend(container); // Prepend container to liElt
 
     liElt.addEventListener('mouseover', () => {
@@ -288,11 +299,6 @@ function wipeCalendar() {
     for (const day of days) {
         if (day instanceof HTMLElement) {
             day.parentNode.removeChild(day);
-        }
-    }
-    for (const dayName of dayNames) { // Add this loop to remove day name headers
-        if (dayName instanceof HTMLElement) {
-            dayName.parentNode.removeChild(dayName);
         }
     }
 }

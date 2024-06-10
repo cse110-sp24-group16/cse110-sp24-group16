@@ -1,1 +1,57 @@
-[{"id":"1717637697332","title":"asdfdsaf","description":"adf","date":"2024-06-05","time":"18:35","completed":false,"importance":0,"color":"#d8e5e8","notes":""},{"id":"1717557697135","title":"asd","description":"asd","date":"2024-06-05","time":"19:50","completed":true,"importance":0,"color":"#d8e5e8","notes":""},{"id":"1717642232768","title":"asdgadsg","description":"sagdadsgas","date":"2024-06-05","time":"19:51","completed":false,"importance":0,"color":"#d8e5e8","notes":""},{"id":"1717555959708","date":"2024-06-05","time":"23:59","title":"Checkpoint Video Due","description":"Submit our checkpoint video by the end of the day.","importance":0.14,"color":"#e69996","notes":"Make sure to include all team members in the video.","completed":false},{"id":"1717637457811","title":"dsaf","description":"adf","date":"2024-06-06","time":"18:30","completed":false,"importance":0,"color":"#d8e5e8","notes":""},{"id":"1717636278735","title":"adsf","description":"adsf","date":"2024-06-12","time":"18:14","completed":true,"importance":0,"color":"#d8e5e8","notes":""},{"id":"1717636280456","title":"adsf","description":"adsf","date":"2024-06-12","time":"18:14","completed":true,"importance":0,"color":"#d8e5e8","notes":""},{"id":"1717636283301","title":"adsf","description":"adsf","date":"2024-06-12","time":"18:14","completed":true,"importance":0,"color":"#d8e5e8","notes":""},{"id":"1717636270656","title":"adsf","description":"adsf","date":"2024-06-12","time":"18:14","completed":false,"importance":0,"color":"#d8e5e8","notes":""},{"id":"1717636275060","title":"adsf","description":"adsf","date":"2024-06-12","time":"18:14","completed":true,"importance":0,"color":"#d8e5e8","notes":""},{"id":"1717636049593","title":"adsf","description":"adsf","date":"2024-06-18","time":"18:11","completed":true,"importance":0,"color":"#d8e5e8","notes":""},{"id":"1717943102856","title":"cse 130","description":"Please write your task description here.","date":"2024-06-09","time":"08:24","completed":false,"importance":0,"color":"#d8e5e8","notes":""}]
+[
+    {
+        "id": "1717555959708",
+        "date": "2024-06-05",
+        "time": "23:59",
+        "title": "Checkpoint Video Due",
+        "description": "Submit our checkpoint video by the end of the day.",
+        "importance": 0.17,
+        "color": "#0a659e",
+        "notes": "Make sure to include all team members in the video.",
+        "completed": true
+    },
+    {
+        "id": "1717908301533",
+        "title": "Daily Standup",
+        "description": "Sprint standup",
+        "date": "2024-06-10",
+        "time": "09:30",
+        "completed": false,
+        "importance": 0,
+        "color": "#d8e5e8",
+        "notes": ""
+    },
+    {
+        "id": "1717907379929",
+        "title": "Submit Code Review",
+        "description": "Submit code review for PR.",
+        "date": "2024-06-10",
+        "time": "10:30",
+        "completed": true,
+        "importance": 0.8,
+        "color": "#40b800",
+        "notes": "No additional notes."
+    },
+    {
+        "id": "1717908251669",
+        "title": "Lunch w/ friends",
+        "description": "UTC probably?",
+        "date": "2024-06-10",
+        "time": "12:00",
+        "completed": true,
+        "importance": 1,
+        "color": "#5ce1ff",
+        "notes": "No additional notes."
+    },
+    {
+        "id": "1717908338835",
+        "title": "Weekly Meeting",
+        "description": "Please write your task description here.",
+        "date": "2024-06-10",
+        "time": "15:00",
+        "completed": true,
+        "importance": 0.5,
+        "color": "#8b61ff",
+        "notes": "No additional notes."
+    }
+]

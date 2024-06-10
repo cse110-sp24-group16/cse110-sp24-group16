@@ -1,5 +1,6 @@
-import { parser } from "./json-parser.js";
-import { showPopupForEdit, addChangeListener, toggleTaskCompletion } from "./task-crud.js";
+const { parser } = require("./json-parser.js");
+const { showPopupForEdit, addChangeListener, toggleTaskCompletion } = require("./task-crud.js");
+
 
 let options = {
     filterText: "",
@@ -183,7 +184,7 @@ function scheduleNotification(task) {
  * 
  * @function refreshTaskList
  */
-export function refreshTaskList() {
+function refreshTaskList() {
     const tasks = parser.getTasks();
     const taskList = document.querySelector("#taskbar-list");
     taskList.innerHTML = "";
@@ -225,7 +226,7 @@ export function refreshTaskList() {
 
         const taskDateItem = document.createElement("span");
         taskDateItem.className = "task-date";
-        taskDateItem.textContent = `${new Date(task["date"]).toDateString()} ${
+        taskDateItem.textContent = `${new Date(task["date"].split('-')).toDateString()} ${
             task["time"]
         }`;
         taskItem.appendChild(taskDateItem);
@@ -278,3 +279,5 @@ export function refreshTaskList() {
         scheduleNotification(task);
     }
 }
+
+module.exports = { refreshTaskList };
