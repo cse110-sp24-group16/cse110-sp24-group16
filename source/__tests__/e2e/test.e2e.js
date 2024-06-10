@@ -1,6 +1,8 @@
 const { browser, expect, $ } = require("@wdio/globals");
 const { time } = require("console");
 
+const currDate = new Date().getDate();
+
 describe("Electron Testing", () => {
   it("should print application title", async () => {
     await expect($("h1")).toHaveText("Task List");
@@ -9,8 +11,8 @@ describe("Electron Testing", () => {
   // Check if current date is displayed when window is opened
   it("should display the current week", async () => {
     await expect($("#month-title")).toHaveText("June 2024");
-    await expect($(".calendar .day > header")).toHaveText("Sunday 9");
-    await browser.pause(2000);
+    const todayDate = (await (await $(".calendar .day > header")).getText()).slice(-1);
+    await expect(todayDate).toBe(currDate.toString());
   });
 
   // Check the functionality of the add task button
@@ -18,7 +20,6 @@ describe("Electron Testing", () => {
     await $("#add-button").click();
     await expect($("#overlay")).toHaveAttribute("style", expect.stringContaining("display: block;"));
     await $("#add-task-cancel").click();
-    await browser.pause(500);
     await expect($("#overlay")).toHaveAttribute("style", expect.stringContaining("display: none;"));
   });
 
