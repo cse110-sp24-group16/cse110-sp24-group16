@@ -59,7 +59,16 @@ jobs:
       - run: npm run make-all-darwin
       - run: pwd
       - run: ls -a
-      - run: cd out
+      - run: cd out/
+      - run: ls -a
+      - run: cd make/
+      - run: ls -a
+      - run: cd zip/
+      - run: ls -a
+      - run: cd darwin/
+      - run: ls -a
+      - run: cd x64/
+      - run: ls -a
       - name: Upload Mac arm64 Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
