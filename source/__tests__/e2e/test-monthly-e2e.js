@@ -18,9 +18,7 @@ describe("Testing of the task element", () => {
     it("check clicking on edit button", async () => {
       await $(".task").click();
       await expect($("#edit-popup")).toHaveAttribute("style", expect.stringContaining("display: block;"));
-      await browser.pause(15000);
       await $("#cancel-edit").click();
-      await browser.pause(15000);
       await expect($("#edit-popup")).toHaveAttribute("style", expect.stringContaining("display: none;"));
     });
 
