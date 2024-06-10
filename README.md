@@ -25,7 +25,7 @@ CI/CD Pipeline:
 - Human review: Protected `main` and `dev` branches
   - First, you have to PR to `dev` branch and it requires code review from 1 person. Please assign several people when creating a PR.
   - Then, after PR to `dev` has been approved and merged, changes will be validated on `dev` and PR'ed into `main` after review from at least 2 people.
-- Unit testing: Electron unit tests
+- Unit testing: Jest
   - Automatically done on push and PR via automations.
   - Can test code locally using `npm run test` in project root.
 - Documentation & autogeneration: JSDoc
@@ -33,7 +33,7 @@ CI/CD Pipeline:
   - Automatically converts comments into documentation on push/PR.
   - Can locally update documentation with `npm run jsdoc` in project root.
   - Documentation output is in `out/` directory.
-- e2e testing: Puppeteer
+- e2e testing: WebDriverIO
   - On PR into `main`, at least 1 person will manually check all functionality of the app.
 - Manual Testing:
   - [Manual Testing Report](./source/__tests__/060824-Manual-Testing-Report.md)
