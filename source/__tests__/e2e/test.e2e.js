@@ -64,7 +64,7 @@ describe("Electron Testing", () => {
     const todayDate = (await (await $(".day > header")).getText()).slice(-2);
     (await $("#prev-button")).click();
     (await $("#prev-button")).click();
-    (await $("#cur-button")).click()
+    (await $("#cur-button")).click();
     const currentweekDate = (await (await $(".day > header")).getText()).slice(-2);
     await expect(todayDate - currentweekDate).toBe(0);
   })
