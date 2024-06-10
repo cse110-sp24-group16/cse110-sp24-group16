@@ -26,7 +26,7 @@ CI/CD Pipeline:
   - First, you have to PR to `dev` branch and it requires code review from 1 person. Please assign several people when creating a PR.
   - Then, after PR to `dev` has been approved and merged, changes will be validated on `dev` and PR'ed into `main` after review from at least 2 people.
 - Unit testing: Jest
-  - Automatically done on push and PR via automations.
+  - Automatically done on push and PR via automation.
   - Can test code locally using `npm run test` in project root.
 - Documentation & autogeneration: JSDoc
   - Document all your code according to JSDoc format.
