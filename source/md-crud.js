@@ -1,4 +1,4 @@
-import { mdParser } from "./md-parser.js";
+const { mdParser } = require("./md-parser.js");
 
 window.addEventListener("DOMContentLoaded", init);
 
@@ -41,7 +41,7 @@ function init() {
  * @function showPopupForMarkdown
  * @param {string} dateStr The date of the journal to edit
  */
-export function showPopupForMarkdown(dateStr) {
+function showPopupForMarkdown(dateStr) {
     const overlay = document.getElementById("overlay");
     const markdownPreview = document.getElementById("markdownPreview");
     const markdownPopup = document.getElementById("popup-journal");
@@ -56,3 +56,5 @@ export function showPopupForMarkdown(dateStr) {
     markdownPopup.style.display = 'block';
     overlay.style.display = 'block';
 }
+
+module.exports = { showPopupForMarkdown };

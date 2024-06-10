@@ -1,7 +1,5 @@
-import {
-    getTimeBasedId
-} from "./util.js";
-import { parser } from "./json-parser.js";
+const { getTimeBasedId } = require("./util.js");
+const { parser } = require("./json-parser.js");
 
 const changeListeners = [];
 
@@ -11,7 +9,7 @@ const changeListeners = [];
  * @function addChangeListener
  * @param {Function} listener The listener function to add
  */
-export function addChangeListener(listener) {
+function addChangeListener(listener) {
     changeListeners.push(listener);
 }
 
@@ -200,7 +198,7 @@ function init() {
  * @function showPopupForDelete
  * @param {string} id The ID of the task to delete
  */
-export function showPopupForDelete(id) {
+function showPopupForDelete(id) {
     const overlay = document.getElementById("overlay");
     const popupDelete = document.getElementById("popup-delete");
     popupDelete.dataset.id = id;
@@ -214,7 +212,7 @@ export function showPopupForDelete(id) {
  * @function showPopupForEdit
  * @param {string} id The ID of the task to edit
  */
-export function showPopupForEdit(id) {
+function showPopupForEdit(id) {
     const task = parser.getTask(id);
     const overlay = document.getElementById("overlay");
     const popupEdit = document.getElementById("edit-popup");
@@ -239,10 +237,12 @@ export function showPopupForEdit(id) {
  * @param {string} id The ID of the task to toggle
  * @param {boolean} completed The new completion status
  */
-export function toggleTaskCompletion(id, completed) {
+function toggleTaskCompletion(id, completed) {
     const task = parser.getTask(id);
     parser.deleteTask(id);
     task.completed = completed;
     parser.addTask(task);
     notifyChangeListeners();
 }
+
+module.exports = { addChangeListener, toggleTaskCompletion, showPopupForDelete, showPopupForEdit };
