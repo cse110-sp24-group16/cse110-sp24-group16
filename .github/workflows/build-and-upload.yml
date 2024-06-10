@@ -57,18 +57,12 @@ jobs:
       - run: node --version
       - run: npm install
       - run: npm run make-all-darwin
-      - run: pwd
-      - run: ls -a
-      - run: cd out/
-      - run: ls -a
-      - run: cd make/
-      - run: ls -a
-      - run: cd zip/
-      - run: ls -a
-      - run: cd darwin/
-      - run: ls -a
-      - run: cd x64/
-      - run: ls -a
+      - run: pwd && ls -a
+      - run: cd out/ && ls -a
+      - run: cd out/make/ && ls -a
+      - run: cd out/make/zip/ && ls -a
+      - run: cd out/make/zip/darwin/ && ls -a
+      - run: cd out/make/zip/darwin/x64/ && ls -a
       - name: Upload Mac arm64 Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
@@ -76,8 +70,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: out/make/zip/darwin/arm64/Developer-Journal-darwin-x64-1.0.0.zip
-          asset_name: mac_arm64.zip
+          asset_path: /Users/runner/work/cse110-sp24-group16/cse110-sp24-group16/out/make/zip/darwin/arm64/Developer-Journal-darwin-x64-1.0.0.zip
+          asset_name: Developer-Journal-darwin-x64-1.0.0.zip
           asset_content_type: application/zip
       - name: Upload Mac x64 Release Asset
         id: upload-release-asset2
