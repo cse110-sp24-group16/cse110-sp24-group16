@@ -1,8 +1,6 @@
 const { browser } = require('@wdio/globals');
 const path = require("path");
 
-let MONTHLY_URL;
-
 describe("Testing of the task element", () => {
 
     it("check clicking on add button", async () => {
@@ -69,7 +67,7 @@ describe("Testing of the task element", () => {
       await journalButton.click();
       const markdownInput = await browser.$("#markdownInput");
       await markdownInput.setValue("**Hey** and _how are you_");
-      const markdownPreview = await browser.$("#markdownPreview")
+      const markdownPreview = await browser.$("#markdownPreview");
       const htmlContent = await markdownPreview.getHTML();
       expect(htmlContent).toContain('<strong>Hey</strong>');
       expect(htmlContent).toContain('<em>how are you</em>');
