@@ -12,6 +12,12 @@ GitHub repo link: [https://github.com/cse110-sp24-group16/cse110-sp24-group16/](
 
 [HTML version of readme and all links](https://cse110-sp24-group16.github.io/cse110-sp24-group16/)
 
+Project review:
+
+[Private video](https://youtu.be/ZG8j2TBUtnA)
+
+[Public video](https://youtu.be/LCzMhmhxmSM)
+
 How to run:
 
 `npm install` to install all dependencies
