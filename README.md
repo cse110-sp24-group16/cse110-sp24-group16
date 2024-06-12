@@ -54,7 +54,7 @@ Project status and work:
 - Daily standups: Standuply
   - App integration with Slack to conduct standup polls on daily basis, results are posted in a public channel so that everyone can evaluate the work done.
 - Tags: Automations
-  - If interested in only specific updates (e.g., frontend or CSS), use tags in your search. They are both automatically and manually assigned to every  Issue and PR.
+  - If interested in only specific updates (e.g., frontend or CSS), use tags in your search. They are both automatically and manually assigned to every Issue and PR.
 
 ### Automatic code evaluation scores
 
