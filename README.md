@@ -14,6 +14,8 @@ GitHub repo link: [https://github.com/cse110-sp24-group16/cse110-sp24-group16/](
 
 How to run:
 
+`npm install` to install all dependencies
+
 `npm start` launches the electron app
 
 CI/CD Pipeline:
